@@ -1,2 +1,2 @@
-# mthw
+# MTHW
 Repo for ProjetArt
