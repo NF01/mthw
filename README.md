@@ -1,4 +1,11 @@
+IMPORTANT
+
+Faites un pull avant de faire un push !!
+
+Merci :)
+
 # MTHW
+
 MoreThanHelloWord Team
 
 Repo for ProjetArt
