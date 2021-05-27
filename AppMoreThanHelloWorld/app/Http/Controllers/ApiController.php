@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\question;
+use App\Exceptions\InvalidOrderException;
 
 class ApiController extends Controller
 {
@@ -20,6 +21,15 @@ class ApiController extends Controller
         }
 
         return response()->json($questions);
+
+    }
+
+    public function getone($n) {
+
+
+        $question= question::where("idQuestion",$n)->get();
+        return response()->json($question);
+
 
     }
 
@@ -50,10 +60,13 @@ class ApiController extends Controller
 
     }
 
+
+
     public function delete(Request $request) {
 
         $id=$request->input("id");
         question::where("idquestion",$id)->delete();
+
 
 
     }

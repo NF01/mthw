@@ -17,14 +17,17 @@ use App\Http\Controllers\ApiController;
 */
 
 
+//RESTful API Routing
 
 Route::get('/api', [ApiController::class, 'get'])->name('apiget');
+Route::get('/api/{n}', [ApiController::class, 'getone'])->name('apigetone');
 Route::Post('/api', [ApiController::class, 'post'])->name('apipost');
 Route::Put('/api', [ApiController::class, 'put'])->name('apiput');
 Route::Delete('/api', [ApiController::class, 'delete'])->name('apidelete');
 
 
 
+//Login routing
 
     Route::get('/', function () {
         return view('welcome');
