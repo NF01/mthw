@@ -18,8 +18,10 @@ use App\Http\Controllers\ApiController;
 
 
 
-Route::get('/api', [ApiController::class, 'testapi'])->name('testapi');
-Route::Post('/api', [ApiController::class, 'testapipost'])->name('testapipost');
+Route::get('/api', [ApiController::class, 'apiget'])->name('apiget');
+Route::Post('/api', [ApiController::class, 'apipost'])->name('apipost');
+Route::Put('/api', [ApiController::class, 'apiput'])->name('apiput');
+Route::Delete('/api', [ApiController::class, 'apidelete'])->name('apidelete');
 
 
 

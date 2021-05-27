@@ -10,7 +10,7 @@ class ApiController extends Controller
 
 
 
-    public function testapi() {
+    public function apiget() {
 
         $questionsdatabase=question::get();
         $questions=[];
@@ -19,21 +19,11 @@ class ApiController extends Controller
 
         }
 
-
-
         return response()->json($questions);
-
-
-
-
 
     }
 
-    public function testapipost(Request $request) {
-
-
-
-
+    public function apipost(Request $request) {
 
         $unequestion = new question();
         $unequestion->enonce = $request->input("enonce");
@@ -42,11 +32,6 @@ class ApiController extends Controller
         $unequestion->idChapitre = 1;
         $unequestion->idImage= 1;
         $unequestion->save();
-
-
-
-
-
 
     }
 
