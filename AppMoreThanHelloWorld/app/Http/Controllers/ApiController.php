@@ -10,7 +10,7 @@ class ApiController extends Controller
 
 
 
-    public function apiget() {
+    public function get() {
 
         $questionsdatabase=question::get();
         $questions=[];
@@ -23,7 +23,7 @@ class ApiController extends Controller
 
     }
 
-    public function apipost(Request $request) {
+    public function post(Request $request) {
 
         $unequestion = new question();
         $unequestion->enonce = $request->input("enonce");
@@ -34,6 +34,30 @@ class ApiController extends Controller
         $unequestion->save();
 
     }
+
+    public function put(Request $request) {
+
+        $id=$request->input("id");
+
+
+        question::where("idquestion",$id)->update(array(
+            "enonce" => $request->input("newenonce"),
+            "ordre" => $request->input("newordre"),
+            "type" => $request->input("newtype")
+
+        ));
+
+
+    }
+
+    public function delete(Request $request) {
+
+        $id=$request->input("id");
+        question::where("idquestion",$id)->delete();
+
+
+    }
+
 
 
 }
