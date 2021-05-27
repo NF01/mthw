@@ -14,20 +14,19 @@ class question extends Model
     protected $table='question';
     public $timestamps=false;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'enonce',
-        'ordre',
-        'type',
-    ];
 
-//    public function chapitre() {
-//        return $this->belongsTo(chapite::class);
-//    }
+    public function chapitre() {
+        return $this->belongsTo(chapite::class);
+    }
+
+    public function reponse() {
+        return $this->hasMany(reponse::class);
+    }
+
+    public function image() {
+        return $this->hasMany(image::class);
+    }
+
 
 
 }
