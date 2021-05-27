@@ -51,7 +51,6 @@ CREATE TABLE question(
         idQuestion Int  Auto_increment  NOT NULL ,
         enonce     Varchar (250) NOT NULL ,
         ordre      Smallint NOT NULL ,
-        statut     Bool NOT NULL ,
         type       Varchar (200) NOT NULL ,
         idChapitre Int NOT NULL ,
         idImage    Int
