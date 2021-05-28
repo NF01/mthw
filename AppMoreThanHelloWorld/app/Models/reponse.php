@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class reponse extends Model
+class Reponse extends Model
 {
     use HasFactory;
-    protected $table='question';
-    public $timestamps=false;
+    protected $table = 'reponses';
+    public $timestamps = false;
 
 
-    public function question() {
-        return $this->belongsTo(question::class);
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
     }
-
 }
