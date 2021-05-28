@@ -8,13 +8,17 @@ import Hello from '../components/Hello.vue';
       ExampleComponent
     },
     setup(){
-      console.log("setupHome");
+      console.log("setupadmin");
     },
 }
 </script>
 
 <template>
-  <h1>Home Page</h1>
+  <div>
+    <h1>Admin Page</h1>
+    <hello></hello>
+    <example-component></example-component>
+  </div>  
 </template>
 
 <style scoped>

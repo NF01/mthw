@@ -33,10 +33,6 @@ require('./bootstrap');
 //     el: '#app',
 // });
 
-// import { createApp } from 'vue';
-// import App from './components/App.vue'
-
-// import Hello from './components/Hello.vue';
 import {createApp} from 'vue';
 import App from './App.vue';
 import router from './router';
