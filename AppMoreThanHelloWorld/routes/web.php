@@ -35,3 +35,9 @@ Route::Delete('/api', [ApiController::class, 'delete'])->name('apidelete');
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Vue Router
+
+Route::get('/{any}', function () {
+    return view('vue_test');}
+)->where('any', '.*');
