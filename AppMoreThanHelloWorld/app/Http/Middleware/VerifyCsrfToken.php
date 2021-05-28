@@ -13,7 +13,9 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
 
-        'http://localhost/mthw/AppMoreThanHelloWorld/public/api',
+        'http://localhost/mthw/AppMoreThanHelloWorld/public/api/question',
+        'http://localhost/mthw/AppMoreThanHelloWorld/public/api/reponse',
+        'http://localhost/mthw/AppMoreThanHelloWorld/public/api/image',
 
     ];
 }
