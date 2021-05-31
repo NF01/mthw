@@ -51,6 +51,16 @@ class ApiControllerGET extends Controller
         return response()->json($responses);
     }
 
+    
+    public function getAllResponsesFromQuestionId()
+    {
+        $id = 3;
+        $reponses = reponse::with("question")->where('idQuestion', $id)->get();
+        echo '<pre>';
+        var_dump($reponses);
+        echo '</pre>';
+    }
+    
     public function getimages() {
 
         $reponsesdatabase=image::get();

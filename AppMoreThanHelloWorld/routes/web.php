@@ -9,6 +9,7 @@ use App\Http\Controllers\ApiControllerDELETE;
 use App\Http\Controllers\ApiControllerPOST;
 use App\Http\Controllers\ApiControllerPUT;
 use App\Http\Controllers\ApiControllerImage;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -60,17 +61,21 @@ Route::Put('/api/reponse', [ApiControllerPUT::class, 'updateresponse']);
 //Login routing
 Route::get('/', function () {return view('welcome');});
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
+Route::get('/model', [ApiControllerResponse::class, 'getAllResponsesFromQuestionId']);
 
-
-//Vue Router
 Route::get('/vue', function () {
-        return view('vue_test');}
-    );
+        return view('vue_test');
+    }
+);
 
 Route::get('/{any}', function () {
-        return abort(404);}
-    );
+    return abort(404);
+});

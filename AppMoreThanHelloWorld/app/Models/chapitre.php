@@ -8,13 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Chapitre extends Model
 {
     use HasFactory;
-    protected $table='chapitres';
-    public $timestamps=false;
+    protected $table = 'chapitres';
+    public $timestamps = false;
 
-    public function question() {
+    public function question()
+    {
         return $this->hasMany(Question::class);
     }
-
-
-
 }
