@@ -6,11 +6,12 @@
 <template>
     <div>
         <div id="nav">
-            <router-link to="/">Home</router-link> |
+            <router-link to="/accueil">Home</router-link> |
             <router-link to="/Admin">Admin</router-link> |
             <router-link to="/Quizz">Quizz</router-link> |
             <router-link to="/Info">Info</router-link> |
-            <router-link to="/Profil">Profil</router-link>
+            <router-link to="/Profil">Profil</router-link> |
+            <router-link to="/Ranking">Classement</router-link>
         </div>
         <router-view />
     </div>
