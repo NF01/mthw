@@ -32,11 +32,11 @@ class CreateQuestionsTable extends Migration
      */
     public function down()
     {
-        Schema::table('questions', function (Blueprint $table) {
-            $table->dropForeign('questions_idchapitre_foreign');
-            $table->dropForeign('questions_idimage_foreign');
-        });
-        Schema::dropIfExists('questions');
+        // Schema::table('questions', function (Blueprint $table) {
+        //     $table->dropForeign('questions_idetape_foreign');
+        //     $table->dropForeign('questions_idimage_foreign');
+        // });
+        // Schema::dropIfExists('questions');
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('questions');

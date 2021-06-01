@@ -1,77 +1,91 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\ApiControllerQuestion;
-use App\Http\Controllers\ApiControllerResponse;
 use App\Http\Controllers\ApiControllerGET;
 use App\Http\Controllers\ApiControllerDELETE;
 use App\Http\Controllers\ApiControllerPOST;
 use App\Http\Controllers\ApiControllerPUT;
-use App\Http\Controllers\ApiControllerImage;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 
-
-
 //REST API Routing//begin
+Route::prefix('api')->group(function () {
+
+    //GET
+
+    //Question(s)
+    Route::get('/questions', [ApiControllerGET::class, 'getquestions']);
+    Route::get('/question/{n}', [ApiControllerGET::class, 'getonequestion']);
+    Route::get('/questions/chapitre/{n}', [ApiControllerGET::class, 'getquestionordre']);
+    Route::get('/questions/type/{n}', [ApiControllerGET::class, 'getquestiontype'])->where('n', '[1-5]');
+
+    //Reponse(s)
+    Route::get('/reponses', [ApiControllerGET::class, 'getresponses']);
+    Route::get('/reponse/{n}', [ApiControllerGET::class, 'getoneresponse']);
+    Route::get('/reponses/idQ/{n}', [ApiControllerGET::class, 'getresponseIdQ']);
+
+    //Image(s)
+    Route::get('/images', [ApiControllerGET::class, 'getimages']);
+    Route::get('/image/{n}', [ApiControllerGET::class, 'getoneimage']);
+
+    //DELETE
+    //Instance
+    Route::Delete('/question', [ApiControllerDELETE::class, 'deleteinstance']);
 
 
-//GET
-//Question(s)
-//Reponse(s)
-//Image(s)
-Route::get('/api/questions', [ApiControllerGET::class, 'getquestions']);
-Route::get('/api/reponses', [ApiControllerGET::class, 'getresponses']);
-Route::get('/api/images', [ApiControllerGET::class, 'getimages']);
-Route::get('/api/question/{n}', [ApiControllerGET::class, 'getonequestion']);
-Route::get('/api/reponse/{n}', [ApiControllerGET::class, 'getoneresponse']);
-Route::get('/api/image/{n}', [ApiControllerGET::class, 'getoneimage']);
-Route::get('/api/questions/chapitre/{n}', [ApiControllerGET::class, 'getquestionordre']);
-Route::get('/api/questions/type/{n}', [ApiControllerGET::class, 'getquestiontype'])->where('n', '[1-5]');
-Route::get('/api/reponses/idQ/{n}', [ApiControllerGET::class, 'getresponseIdQ']);
+    //POST
+    //Instance
+    Route::Post('/question', [ApiControllerPOST::class, 'postquestion']);
+    Route::Post('/reponse', [ApiControllerPOST::class, 'postresponse']);
+    //image
+    Route::Post('/image', [ApiControllerPOST::class, 'postimage']);
 
 
-//DELETE
-//Instance
-Route::Delete('/api/question', [ApiControllerDELETE::class, 'deleteinstance']);
-
-
-//POST
-//Instance
-//image
-Route::Post('/api/image', [ApiControllerPOST::class, 'postimage']);
-Route::Post('/api/question', [ApiControllerPOST::class, 'postquestion']);
-Route::Post('/api/reponse', [ApiControllerPOST::class, 'postresponse']);
-
-
-
-//PUT (update)
-//Instance
-Route::Put('/api/image', [ApiControllerPUT::class, 'updateimage']);
-Route::Put('/api/question', [ApiControllerPUT::class, 'updatequestion']);
-Route::Put('/api/reponse', [ApiControllerPUT::class, 'updateresponse']);
-
-
-//REST API Routing//end
-
-
-
-
-//Login routing
-Route::get('/', function () {return view('welcome');});
-
-Route::get('/', function () {
-    return view('welcome');
+    //PUT (update)
+    //Instance
+    Route::Put('/question', [ApiControllerPUT::class, 'updatequestion']);
+    Route::Put('/reponse', [ApiControllerPUT::class, 'updateresponse']);
+    //image
+    Route::Put('/image', [ApiControllerPUT::class, 'updateimage']);
 });
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Login routing
+Route::get('/', function () {
+    return view('auth.login');
+});
 
 
-Route::get('/model', [ApiControllerResponse::class, 'getAllResponsesFromQuestionId']);
+// Route::get('/what', function () {
+//     return view('vue_test');
+// })->middleware('auth');
 
-Route::get('/vue', function () {
+$router->group(['middleware' => 'auth'], function () {
+    Route::get('/profil', function () {
+
+        if (Auth::user()->isAdmin == 1) {
+            echo 'Im admin!!';
+        }
+        return view('vue_test');
+    });
+});
+
+// if (auth()->check()) {
+//     Route::get('/user', function () {
+//         return view('auth.login');
+//     });
+// }
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+
+
+Route::get(
+    '/vue',
+    function () {
         return view('vue_test');
     }
 );

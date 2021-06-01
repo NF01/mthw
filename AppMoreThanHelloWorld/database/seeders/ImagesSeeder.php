@@ -21,6 +21,6 @@ class ImagesSeeder extends Seeder
             DB::table('images')->insert([
                 'url' => $images[$i]
             ]);
-        }//
+        }
     }
 }

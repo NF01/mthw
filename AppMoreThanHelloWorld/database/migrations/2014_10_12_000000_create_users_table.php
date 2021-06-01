@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->integer('experience')->default(0);
             $table->boolean('isAdmin')->default(0);
+            // $table->enum('role', ['user','admin'])->default('user');
             $table->rememberToken();
             $table->timestamps();
         });

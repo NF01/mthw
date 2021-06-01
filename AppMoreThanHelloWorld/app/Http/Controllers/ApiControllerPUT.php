@@ -10,26 +10,16 @@ use Illuminate\Http\Request;
 class ApiControllerPUT extends Controller
 {
 
-    public function updateimage(Request $request) {
-
-        $id=$request->input("id");
-        $reponse= image::where("idImage",$id)->get();
-        
-
-
-
-    }
-
 
     public function updatequestion(Request $request) {
 
         $id=$request->input("id");
 
-        question::where("idquestion",$id)->update(array(
+        question::find($id)->update(array(
             "enonce" => $request->input("newenonce"),
             "ordre" => $request->input("newordre"),
             "type" => $request->input("newtype"),
-            "idChapitre" => $request->input("newidChapite<"),
+            "idChapitre" => $request->input("newidChapitre"),
             "idImage" => $request->input("newidImage"),
         ));
 

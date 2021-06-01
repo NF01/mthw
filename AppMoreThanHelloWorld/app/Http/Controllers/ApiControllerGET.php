@@ -52,9 +52,9 @@ class ApiControllerGET extends Controller
     }
 
     
-    public function getAllResponsesFromQuestionId()
+    public function getAllResponsesFromQuestionId($id)
     {
-        $id = 3;
+        // $id = 3;
         $reponses = reponse::with("question")->where('idQuestion', $id)->get();
         echo '<pre>';
         var_dump($reponses);
