@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Chapitre extends Model
+class Etape extends Model
 {
     use HasFactory;
-    protected $table = 'chapitres';
+    protected $table = 'etapes';
     public $timestamps = false;
 
     public function question()

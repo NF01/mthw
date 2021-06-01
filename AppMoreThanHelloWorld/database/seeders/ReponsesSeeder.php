@@ -18,7 +18,7 @@ class ReponsesSeeder extends Seeder
         for ($i = 1; $i <= 10; $i++) {
             DB::table('reponses')->insert([
                 'enonce' => 'Réponse n°' . $i,
-                'ordre' => rand(0, 10),
+                // 'ordre' => rand(0, 10),
                 'statut' => false,
                 'anecdote' => 'Mon anecdote - ' . $i,
                 'idQuestion' => rand(1, 3)

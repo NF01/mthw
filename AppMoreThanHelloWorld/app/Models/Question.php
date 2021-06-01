@@ -15,8 +15,8 @@ class Question extends Model
     public $timestamps=false;
 
 
-    public function chapitre() {
-        return $this->belongsTo(Chapitre::class);
+    public function etape() {
+        return $this->belongsTo(Etape::class);
     }
 
     public function reponse() {

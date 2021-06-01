@@ -18,7 +18,7 @@ class CreateReponsesTable extends Migration
         Schema::create('reponses', function (Blueprint $table) {
             $table->id('idReponse');
             $table->tinyText('enonce');
-            $table->tinyInteger('ordre');
+            // $table->tinyInteger('ordre');
             $table->boolean('statut');
             $table->string('anecdote', 400);
             $table->foreignId('idQuestion')->constrained('questions', 'idQuestion');

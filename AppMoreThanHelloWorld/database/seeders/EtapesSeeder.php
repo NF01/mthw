@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ChapitresSeeder extends Seeder
+class EtapesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,11 +14,11 @@ class ChapitresSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('chapitres')->delete();
+        DB::table('etapes')->delete();
         for ($i = 1; $i <= 10; $i++) {
-            DB::table('chapitres')->insert([
-                'idChapitre' => $i,
-                'nom' => 'chapitre' . $i,
+            DB::table('etapes')->insert([
+                'idEtape' => $i,
+                'nom' => 'Étape ' . $i,
             ]);
         }
     }

@@ -18,9 +18,9 @@ class QuestionsSeeder extends Seeder
         for ($i = 1; $i <= 10; $i++) {
             DB::table('questions')->insert([
                 'enonce' => 'Question n°' . $i,
-                'ordre' => rand(0, 10),
+                // 'ordre' => rand(0, 10),
                 'type' => rand(1,3),
-                'idChapitre' => rand(1, 3)
+                'idEtape' => rand(1, 3)
             ]);
         }
         //

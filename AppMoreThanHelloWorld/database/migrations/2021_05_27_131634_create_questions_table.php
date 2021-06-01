@@ -18,9 +18,9 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id('idQuestion');
             $table->tinyText('enonce');
-            $table->tinyInteger('ordre');
+            // $table->tinyInteger('ordre');
             $table->foreignId('type')->constrained('types', 'idType');
-            $table->foreignId('idChapitre')->constrained('chapitres', 'idChapitre');;
+            $table->foreignId('idEtape')->constrained('etapes', 'idEtape');;
             $table->foreignId('idImage')->nullable()->constrained('images', 'idImage');;
         });
     }

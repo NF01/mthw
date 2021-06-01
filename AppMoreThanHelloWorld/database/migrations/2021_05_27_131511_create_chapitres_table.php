@@ -14,9 +14,9 @@ class CreateChapitresTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('chapitres');
-        Schema::create('chapitres', function (Blueprint $table) {
-            $table->id('idChapitre');
+        Schema::dropIfExists('etapes');
+        Schema::create('etapes', function (Blueprint $table) {
+            $table->id('idEtape');
             $table->string('nom');
         });
     }
