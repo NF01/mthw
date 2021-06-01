@@ -82,13 +82,11 @@ $router->group(['middleware' => 'auth'], function () {
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
+//Vue routing
 
-Route::get(
-    '/vue',
-    function () {
-        return view('vue_test');
-    }
-);
+Route::get('{vue}', function($vue) {
+    return view('vue')->with('vue', $vue);
+})->where(['vue' => 'vue|admin|accueil|info|quizz|ranking|profil']);
 
 Route::get('/{any}', function () {
     return abort(404);
