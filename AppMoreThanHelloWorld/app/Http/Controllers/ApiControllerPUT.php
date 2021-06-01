@@ -17,9 +17,8 @@ class ApiControllerPUT extends Controller
 
         question::find($id)->update(array(
             "enonce" => $request->input("newenonce"),
-            "ordre" => $request->input("newordre"),
             "type" => $request->input("newtype"),
-            "idChapitre" => $request->input("newidChapitre"),
+            "idEtape" => $request->input("newidEtape"),
             "idImage" => $request->input("newidImage"),
         ));
 
@@ -32,7 +31,6 @@ class ApiControllerPUT extends Controller
 
         reponse::where("idReponse",$id)->update(array(
             "enonce" => $request->input("newenonce"),
-            "ordre" => $request->input("newordre"),
             "statut" => $request->input("newstatus"),
             "anecdote" => $request->input("newanectode"),
             "idQuestion" => $request->input("newidChapitre"),

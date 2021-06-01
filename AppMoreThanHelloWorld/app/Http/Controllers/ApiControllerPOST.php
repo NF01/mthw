@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Api\errorrs;
+use App\Models\Etape;
 use App\Models\Image;
 use App\Models\Question;
 use App\Models\chapitre;
@@ -34,12 +35,11 @@ class ApiControllerPOST extends Controller
 
         $unequestion = new question();
         $unequestion->enonce = $request->input("enonceQuestion");
-        $unequestion->ordre = $request->input("ordreQuestion");
         $unequestion->type = $request->input("typeQuestion");
-        $unequestion->idChapitre = $request->input("idChapitreQuestion");
+        $unequestion->idEtape = $request->input("idEtapeQuestion");
         $unequestion->idImage= $request->input("idImageQuestion");
         $myimage=image::where("idImage",$unequestion->idImage)->get();
-        $mychapter=chapitre::where("idChapitre", $unequestion->idChapitre)->get();
+        $mychapter=Etape::where("idChapitre", $unequestion->idEtape)->get();
         $errors=new errorrs();
         if ((count($myimage)>=1||$unequestion->idImage===null)&&(count($mychapter)==1)){
             $unequestion->save();
@@ -48,7 +48,7 @@ class ApiControllerPOST extends Controller
             $errors->first="Impossible d'enregistrer la question car l'id de l'image associee est inexistant";
             return response()->json($errors->first);
         }else{
-            $errors->second="Impossible d'enregistrer la question car l'id du chapitre associe est inexistant";
+            $errors->second="Impossible d'enregistrer la question car l'id de l'étape associée est inexistant";
             return response()->json($errors->second);
         }
     }
@@ -58,7 +58,6 @@ class ApiControllerPOST extends Controller
 
         $aresponse = new reponse();
         $aresponse->enonce = $request->input("enonceResponse");
-        $aresponse->ordre = $request->input("ordreResponse");
         $aresponse->statut = $request->input("statutResponse");
         $aresponse->anecdote= $request->input("anecdoteResponse");
         $aresponse->idQuestion = $request->input("idQuestionResponse");

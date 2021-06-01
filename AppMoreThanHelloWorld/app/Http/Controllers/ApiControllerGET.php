@@ -51,7 +51,7 @@ class ApiControllerGET extends Controller
         return response()->json($responses);
     }
 
-    
+
     public function getAllResponsesFromQuestionId($id)
     {
         // $id = 3;
@@ -60,7 +60,7 @@ class ApiControllerGET extends Controller
         var_dump($reponses);
         echo '</pre>';
     }
-    
+
     public function getimages() {
 
         $reponsesdatabase=image::get();
@@ -94,11 +94,6 @@ class ApiControllerGET extends Controller
         return response()->json($reponse);
     }
 
-    public function getquestionordre($n) {
-
-        $question= question::where("ordre",$n)->get(); //ordre  vs chapitre ue différence ??
-        return response()->json($question);
-    }
 
     public function getquestiontype($n) {
 
@@ -112,9 +107,6 @@ class ApiControllerGET extends Controller
         return response()->json($reponses);
     }
 
-    public function testdeleteimage() {
-
-    }
 
 
 

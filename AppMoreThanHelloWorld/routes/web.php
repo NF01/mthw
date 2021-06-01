@@ -18,7 +18,6 @@ Route::prefix('api')->group(function () {
     //Question(s)
     Route::get('/questions', [ApiControllerGET::class, 'getquestions']);
     Route::get('/question/{n}', [ApiControllerGET::class, 'getonequestion']);
-    Route::get('/questions/chapitre/{n}', [ApiControllerGET::class, 'getquestionordre']);
     Route::get('/questions/type/{n}', [ApiControllerGET::class, 'getquestiontype'])->where('n', '[1-5]');
 
     //Reponse(s)
