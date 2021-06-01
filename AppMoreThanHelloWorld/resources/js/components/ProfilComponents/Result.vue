@@ -5,18 +5,17 @@
         },
         setup(props, context) {
 
-          
         },
     }
 
 </script>
 
 <template>
-    <div class="badges">
-        <h2>Badges</h2>
-        <div>badge1</div>
-        <div>badge2</div>
-        <div>badge3</div>
+    <div class="result">
+        <h2>Résultat</h2>
+        <div>result 1</div>
+        <div>result 2</div>
+        <div>result 3</div>
     </div>
 </template>
 

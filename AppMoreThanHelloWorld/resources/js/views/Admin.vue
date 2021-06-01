@@ -1,14 +1,17 @@
 <script>
-import ExampleComponent from '../components/ExampleComponent.vue';
-import Hello from '../components/Hello.vue';
-
+  
+  import {ref, watch, watchEffect} from 'vue';
   export default {
     components: {
-      Hello,
-      ExampleComponent
+      
     },
-    setup(){
-      console.log("setupadmin");
+    setup(props, context){
+        const isModalVisible = ref('');
+        const showModal = () => isModalVisible.value = true;
+        const closeModal = () => isModalVisible.value = false;
+        
+
+    return { isModalVisible, showModal, closeModal }
     },
 }
 </script>
@@ -16,8 +19,7 @@ import Hello from '../components/Hello.vue';
 <template>
   <div>
     <h1>Admin Page</h1>
-    <hello></hello>
-    <example-component></example-component>
+    <div>liste question</div>
   </div>  
 </template>
 

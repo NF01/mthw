@@ -5,15 +5,15 @@
 
 <template>
     <div>
+        <router-view />
         <div id="nav">
             <router-link to="/accueil">Home</router-link> |
-            <router-link to="/Admin">Admin</router-link> |
-            <router-link to="/Quizz">Quizz</router-link> |
-            <router-link to="/Info">Info</router-link> |
-            <router-link to="/Profil">Profil</router-link> |
-            <router-link to="/Ranking">Classement</router-link>
+            <router-link to="/admin">Admin</router-link> |
+            <router-link to="/quizz">Quizz</router-link> |
+            <router-link to="/info">Info</router-link> |
+            <router-link to="/profil">Profil</router-link> |
+            <router-link to="/ranking">Classement</router-link>
         </div>
-        <router-view />
     </div>
 </template>
 

@@ -14,27 +14,27 @@ const routes = [
   },
   {
     path: "/admin",
-    name: "Admin",
+    name: "admin",
     component: Admin,
   },
   {
     path: "/quizz",
-    name: "Quizz",
+    name: "quizz",
     component: Quizz,
   },
   {
     path: "/info",
-    name: "Info",
+    name: "info",
     component: Info,
   },
   {
     path: "/profil",
-    name: "Profil",
+    name: "profil",
     component: Profil,
   },
   {
     path: "/ranking",
-    name: "Ranking",
+    name: "ranking",
     component: Ranking,
   },
 

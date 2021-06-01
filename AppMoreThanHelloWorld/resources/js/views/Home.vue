@@ -1,16 +1,14 @@
 <script>
     import {ref, watch, watchEffect } from 'vue';
     import Modal from '../components/Modal.vue';
-    import HomeProgress from '../components/HomeProgress.vue';
 
     export default {
         components: {
             Modal,
-            HomeProgress
         },
         setup(props, context) {
 
-            const isModalVisible = ref('register');
+            const isModalVisible = ref('');
             console.log(isModalVisible.value);
 
             const showModal = () => isModalVisible.value = true;
@@ -44,8 +42,7 @@
             <template v-slot:footer>footer</template>
         </modal>
 
-        <!-- a voir la taille/complexité -->
-        <home-progress></home-progress>
+        <div>cheminement train</div>
 
     </div>
 

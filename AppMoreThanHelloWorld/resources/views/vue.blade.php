@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
+        {{-- <link rel="stylesheet" href="{{ asset('/css/app.css') }}"> --}}
         <title>
             
         </title>
@@ -11,10 +12,8 @@
         <style> textarea {resize:none} </style>
     </head>
     <body>
-        <h1>test</h1>
-        <section id="app" >
+        <section id="app">
             
-            <Hello></Hello>
             
             
         </section>
