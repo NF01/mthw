@@ -66,10 +66,10 @@ Route::get('/', function () {
 $router->group(['middleware' => 'auth'], function () {
     Route::get('/profil', function () {
 
-        if (Auth::user()->isAdmin == 1) {
-            echo 'Im admin!!';
-        }
-        return view('vue_test');
+        // if (Auth::user()->isAdmin == 1) {
+        //     echo 'Im admin!!';
+        // }
+        // return view('vue');
     });
 });
 
@@ -79,7 +79,11 @@ $router->group(['middleware' => 'auth'], function () {
 //     });
 // }
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', function () {
+
+    return view('vue');
+
+});
 
 
 //Vue routing
