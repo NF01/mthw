@@ -21,8 +21,6 @@ class ApiControllerPUT extends Controller
             "idEtape" => $request->input("newidEtape"),
             "idImage" => $request->input("newidImage"),
         ));
-
-
     }
 
     public function updateresponse(Request $request) {

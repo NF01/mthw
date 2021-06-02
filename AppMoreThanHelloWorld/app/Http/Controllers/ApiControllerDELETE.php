@@ -24,7 +24,7 @@ class ApiControllerDELETE extends Controller
                     $url=$r2->url;
                     $pieces=explode("/", $url);
                     $piece=$pieces[array_key_last ($pieces)];
-                    Storage::delete($piece);
+                    unlink(storage_path('app/public/images/'.$piece));
                 }
                 image::where("idImage",$r->idImage)->delete();
             }
@@ -37,7 +37,7 @@ class ApiControllerDELETE extends Controller
                     $url2=$r3->url;
                     $pieces=explode("/", $url2);
                     $piece=$pieces[array_key_last ($pieces)];
-                    Storage::delete($piece);
+                    unlink(storage_path('app/public/images/'.$piece));
                 }
                 image::where("idImage",$q->idImage)->delete();
             }
