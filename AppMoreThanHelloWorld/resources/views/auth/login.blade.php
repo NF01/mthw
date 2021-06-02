@@ -3,65 +3,54 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+        <div class="col-lg-8">
+            <a class="uk-button uk-button-default" href="#modal-center" uk-toggle>Open</a>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+            <div id="modal-center" class="uk-flex-top" uk-modal>
+                <div class="uk-modal-dialog uk-margin-auto-vertical modal-login px-3 py-2">
+                    <form method="POST" action="{{ route('login') }}" class="col px-2">
                         @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                        <header class="row border-bottom py-2">
+                            <div class="col-auto">
+                                <button class="uk-modal-close-default" type="button" uk-close></button>
                             </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                            <div class="col text-center">
+                                <h2>Connexion</h2>
                             </div>
-                        </div>
+                        </header>
+                        <div class="row align-items-center">
+                            <div class="col py-default">
+                                <div class="form-group">
+                                    <label for="email">Adresse Email</label>
+                                    <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="email@exemple.com" autofocus>
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
+                                    @error('email')
+                                    <span class="alert-form" role="alert">
+                                        {{ $message }}
+                                    </span>
+                                    @enderror
                                 </div>
+                                <div class="form-group">
+                                    <label for="password">Mot de passe</label>
+                                    <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="**********">
+
+                                    @error('password')
+                                    <span class="alert-form" role="alert">
+                                        {{ $message }}
+                                    </span>
+                                    @enderror
+                                </div>
+
                             </div>
                         </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
+                        <div class="row border-top py-4 mt-auto">
+                            <div class="col">
+                                <div class="row my-3">
+                                    <button type="submit" class="btn btn-primary full-width">Se connecter</button>
+                                </div>
+                                <div class="row">
+                                    <a href="{{ url('register') }}" class="mx-auto primary-link">Tu n'as pas de compte ?</a>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -70,4 +59,8 @@
         </div>
     </div>
 </div>
+
+<script>
+    UIkit.modal(document.getElementById('modal-center')).show();
+</script>
 @endsection

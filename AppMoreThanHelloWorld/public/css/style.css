@@ -1,0 +1,71 @@
+:root {
+    --primary-color: #DA291C;
+    --primary-color-hover: #cc1b0f;
+}
+
+body {
+    font-size: 20px;
+}
+
+.primary, .primary-color{
+    color: var(--primary-color);
+}
+
+.primary-link{
+    font-size: .75em;
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.primary-link:hover{
+    color: var(--primary-color-hover) !important;
+}
+
+[class*=uk-modal-close-] {
+    left: 10px;
+    right: default;
+}
+
+.modal-login {
+    /* max-height: 80vh; */
+}
+
+.py-default{
+    padding-top:12vh;
+    padding-bottom:12vh;
+}
+
+.alert-form {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #e3342f;
+    font-weight: bold;
+}
+
+.btn {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 20px;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    border: none;
+    box-shadow: rgba(0, 0, 0, .15) 0 6px 15px;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background: var(--primary-color-hover) !important;
+}
+
+.form-control:focus {
+    border-color: #e3342f6b;
+    box-shadow: 0 0 0 0.2rem #e3342f30;
+}
+
+.full-width {
+    width: 100%;
+}
