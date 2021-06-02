@@ -10,8 +10,10 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 
+
 //REST API Routing//begin
 Route::prefix('api')->group(function () {
+
 
     //GET
 
@@ -62,7 +64,7 @@ Route::get('/', function () {
 //     return view('vue_test');
 // })->middleware('auth');
 
-$router->group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth','csrf']], function () {
     Route::get('/profil', function () {
 
         // if (Auth::user()->isAdmin == 1) {

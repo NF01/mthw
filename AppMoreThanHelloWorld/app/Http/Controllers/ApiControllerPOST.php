@@ -9,24 +9,40 @@ use App\Models\Question;
 use App\Models\chapitre;
 use App\Models\reponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ApiControllerPOST extends Controller
 {
 
 
-    public function postimage() {
+    public function postimage(Request $request) {
 
-        $nomFichier = $_FILES['file']['name'];
-        $nomTemporaire = $_FILES['file']['tmp_name'];
+        $myimage=$request->file->path();
+        $content=file_get_contents($myimage);
+        $nameFile = $_FILES['file']['name'];
 
-        $destination = "C:\Users\Admin_N\Desktop\\$nomFichier";//mieux à chercher depuis une variable d'env -- à faire
-        move_uploaded_file($nomTemporaire, $destination);
+        $destination=asset("storage/images/$nameFile");
 
-        $uneimage = new image();
-        $uneimage->url = $destination;
-        $uneimage->save();
+        $myimages=image::get();
 
-        return response()->json($uneimage->id);
+        $errors=0;
+        foreach ($myimages as $i){
+           if ($destination===$i->url){
+               $errors+=1;
+           }
+        }
+
+        if ($errors>0){
+            return response()->json("already this name");
+        }else{
+            Storage::put("public/images/$nameFile", $content);
+
+            $animage = new image();
+            $animage->url = $destination;
+            $animage->save();
+
+            return response()->json([$animage->id, $animage->url]);
+        }
 
     }
 
@@ -68,10 +84,10 @@ class ApiControllerPOST extends Controller
         if ((count($myquestion)==1)&&(count($myimage)>=1||$aresponse->idImage===null)){
             $aresponse->save();
         }elseif(count($myquestion)<=0){
-            $errors->first="Impossible d'enregistrer la question car l'id de la question associee est inexistant";
+            $errors->first="Impossible d'enregistrer la reponse car l'id de la question associee est inexistant";
             return response()->json($errors->first);
         }else{
-            $errors->second="Impossible d'enregistrer la question car l'id de l'image associee est inexistant";
+            $errors->second="Impossible d'enregistrer la reponse car l'id de l'image associee est inexistant";
             return response()->json($errors->second);
         }
 

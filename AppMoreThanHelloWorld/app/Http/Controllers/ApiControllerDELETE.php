@@ -6,6 +6,7 @@ use App\Models\question;
 use App\Models\reponse;
 use App\Models\image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ApiControllerDELETE extends Controller
 {
@@ -21,7 +22,9 @@ class ApiControllerDELETE extends Controller
                 $reponse= image::where("idImage",$r->idImage)->get();
                 foreach ($reponse as $r2){
                     $url=$r2->url;
-                    unlink($url);
+                    $pieces=explode("/", $url);
+                    $piece=$pieces[array_key_last ($pieces)];
+                    Storage::delete($piece);
                 }
                 image::where("idImage",$r->idImage)->delete();
             }
@@ -32,12 +35,13 @@ class ApiControllerDELETE extends Controller
                 $reponse2= image::where("idImage",$q->idImage)->get();
                 foreach ($reponse2 as $r3){
                     $url2=$r3->url;
-                    unlink($url2);
+                    $pieces=explode("/", $url2);
+                    $piece=$pieces[array_key_last ($pieces)];
+                    Storage::delete($piece);
                 }
                 image::where("idImage",$q->idImage)->delete();
             }
         }
 
     }
-
 }
