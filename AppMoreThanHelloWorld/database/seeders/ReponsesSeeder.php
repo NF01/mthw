@@ -15,13 +15,13 @@ class ReponsesSeeder extends Seeder
     public function run()
     {
 
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 40; $i++) {
             DB::table('reponses')->insert([
                 'enonce' => 'Réponse n°' . $i,
                 // 'ordre' => rand(0, 10),
-                'statut' => false,
+                'statut' => rand(0, 1),
                 'anecdote' => 'Mon anecdote - ' . $i,
-                'idQuestion' => rand(1, 3)
+                'idQuestion' => rand(1, 10)
             ]);
         }
     }
