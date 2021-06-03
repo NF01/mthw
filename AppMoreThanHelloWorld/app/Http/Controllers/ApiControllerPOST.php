@@ -6,7 +6,7 @@ use App\Http\Api\errorrs;
 use App\Models\Etape;
 use App\Models\Image;
 use App\Models\Question;
-use App\Models\chapitre;
+use App\Models\Etape;
 use App\Models\reponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -48,14 +48,13 @@ class ApiControllerPOST extends Controller
 
 
     public function postquestion(Request $request) {
-
         $unequestion = new question();
         $unequestion->enonce = $request->input("enonceQuestion");
         $unequestion->type = $request->input("typeQuestion");
         $unequestion->idEtape = $request->input("idEtapeQuestion");
         $unequestion->idImage= $request->input("idImageQuestion");
         $myimage=image::where("idImage",$unequestion->idImage)->get();
-        $mychapter=Etape::where("idChapitre", $unequestion->idEtape)->get();
+        $mychapter=Etape::where("idEtape", $unequestion->idEtape)->get();
         $errors=new errorrs();
         if ((count($myimage)>=1||$unequestion->idImage===null)&&(count($mychapter)==1)){
             $unequestion->save();
@@ -68,6 +67,7 @@ class ApiControllerPOST extends Controller
             return response()->json($errors->second);
         }
     }
+    
 
 
     public function postresponse(Request $request) {

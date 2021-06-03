@@ -46,7 +46,6 @@
         </modal>
         <button type="button" class="btn" @click="isModalVisible = 'badgesModal'">Voir tous les badges</button>
 
-
         <result></result>
 
         <button type="button" class="btn" @click="isModalVisible = 'resultModal'">Voir les resultat</button>
