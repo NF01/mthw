@@ -17,6 +17,7 @@ Route::prefix('api')->group(function () {
 
     //GET
 
+
     //Question(s)
     Route::get('/questions', [ApiControllerGET::class, 'getAllQuestions']);
     Route::get('/question/{n}', [ApiControllerGET::class, 'getQuestionFromId']);
@@ -31,25 +32,34 @@ Route::prefix('api')->group(function () {
     Route::get('/images', [ApiControllerGET::class, 'getAllImages']);
     Route::get('/image/{n}', [ApiControllerGET::class, 'getImageFromId']);
 
-    //DELETE
-    //Instance
-    Route::Delete('/question', [ApiControllerDELETE::class, 'deleteinstance']);
 
 
-    //POST
-    //Instance
-    Route::Post('/question', [ApiControllerPOST::class, 'postquestion']);
-    Route::Post('/reponse', [ApiControllerPOST::class, 'postresponse']);
-    //image
-    Route::Post('/image', [ApiControllerPOST::class, 'postimage']);
+    Route::middleware(['auth','admin'])->group(function () {
 
 
-    //PUT (update)
-    //Instance
-    Route::Put('/question', [ApiControllerPUT::class, 'updatequestion']);
-    Route::Put('/reponse', [ApiControllerPUT::class, 'updateresponse']);
-    //image
-    Route::Put('/image', [ApiControllerPUT::class, 'updateimage']);
+
+
+
+        //POST
+        //Instance
+        Route::Post('/question', [ApiControllerPOST::class, 'postquestion']);
+        Route::Post('/reponse', [ApiControllerPOST::class, 'postresponse']);
+        //image
+        Route::Post('/image', [ApiControllerPOST::class, 'postimage']);
+
+        //DELETE
+        //Instance
+        Route::Delete('/question', [ApiControllerDELETE::class, 'deleteinstance']);
+
+
+        //PUT (update)
+        //Instance
+        Route::Put('/question', [ApiControllerPUT::class, 'updatequestion']);
+        Route::Put('/reponse', [ApiControllerPUT::class, 'updateresponse']);
+        //image
+        Route::Put('/image', [ApiControllerPUT::class, 'updateimage']);
+
+    });
 });
 
 Auth::routes();
@@ -64,15 +74,15 @@ Route::get('/', function () {
 //     return view('vue_test');
 // })->middleware('auth');
 
-// Route::group(['middleware' => ['auth','csrf']], function () {
-//     Route::get('/profil', function () {
+ Route::group(['middleware' => ['auth','csrf']], function () {
+     Route::get('/profil', function () {
 
-//         // if (Auth::user()->isAdmin == 1) {
-//         //     echo 'Im admin!!';
-//         // }
-//         // return view('vue');
-//     });
-// });
+          if (Auth::user()->isAdmin == 1) {
+              echo 'Im admin!!';
+          }
+          return view('vue');
+     });
+ });
 
 // if (auth()->check()) {
 //     Route::get('/user', function () {
