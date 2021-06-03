@@ -18,18 +18,18 @@ Route::prefix('api')->group(function () {
     //GET
 
     //Question(s)
-    Route::get('/questions', [ApiControllerGET::class, 'getquestions']);
-    Route::get('/question/{n}', [ApiControllerGET::class, 'getonequestion']);
-    Route::get('/questions/type/{n}', [ApiControllerGET::class, 'getquestiontype'])->where('n', '[1-5]');
+    Route::get('/questions', [ApiControllerGET::class, 'getAllQuestions']);
+    Route::get('/question/{n}', [ApiControllerGET::class, 'getQuestionFromId']);
+    Route::get('/question/{n}/type', [ApiControllerGET::class, 'getQuestionTypeFromQuestionId']);
 
     //Reponse(s)
-    Route::get('/reponses', [ApiControllerGET::class, 'getresponses']);
-    Route::get('/reponse/{n}', [ApiControllerGET::class, 'getoneresponse']);
-    Route::get('/reponses/idQ/{n}', [ApiControllerGET::class, 'getresponseIdQ']);
+    Route::get('/reponses', [ApiControllerGET::class, 'getAllResponses']);
+    Route::get('/reponse/{n}', [ApiControllerGET::class, 'getResponseFromId']);
+    Route::get('/reponses/idQ/{n}', [ApiControllerGET::class, 'getResponsesFromIdQuestion']);
 
     //Image(s)
-    Route::get('/images', [ApiControllerGET::class, 'getimages']);
-    Route::get('/image/{n}', [ApiControllerGET::class, 'getoneimage']);
+    Route::get('/images', [ApiControllerGET::class, 'getAllImages']);
+    Route::get('/image/{n}', [ApiControllerGET::class, 'getImageFromId']);
 
     //DELETE
     //Instance
@@ -64,15 +64,15 @@ Route::get('/', function () {
 //     return view('vue_test');
 // })->middleware('auth');
 
-Route::group(['middleware' => ['auth','csrf']], function () {
-    Route::get('/profil', function () {
+// Route::group(['middleware' => ['auth','csrf']], function () {
+//     Route::get('/profil', function () {
 
-        // if (Auth::user()->isAdmin == 1) {
-        //     echo 'Im admin!!';
-        // }
-        // return view('vue');
-    });
-});
+//         // if (Auth::user()->isAdmin == 1) {
+//         //     echo 'Im admin!!';
+//         // }
+//         // return view('vue');
+//     });
+// });
 
 // if (auth()->check()) {
 //     Route::get('/user', function () {

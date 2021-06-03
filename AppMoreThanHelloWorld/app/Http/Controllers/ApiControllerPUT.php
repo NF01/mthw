@@ -31,9 +31,8 @@ class ApiControllerPUT extends Controller
             "enonce" => $request->input("newenonce"),
             "statut" => $request->input("newstatus"),
             "anecdote" => $request->input("newanectode"),
-            "idQuestion" => $request->input("newidChapitre"),
+            "idQuestion" => $request->input("newidQuestion"),
             "idImage" => $request->input("newidImage")
-
         ));
 
 

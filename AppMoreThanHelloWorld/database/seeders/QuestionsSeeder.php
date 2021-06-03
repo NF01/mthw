@@ -19,7 +19,7 @@ class QuestionsSeeder extends Seeder
             DB::table('questions')->insert([
                 'enonce' => 'Question n°' . $i,
                 // 'ordre' => rand(0, 10),
-                'type' => rand(1,3),
+                'idType' => rand(1,3),
                 'idEtape' => rand(1, 3)
             ]);
         }
