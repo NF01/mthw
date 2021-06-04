@@ -19,7 +19,7 @@ Route::prefix('api')->group(function () {
 
 
     //Question(s)
-
+    Route::get('/questions', [ApiControllerGET::class, 'getAllQuestions']);
     Route::get('/question/{n}', [ApiControllerGET::class, 'getQuestionFromId']);
     Route::get('/question/{n}/type', [ApiControllerGET::class, 'getQuestionTypeFromQuestionId']);
 
@@ -35,7 +35,7 @@ Route::prefix('api')->group(function () {
 
     Route::middleware(['auth','admin'])->group(function () {
 
-        Route::get('/questions', [ApiControllerGET::class, 'getAllQuestions']);
+
         //POST
         //Instance
         Route::Post('/question', [ApiControllerPOST::class, 'postquestion']);
