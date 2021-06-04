@@ -18,7 +18,7 @@ class AdminMiddleware
     {
         $myuser=auth()->user()->getAttributes()['isAdmin'];
 
-        if (!$myuser==1) {
+        if (!$myuser===1) {
             return redirect('accueil');
         }
 

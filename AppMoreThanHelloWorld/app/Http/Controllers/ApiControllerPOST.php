@@ -50,7 +50,7 @@ class ApiControllerPOST extends Controller
     {
         $unequestion = new question();
         $unequestion->enonce = $request->input("enonceQuestion");
-        $unequestion->type = $request->input("typeQuestion");
+        $unequestion->idType = $request->input("typeQuestion");
         $unequestion->idEtape = $request->input("idEtapeQuestion");
         $unequestion->idImage = $request->input("idImageQuestion");
         $myimage = image::where("idImage", $unequestion->idImage)->get();
@@ -68,28 +68,4 @@ class ApiControllerPOST extends Controller
         }
     }
 
-
-
-    public function postresponse(Request $request)
-    {
-
-        $aresponse = new reponse();
-        $aresponse->enonce = $request->input("enonceResponse");
-        $aresponse->statut = $request->input("statutResponse");
-        $aresponse->anecdote = $request->input("anecdoteResponse");
-        $aresponse->idQuestion = $request->input("idQuestionResponse");
-        $aresponse->idImage = $request->input("idImageResponse");
-        $myimage = image::where("idImage", $aresponse->idImage)->get();
-        $myquestion = question::where("idQuestion", $aresponse->idQuestion)->get();
-        $errors = new errorrs();
-        if ((count($myquestion) == 1) && (count($myimage) >= 1 || $aresponse->idImage === null)) {
-            $aresponse->save();
-        } elseif (count($myquestion) <= 0) {
-            $errors->first = "Impossible d'enregistrer la reponse car l'id de la question associee est inexistant";
-            return response()->json($errors->first);
-        } else {
-            $errors->second = "Impossible d'enregistrer la reponse car l'id de l'image associee est inexistant";
-            return response()->json($errors->second);
-        }
-    }
 }

@@ -33,11 +33,7 @@ Route::prefix('api')->group(function () {
     Route::get('/image/{n}', [ApiControllerGET::class, 'getImageFromId']);
 
 
-
     Route::middleware(['auth','admin'])->group(function () {
-
-
-
 
 
         //POST
@@ -56,8 +52,6 @@ Route::prefix('api')->group(function () {
         //Instance
         Route::Put('/question', [ApiControllerPUT::class, 'updatequestion']);
         Route::Put('/reponse', [ApiControllerPUT::class, 'updateresponse']);
-        //image
-        Route::Put('/image', [ApiControllerPUT::class, 'updateimage']);
 
     });
 });
@@ -69,10 +63,6 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-
-// Route::get('/what', function () {
-//     return view('vue_test');
-// })->middleware('auth');
 
  Route::group(['middleware' => ['auth','csrf']], function () {
      Route::get('/profil', function () {

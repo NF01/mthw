@@ -65,7 +65,7 @@ class ApiControllerGET extends Controller
     private function exportToJson($data)
     {
         if ($data != null) {
-            return $data->toJson(JSON_PRETTY_PRINT);
+            return response()->json($data);
         } else {
             return $data;
         }
