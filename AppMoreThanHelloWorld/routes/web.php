@@ -40,28 +40,30 @@ Route::prefix('api')->group(function () {
     Route::get('/user/{n}', [ApiControllerGET::class, 'getUserFromId']);
     Route::get('/users/xp', [ApiControllerGET::class, 'getUsersSortByXp']);
 
+    //Badge
+    Route::get('/badges', [ApiControllerGET::class, 'getAllBadges']);
 
-    //DELETE
-    //Instance
-    Route::Delete('/question', [ApiControllerDELETE::class, 'deleteinstance']);
+
 
     Route::middleware(['auth'])->group(function () {
 
     //POST
     //Instance
-    Route::Post('/question', [ApiControllerPOST::class, 'postquestion']);
-    Route::Post('/reponse', [ApiControllerPOST::class, 'postresponse']);
-    //image
-    Route::Post('/image', [ApiControllerPOST::class, 'postimage']);
+
     //Experience
     Route::Post('/user/xp', [ApiControllerPOST::class, 'addXpToUser']);
 
     //PUT//user
-    Route::Put('/user/{n}', [ApiControllerPUT::class, 'updateUser']);
+    Route::get('/user/{n}', [ApiControllerPUT::class, 'updateUser']);
 
     });
 
     Route::middleware(['auth', 'admin'])->group(function () {
+
+        Route::Post('/question', [ApiControllerPOST::class, 'postquestion']);
+        Route::Post('/reponse', [ApiControllerPOST::class, 'postresponse']);
+        //image
+        Route::Post('/image', [ApiControllerPOST::class, 'postimage']);
 
     //DELETE
     //Instance

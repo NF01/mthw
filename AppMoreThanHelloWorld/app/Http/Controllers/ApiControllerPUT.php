@@ -44,11 +44,8 @@ class ApiControllerPUT extends Controller
         $id=$request->input("id");
 
         User::where("id",$id)->update(array(
-            "enonce" => $request->input("newenonce"),
-            "statut" => $request->input("newstatus"),
-            "anecdote" => $request->input("newanectode"),
-            "idQuestion" => $request->input("newidQuestion"),
-            "idImage" => $request->input("newidImage")
+            "name" => $request->input("neweUserName"),
+            "email" => $request->input("newsUserEmail"),
         ));
 
 

@@ -89,6 +89,13 @@ class ApiControllerGET extends Controller
         return $this->exportToJson($result);
     }
 
+    public function getAllBadges()
+    {
+
+        $result=Etape::select(['idEtape','badgeUrl'])->get();
+        return $this->exportToJson($result);
+    }
+
 
     private function exportToJson($data)
     {
