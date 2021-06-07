@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Image;
 use App\Models\Question;
 use App\Models\Reponse;
+use App\Models\User;
 
 class ApiControllerGET extends Controller
 {
@@ -49,6 +50,12 @@ class ApiControllerGET extends Controller
     public function getImageFromId($id)
     {
         $result = Image::firstWhere('idImage', $id);
+        return $this->exportToJson($result);
+    }
+
+    public function getUserFromId($id)
+    {
+        $result = User::firstWhere('id', $id);
         return $this->exportToJson($result);
     }
 

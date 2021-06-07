@@ -32,9 +32,23 @@ Route::prefix('api')->group(function () {
     Route::get('/images', [ApiControllerGET::class, 'getAllImages']);
     Route::get('/image/{n}', [ApiControllerGET::class, 'getImageFromId']);
 
+    //User
+    Route::get('/user/{n}', [ApiControllerGET::class, 'getUserFromId']);
+
+    //DELETE
+    //Instance
+    Route::Delete('/question', [ApiControllerDELETE::class, 'deleteinstance']);
 
     Route::middleware(['auth','admin'])->group(function () {
 
+    //POST
+    //Instance
+    Route::Post('/question', [ApiControllerPOST::class, 'postquestion']);
+    Route::Post('/reponse', [ApiControllerPOST::class, 'postresponse']);
+    //image
+    Route::Post('/image', [ApiControllerPOST::class, 'postimage']);
+    //Experience
+    Route::Post('/user/xp', [ApiControllerPOST::class, 'addXpToUser']);
 
         //POST
         //Instance
@@ -81,17 +95,15 @@ Route::get('/', function () {
 // }
 
 Route::get('/home', function () {
-
-    return view('vue');
-
+    return view('vue')->with('auth_user',  auth()->user());
 });
 
 
 //Vue routing
 
-Route::get('{vue}', function($vue) {
+Route::get('{vue}', function ($vue) {
     return view('vue')->with('vue', $vue);
-})->where(['vue' => 'vue|admin|accueil|info|quizz|ranking|profil']);
+})->where(['vue' => 'vue|admin|accueil|info|quizz|ranking|profil|experience']);
 
 Route::get('/{any}', function () {
     return abort(404);

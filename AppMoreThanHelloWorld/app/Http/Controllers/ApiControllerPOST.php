@@ -7,6 +7,7 @@ use App\Models\Etape;
 use App\Models\Image;
 use App\Models\Question;
 use App\Models\reponse;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -70,7 +71,6 @@ class ApiControllerPOST extends Controller
 
     public function postresponse(Request $request)
     {
-
         $aresponse = new reponse();
         $aresponse->enonce = $request->input("enonceResponse");
         $aresponse->statut = $request->input("statutResponse");
@@ -89,5 +89,18 @@ class ApiControllerPOST extends Controller
             $errors->second = "Impossible d'enregistrer la reponse car l'id de l'image associee est inexistant";
             return response()->json($errors->second);
         }
+    }
+
+    public function addXpToUser(Request $request)
+    {
+        $EXPERIENCE_TO_ADD = 500;
+        $idUser = $request->input("idUser");
+
+        $user = User::firstWhere('id', $idUser);
+        if ($user != null) {
+            $user->experience = $user->experience + $EXPERIENCE_TO_ADD;
+            $user->save();
+        }
+        return response()->json('Experience added');
     }
 }
