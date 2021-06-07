@@ -30,6 +30,18 @@ class ApiControllerGET extends Controller
         return $this->exportToJson($result);
     }
 
+    public function getAllChapters()
+    {
+        $result = Etape::all();
+        return $this->exportToJson($result);
+    }
+
+    public function getAllQuestionsFromIdChapter($id)
+    {
+        $result = Question::Where("idEtape", $id)->get();
+        return $this->exportToJson($result);
+    }
+
     public function getAllImages()
     {
         $result = Image::all();
@@ -68,19 +80,6 @@ class ApiControllerGET extends Controller
         } else {
             return $result;
         }
-    }
-
-    public function getAllChapters()
-    {
-        $result = Etape::all();
-        return $this->exportToJson($result);
-
-    }
-
-    public function getAllQuestionsFromIdChapter($id)
-    {
-        $result = Question::Where("idEtape",$id)->get();
-        return $this->exportToJson($result);
     }
 
     private function exportToJson($data)

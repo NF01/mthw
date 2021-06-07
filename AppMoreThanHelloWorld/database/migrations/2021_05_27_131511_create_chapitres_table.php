@@ -18,6 +18,8 @@ class CreateChapitresTable extends Migration
         Schema::create('etapes', function (Blueprint $table) {
             $table->id('idEtape');
             $table->string('nom');
+            $table->string('illustrationUrl');
+            $table->string('badgeUrl');
         });
     }
 

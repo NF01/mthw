@@ -15,10 +15,12 @@ class EtapesSeeder extends Seeder
     public function run()
     {
         DB::table('etapes')->delete();
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 11; $i++) {
             DB::table('etapes')->insert([
                 'idEtape' => $i,
                 'nom' => 'Étape ' . $i,
+                'illustrationUrl' => 'illustrationUrl ' . $i,
+                'badgeUrl' => 'badgeUrl ' . $i,
             ]);
         }
     }

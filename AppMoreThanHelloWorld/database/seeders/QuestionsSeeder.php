@@ -14,14 +14,19 @@ class QuestionsSeeder extends Seeder
      */
     public function run()
     {
+        
+        $idEtape = 1;
         // DB::table('questions')->delete();
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 88; $i++) {
             DB::table('questions')->insert([
                 'enonce' => 'Question n°' . $i,
                 // 'ordre' => rand(0, 10),
                 'idType' => rand(1,3),
-                'idEtape' => rand(1, 3)
+                'idEtape' => $idEtape
             ]);
+            if ($i % 8 == 0) {
+                $idEtape++;
+            }
         }
         //
     }

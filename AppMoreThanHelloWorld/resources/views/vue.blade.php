@@ -21,7 +21,7 @@
 
     <script>
         window.idUser = {{ auth()->user()->id }};
-        console.log("blade : " + window.idUser);
+        // console.log("blade : " + window.idUser);
     </script>
     
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">

@@ -10,14 +10,13 @@
         },
 
         setup(props, context) {
-            console.log('helloprogressBar');
         },
     }
 </script>
 
 <template>
     <div class="progressbar">
-        <template v-for="(n, i) in 10" :key="i">
+        <template v-for="(n, i) in 8" :key="i">
             <div v-if="i <= count " class="progressbar-item red"></div>
             <div v-if="i > count " class="progressbar-item black"></div>
         </template>

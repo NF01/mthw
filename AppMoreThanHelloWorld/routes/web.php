@@ -104,7 +104,7 @@ Route::get('/home', function () {
 
 Route::get('{vue}', function ($vue) {
     return view('vue')->with('vue', $vue);
-})->where(['vue' => 'vue|admin|accueil|info|quizz|ranking|profil|experience']);
+})->where(['vue' => 'vue|admin|accueil|info|quizz|quizz/2|ranking|profil|experience']);
 
 Route::get('/{any}', function () {
     return abort(404);
