@@ -32,6 +32,10 @@ Route::prefix('api')->group(function () {
     Route::get('/images', [ApiControllerGET::class, 'getAllImages']);
     Route::get('/image/{n}', [ApiControllerGET::class, 'getImageFromId']);
 
+    //Chapters
+    Route::get('/chapitres', [ApiControllerGET::class, 'getAllChapters']);
+    Route::get('/questions/idC/{n}', [ApiControllerGET::class, 'getAllQuestionsFromIdChapter']);
+
     //User
     Route::get('/user/{n}', [ApiControllerGET::class, 'getUserFromId']);
 
@@ -53,7 +57,7 @@ Route::prefix('api')->group(function () {
     });
 
     Route::middleware(['auth', 'admin'])->group(function () {
-    
+
     //DELETE
     //Instance
     Route::Delete('/question', [ApiControllerDELETE::class, 'deleteinstance']);

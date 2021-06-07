@@ -6,6 +6,7 @@ use App\Models\Image;
 use App\Models\Question;
 use App\Models\Reponse;
 use App\Models\User;
+use App\Models\Etape;
 
 class ApiControllerGET extends Controller
 {
@@ -67,6 +68,19 @@ class ApiControllerGET extends Controller
         } else {
             return $result;
         }
+    }
+
+    public function getAllChapters()
+    {
+        $result = Etape::all();
+        return $this->exportToJson($result);
+
+    }
+
+    public function getAllQuestionsFromIdChapter($id)
+    {
+        $result = Question::Where("idEtape",$id)->get();
+        return $this->exportToJson($result);
     }
 
     private function exportToJson($data)

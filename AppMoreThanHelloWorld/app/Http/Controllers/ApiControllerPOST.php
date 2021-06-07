@@ -93,13 +93,13 @@ class ApiControllerPOST extends Controller
 
     public function addXpToUser(Request $request)
     {
-        $EXPERIENCE_TO_ADD = 500;
+
         $idUser = $request->input("idUser");
+        $xp = $request->input("xp");
 
         $user = User::firstWhere('id', $idUser);
-        var_dump($user);
         if ($user != null) {
-            $user->experience = $user->experience + $EXPERIENCE_TO_ADD;
+            $user->experience = $user->experience + $xp;
             $user->save();
         }
         return response()->json('Experience added');
