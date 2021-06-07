@@ -16,10 +16,10 @@
 
         }
     }
-    
+</script>
 
 
-<template :user={{ auth()->user() }}>
+<template>
     <div>
         <router-view />
         <div id="nav">
@@ -33,20 +33,6 @@
     </div>
 </template>
 
-<script>
-       export default {
-        props: ['user'],
-        data(){
-            return {
-
-            }
-        },
-        mounted() {
-            console.log(this.user)
-        }
-    }
-
-</script>
 <style>
 
 </style>

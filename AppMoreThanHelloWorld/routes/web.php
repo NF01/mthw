@@ -39,7 +39,7 @@ Route::prefix('api')->group(function () {
     //Instance
     Route::Delete('/question', [ApiControllerDELETE::class, 'deleteinstance']);
 
-    Route::middleware(['auth','admin'])->group(function () {
+    Route::middleware(['auth'])->group(function () {
 
     //POST
     //Instance
@@ -50,22 +50,19 @@ Route::prefix('api')->group(function () {
     //Experience
     Route::Post('/user/xp', [ApiControllerPOST::class, 'addXpToUser']);
 
-        //POST
-        //Instance
-        Route::Post('/question', [ApiControllerPOST::class, 'postquestion']);
-        Route::Post('/reponse', [ApiControllerPOST::class, 'postresponse']);
-        //image
-        Route::Post('/image', [ApiControllerPOST::class, 'postimage']);
+    });
 
-        //DELETE
-        //Instance
-        Route::Delete('/question', [ApiControllerDELETE::class, 'deleteinstance']);
+    Route::middleware(['auth', 'admin'])->group(function () {
+    
+    //DELETE
+    //Instance
+    Route::Delete('/question', [ApiControllerDELETE::class, 'deleteinstance']);
 
 
-        //PUT (update)
-        //Instance
-        Route::Put('/question', [ApiControllerPUT::class, 'updatequestion']);
-        Route::Put('/reponse', [ApiControllerPUT::class, 'updateresponse']);
+    //PUT (update)
+    //Instance
+    Route::Put('/question', [ApiControllerPUT::class, 'updatequestion']);
+    Route::Put('/reponse', [ApiControllerPUT::class, 'updateresponse']);
 
     });
 });

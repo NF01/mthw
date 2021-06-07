@@ -97,6 +97,7 @@ class ApiControllerPOST extends Controller
         $idUser = $request->input("idUser");
 
         $user = User::firstWhere('id', $idUser);
+        var_dump($user);
         if ($user != null) {
             $user->experience = $user->experience + $EXPERIENCE_TO_ADD;
             $user->save();

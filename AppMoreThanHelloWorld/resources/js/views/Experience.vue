@@ -6,15 +6,22 @@ export default {
   setup(props, context) {
     const currentUser = ref([]);
 
-    //TO REPLACE WITH LARAVEL LOGIN'S INFO
+    // //TO REPLACE WITH LARAVEL LOGIN'S INFO
     const fetchget = async () => {
-      const result = await fetch("http://127.0.0.1:8000/api/user/1");
+      const result = await fetch("http://127.0.0.1:8000/api/user/5");
       const data = await result.json();
       currentUser.value = data;
     };
     fetchget();
+    const getUserId = computed(() => {
+                console.log("vue : " + window.idUser)
+                return window.idUser;
+                });
+
+            
 
     const addExperience = (idUser) => {
+      console.log("fetchxp  "+idUser);
       // fetch('http://127.0.0.1:8000/api/user/xp/{idUser}', {
       //   method: 'POST',
       //   body: idUser
@@ -28,7 +35,6 @@ export default {
           idUser: idUser
         }),
       });
-      location.reload();
 
     };
 
@@ -36,17 +42,19 @@ export default {
     return {
       currentUser,
       addExperience,
+      getUserId
     };
   },
 };
 </script>
 
 <template>
+<p>user {{getUserId}}</p>
   <div>
     <h1>Experience</h1>
     <h3>User : {{ currentUser.name }}</h3>
     <h3>Experience : {{ currentUser.experience }}</h3>
-    <button class="btn btn-primary" @click="addExperience(currentUser.id)">
+    <button class="btn btn-primary" @click="addExperience(getUserId)">
       Add Experience
     </button>
   </div>

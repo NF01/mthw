@@ -119,7 +119,7 @@
             <template v-slot:body>
               <template v-for="reponse in reponse" :key="reponse.idReponse">
                 <p v-if="reponse.idQuestion+1 === question[countQuestion].idQuestion"><!-- +1 because magic happen  -->
-                    {{reponse.anectode}} {{reponse.idQuestion}}
+                    {{reponse.anecdote}} {{reponse.idQuestion}}
                 </p>
               </template>
               </template>
