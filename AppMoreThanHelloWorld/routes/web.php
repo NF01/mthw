@@ -38,6 +38,8 @@ Route::prefix('api')->group(function () {
 
     //User
     Route::get('/user/{n}', [ApiControllerGET::class, 'getUserFromId']);
+    Route::get('/users/xp', [ApiControllerGET::class, 'getUsersSortByXp']);
+
 
     //DELETE
     //Instance
@@ -54,6 +56,9 @@ Route::prefix('api')->group(function () {
     //Experience
     Route::Post('/user/xp', [ApiControllerPOST::class, 'addXpToUser']);
 
+    //PUT//user
+    Route::Put('/user/{n}', [ApiControllerPUT::class, 'updateUser']);
+
     });
 
     Route::middleware(['auth', 'admin'])->group(function () {
@@ -67,6 +72,7 @@ Route::prefix('api')->group(function () {
     //Instance
     Route::Put('/question', [ApiControllerPUT::class, 'updatequestion']);
     Route::Put('/reponse', [ApiControllerPUT::class, 'updateresponse']);
+
 
     });
 });

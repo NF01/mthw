@@ -82,6 +82,14 @@ class ApiControllerGET extends Controller
         }
     }
 
+    public function getUsersSortByXp()
+    {
+
+        $result=User::orderByDesc('experience')->get()    ;
+        return $this->exportToJson($result);
+    }
+
+
     private function exportToJson($data)
     {
         if ($data != null) {
