@@ -3,21 +3,23 @@
     --primary-color-hover: #cc1b0f;
 }
 
+
 body {
     font-size: 20px;
 }
 
-.primary, .primary-color{
+.primary,
+.primary-color {
     color: var(--primary-color);
 }
 
-.primary-link{
+.primary-link {
     font-size: .75em;
     color: var(--primary-color);
     text-decoration: underline;
 }
 
-.primary-link:hover{
+.primary-link:hover {
     color: var(--primary-color-hover) !important;
 }
 
@@ -30,9 +32,9 @@ body {
     /* max-height: 80vh; */
 }
 
-.py-default{
-    padding-top:12vh;
-    padding-bottom:12vh;
+.py-default {
+    padding-top: 12vh;
+    padding-bottom: 12vh;
 }
 
 .alert-form {
