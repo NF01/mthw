@@ -13,10 +13,12 @@
         setup(props, context) {
 
             const isModalVisible = ref('');
-            const showModal = () => isModalVisible.value = true;
+            // const showModal = () => isModalVisible.value = true;
             const closeModal = () => isModalVisible.value = false;
 
-        return { isModalVisible, showModal, closeModal}
+        return { isModalVisible,
+        //  showModal, 
+         closeModal}
         },
     }
 

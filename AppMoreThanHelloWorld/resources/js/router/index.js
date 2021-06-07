@@ -19,9 +19,10 @@ const routes = [
     component: Admin,
   },
   {
-    path: "/quizz",
+    path: "/quizz/:idChapitre",
     name: "quizz",
     component: Quizz,
+    props: true
   },
   {
     path: "/info",

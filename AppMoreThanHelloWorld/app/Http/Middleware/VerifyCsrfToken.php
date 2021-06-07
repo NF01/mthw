@@ -12,13 +12,12 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'http://127.0.0.1:8000/api/question',
-        'http://127.0.0.1:8000/api/reponse',
-        'http://127.0.0.1:8000/api/image',
+        // 'http://127.0.0.1:8000/api/question',
+        // 'http://127.0.0.1:8000/api/reponse',
+        // 'http://127.0.0.1:8000/api/image',
 
-        'http://localhost/mthw/AppMoreThanHelloWorld/public/api/question',
-        'http://localhost/mthw/AppMoreThanHelloWorld/public/api/reponse',
-        'http://localhost/mthw/AppMoreThanHelloWorld/public/api/image',
-
+        // 'http://localhost/mthw/AppMoreThanHelloWorld/public/api/question',
+        // 'http://localhost/mthw/AppMoreThanHelloWorld/public/api/reponse',
+        // 'http://localhost/mthw/AppMoreThanHelloWorld/public/api/image',
     ];
 }

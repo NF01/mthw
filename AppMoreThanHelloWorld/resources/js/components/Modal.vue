@@ -7,7 +7,7 @@
             },
         },
     };
-</script>
+</script> 
 
 <template>
     <div class="modal-backdrop">
@@ -50,9 +50,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column-reverse;
   }
 
   .modal {
+    height: 50%;
     background: #FFFFFF;
     box-shadow: 2px 2px 20px 1px;
     overflow-x: auto;
