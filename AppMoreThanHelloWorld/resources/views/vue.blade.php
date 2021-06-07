@@ -1,32 +1,31 @@
 <!doctype html>
 <html lang='fr'>
-
+ 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    {{-- <link rel="stylesheet" href="{{ asset('/css/app.css') }}"> --}}
     <title>
-
+ 
     </title>
-
+ 
     <link media="all" type="text/css" rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link media="all" type="text/css" rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
     
     <!-- UIkit CSS -->
-    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/css/uikit.min.css" /> --}}
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/css/uikit.min.css" />
+ 
     <!-- UIkit JS -->
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/js/uikit-icons.min.js"></script>
-
+ 
     <script>
         window.idUser = {{ auth()->user()->id }};
         // console.log("blade : " + window.idUser);
     </script>
-
+ 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-
+ 
     <style>
         textarea {
             resize: none
