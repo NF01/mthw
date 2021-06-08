@@ -68,6 +68,8 @@ Route::prefix('api')->group(function () {
     //DELETE
     //Instance
     Route::Delete('/question', [ApiControllerDELETE::class, 'deleteinstance']);
+    //Image
+        Route::Delete('/image', [ApiControllerDELETE::class, 'deleteimage']);
 
 
     //PUT (update)

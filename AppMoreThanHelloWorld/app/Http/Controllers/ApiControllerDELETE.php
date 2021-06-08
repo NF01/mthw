@@ -44,4 +44,16 @@ class ApiControllerDELETE extends Controller
             }
         }
     }
+
+
+
+    public function deleteimage(Request $request)
+    {
+        $idImageToDelete = $request->input("idImageDelete");
+        $myImagetoDelete=image::where("idImage",$idImageToDelete);
+        $url=$myImagetoDelete[0]->url;
+        $p = explode("/", $url);
+        unlink(storage_path('app/public/images/' . $p));
+        image::where("idImage", $idImageToDelete)->delete();
+    }
 }
