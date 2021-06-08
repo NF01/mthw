@@ -158,3 +158,10 @@ body {
     top: 50%;
     transform: translateY(-75%); */
 }
+
+.page {
+    padding: 1rem;
+    max-width: 100rem;
+    margin: 0 auto;
+    text-align: center;
+}
