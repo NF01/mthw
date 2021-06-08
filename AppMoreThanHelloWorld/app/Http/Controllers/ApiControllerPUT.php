@@ -7,6 +7,7 @@ use App\Models\Question;
 use App\Models\Reponse;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ApiControllerPUT extends Controller
 {
@@ -44,8 +45,9 @@ class ApiControllerPUT extends Controller
         $id=$request->input("id");
 
         User::where("id",$id)->update(array(
-            "name" => $request->input("neweUserName"),
+            "name" => $request->input("newUserName"),
             "email" => $request->input("newsUserEmail"),
+            'password' => Hash::make($request->input("newPassword")),
         ));
 
 
