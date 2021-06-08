@@ -53,8 +53,8 @@ Route::prefix('api')->group(function () {
     //Experience
     Route::Post('/user/xp', [ApiControllerPOST::class, 'addXpToUser']);
 
-    //PUT//user
-    Route::get('/user/{n}', [ApiControllerPUT::class, 'updateUser']);
+    //PUT //update user
+    Route::put('/user', [ApiControllerPUT::class, 'updateUser']);
 
     });
 
