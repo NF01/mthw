@@ -93,7 +93,7 @@ Route::get('/', function () {
      Route::get('/profil', function () {
 
           if (Auth::user()->isAdmin == 1) {
-              echo 'Im admin!!';
+            //   echo 'Im admin!!';
           }
           return view('vue');
      });
