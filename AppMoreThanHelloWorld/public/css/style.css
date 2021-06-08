@@ -154,4 +154,7 @@ body {
 .container-resultat .icon img{
     width: 28px;
     height: 28px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-75%);
 }
