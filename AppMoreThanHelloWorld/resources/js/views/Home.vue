@@ -6,19 +6,11 @@
         watchEffect
     } from 'vue';
 
-    // export default {
-    //     computed: {
-    //         getUserId() {
-    //             return window.idUser;
-    //         }
-    //     }
-    // }
     export default {
         components: {
             
         },
         props: {
-            // 'idUser': {default: '1'}
         },
         setup(props, context) {
 
@@ -34,10 +26,8 @@
             fetchChapitre();
 
 
-            const getUserId = computed(() => {
-                console.log("vue : " + window.idUser)
-                return window.idUser;
-                });
+            const getUserId = ref(window.idUser);
+            console.log("useridHome"+getUserId.value);
 
 
             return{getUserId, chapitres};
@@ -48,15 +38,12 @@
 </script>
 
 <template>
-        <p>user id {{getUserId}}</p>
-        <template>{{getUserId}}</template>
         <header>
            <div>Info</div>
            <div>score</div>
         </header>
 
         <div>cheminement train</div>
-        <!-- <button><router-link to="/quizz">Quizz</router-link></button> -->
 
         <ul>
             <template v-for="chapitres in chapitres" :key="chapitres.idEtape">

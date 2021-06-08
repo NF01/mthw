@@ -1,12 +1,14 @@
 <script>
 import { computed, ref, watch, watchEffect } from "vue";
 import Progressbar from "../components/Progressbar.vue";
-import Modal from "../components/Modal.vue";
+import ModalQuizz from "../components/Modal/ModalQuizz.vue";
+import ModalEnd from "../components/Modal/ModalEnd.vue";
 
 export default {
   components: {
     Progressbar,
-    Modal,
+    ModalEnd,
+    ModalQuizz,
   },
   props: {
     idChapitre: { default: "1" },
@@ -16,7 +18,7 @@ export default {
     const reponses = ref([]);
     const countQuestion = ref(0);
     const score = ref(0);
-
+//fetch question & reponse
     const fetchData = async () => {
       //   const questions = await fetch("http://127.0.0.1:8000/api/questions/");
       const getQuestion = await fetch(
@@ -54,9 +56,8 @@ export default {
       //   });
       console.log(questions.value.length);
     };
-
     fetchData();
-
+//quizz gameplay
     const nextQuestion = (reponse) => {
       //   console.log(countQuestion.value);
       if (reponse.statut == 1) {
@@ -69,13 +70,36 @@ export default {
       }
       //   console.log("score" + score.value);
       countQuestion.value = countQuestion.value + 1;
-      console.log(countQuestion.value + 1);
-      console.log(questions.value.length);
+      console.log("countQuestion " + countQuestion.value);
+      console.log("question.value.lenght " + questions.value.length);
     };
+//get authenticated user
+    const getUserId = ref(window.idUser);
+    console.log("useridquizz"+getUserId.value);
+//add xp
+    const addExperience = (idUser) => {
+            console.log("fetchxp  "+idUser);
+            fetch("http://127.0.0.1:8000/api/user/xp", {
+              method: "POST",
+              headers: new Headers({
+                "Content-Type": "application/json",
+              }),
+              body: JSON.stringify({
+                idUser: idUser,
+                xp: 100
+              }),
+            });
+          };
+
+//endquizz
+    const endQuizz = (()=>{
+      isModalVisible.value = "QuestionModalEnd";
+    })
 
     const isModalVisible = ref("");
     // const showModal = () => isModalVisible.value = true;
     const closeModal = () => (isModalVisible.value = false);
+
 
     //return vue
     return {
@@ -87,6 +111,9 @@ export default {
       // showModal,
       closeModal,
       score,
+      endQuizz,
+      addExperience,
+      getUserId
     };
   },
 };
@@ -102,7 +129,7 @@ export default {
 
   <p></p>
   <!-- <ul> -->
-  <ul v-if="countQuestion + 1 < questions.length">
+  <ul v-if="countQuestion + 1 <= questions.length">
     <template v-for="reponse in reponses" :key="reponse.idReponse">
       <!-- v-if="reponse.idQuestion === questions[countQuestion].idQuestion && questions[countQuestion].idQuestion <= 10" -->
       <button
@@ -115,51 +142,75 @@ export default {
     </template>
   </ul>
 
-  <modal v-show="isModalVisible == 'QuestionModalRight'" @close="closeModal">
-    <template v-slot:header>Bonne reponse</template>
+  <modal-quizz v-show="isModalVisible == 'QuestionModalRight'" @close="closeModal">
+    <template v-slot:header>
+      <h3>Tip top !</h3>
+    </template>
     <template v-slot:body>
+      <p> + 166,66 "edelweiss"</p>
       <template v-for="reponse in reponses" :key="reponse.idReponse">
         <p
-          v-if="reponse.idQuestion + 1 === questions[countQuestion].idQuestion"
+          v-if="reponse.idQuestion + 1 == questions[countQuestion].idQuestion"
         >
-          <!-- +1 because magic happen  -->
+          <!-- +1 because displaying is not updated yet -->
           {{ reponse.anecdote }} {{ reponse.idQuestion }}
         </p>
       </template>
     </template>
-    <template v-slot:footer>footer</template>
-  </modal>
-
-  <modal v-show="isModalVisible == 'QuestionModalWrong'" @close="closeModal">
-    <template v-slot:header>Mauvaise réponse</template>
-    <template v-slot:body>tu feras mieux la prochaine fois</template>
-    <template v-slot:footer>footer</template>
-  </modal>
-
-  <modal v-show="isModalVisible == 'QuestionModalEnd'">
-    <template v-slot:header>fin</template>
-    <template v-slot:body>
-      <p>tu as gagné {{ score }} points</p>
-      <button><router-link to="/accueil">retour</router-link></button>
+    <template v-slot:footer>
+      <template  v-if="countQuestion == 8 ">
+        <button @click="endQuizz();addExperience(getUserId)">fin du quizz</button>
+      </template>
+      <template v-else>
+        <button type="button" @click="closeModal()">
+          Suivant
+        </button>
+      </template>
     </template>
-    <template v-slot:footer>footer</template>
-  </modal>
+  </modal-quizz>
 
-  <modal
-    v-show="true"
+  <modal-quizz v-show="isModalVisible == 'QuestionModalWrong'" @close="closeModal">
+    <template v-slot:header>Faux :’(</template>
+    <template v-slot:body>+0 "edelweiss"</template>
+    <template v-slot:footer>
+      <template v-if="countQuestion == 8 ">
+        <button @click="endQuizz();addExperience(getUserId)">fin du quizz</button>
+      </template>
+      <template v-else>
+        <button type="button" @click="closeModal()">
+          Suivant
+        </button>
+      </template>
+    </template>
+  </modal-quizz>
+
+
+  <modal-end
+    v-show="isModalVisible == 'QuestionModalEnd'"
     @close="closeModal"
-    v-if="countQuestion + 1 >= questions.length"
   >
     <template v-slot:header>Résultats</template>
     <template v-slot:body>
-      <p>{{ score }} / {{ questions.length }}</p>
-      <p>{{ countQuestion + 1 }} - {{ questions.length }}</p>
+      <p>ton score : {{ score }} / {{ questions.length }}</p>
+      <!-- <p>{{ countQuestion + 1 }} - {{ questions.length }}</p> -->
+      
 
       <button><router-link to="/accueil">retour</router-link></button>
     </template>
     <template v-slot:footer>footer</template>
-  </modal>
+  </modal-end>
+
+
+
+
+
+    <!-- <button class="btn btn-primary" @click="addExperience(getUserId)">
+      Add Experience
+    </button> -->
+
 </template>
+
+
 
 <style scoped>
 </style>

@@ -13,29 +13,21 @@ export default {
       currentUser.value = data;
     };
     fetchget();
-    const getUserId = computed(() => {
-                console.log("vue : " + window.idUser)
-                return window.idUser;
-                });
-
-            
+    const getUserId = ref(window.idUser);
+            console.log(getUserId.value);
 
     const addExperience = (idUser) => {
       console.log("fetchxp  "+idUser);
-      // fetch('http://127.0.0.1:8000/api/user/xp/{idUser}', {
-      //   method: 'POST',
-      //   body: idUser
-      // });
       fetch("http://127.0.0.1:8000/api/user/xp", {
         method: "POST",
         headers: new Headers({
           "Content-Type": "application/json",
         }),
         body: JSON.stringify({
-          idUser: idUser
+          idUser: idUser,
+          xp: 100
         }),
       });
-
     };
 
     //return vue
