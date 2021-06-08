@@ -8,6 +8,37 @@ body {
     font-size: 20px;
 }
 
+.header {
+    padding: 30px 0 15px 0;
+    text-align: center;
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+.header h1 {
+    margin: auto;
+}
+.badges-container{
+    max-height: 70vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.badge-container {
+    height: 23vw;
+    width: 23vw;
+    max-width: 105px;
+    max-height: 105px;
+    line-height: 105px;
+    text-align: center;
+    background: white;
+    margin: 10px;
+    border-radius: 4px;
+    box-shadow: rgb(0 0 0 / 15%) 0 8px 16px;
+}
+
+.badges-container .locked{
+    background-color: #E5E5E5;
+}
+
 .primary,
 .primary-color {
     color: var(--primary-color);
@@ -57,6 +88,18 @@ body {
     box-shadow: rgba(0, 0, 0, .15) 0 6px 15px;
 }
 
+.btn.btn-primary.small {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 20px;
+}
+
+.btn.btn-primary.smaller {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 20px;
+}
+
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active {
@@ -70,4 +113,45 @@ body {
 
 .full-width {
     width: 100%;
+}
+
+.container-scroll {
+    overflow-x: auto;
+    padding-bottom: 20px;
+}
+
+/* Résultats */
+.container-resultat {
+    display: grid;
+    grid-template-columns: 4fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+        "titre titre titre titre score icon"
+        "date date date date score icon"
+}
+
+.container-resultat .titre {
+    grid-area: titre;
+}
+
+.container-resultat .date {
+    grid-area: date;
+    font-size: 16px;
+    color: grey;
+}
+
+.container-resultat .score {
+    grid-area: score;
+    margin-right: 12px;
+    line-height: 50px;
+}
+
+.container-resultat .icon {
+    grid-area: icon;
+    line-height: 50px;
+}
+
+.container-resultat .icon img{
+    width: 28px;
+    height: 28px;
 }
