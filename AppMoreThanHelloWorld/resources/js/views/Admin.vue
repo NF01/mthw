@@ -15,7 +15,7 @@
 
             //add question
             const fetchpostQ = async () => {
-                const result = await fetch("http://127.0.0.1:8000/api/questions", {
+                const result = await fetch("/api/questions", {
                     method: "POST",
                     headers: new Headers({
                         'Content-Type': 'application/json'

@@ -29,28 +29,29 @@
             const nbOfQuestion = ref(8);
             const XpbyQuestion= ref(166);
             const getUserId = ref(window.idUser);
-            const url = ref(window.url);
-            console.log(url.value);
+            const url = ref(window.urlProd);
+            // const url = ref(process.env.URL);
+            // console.log(url.value);
             
             //fetch question & reponse
             const fetchData = async () => {
                 const getQuestion = await fetch(
-                    url.value+"api/questions/idC/" + props.idChapitre
+                    "/api/questions/idC/" + props.idChapitre
                 );
                 questions.value = await getQuestion.json();
 
                 const getReponse = await fetch(
-                     url.value+"api/reponses"
+                     "/api/reponses"
                 );
                 reponses.value = await getReponse.json();
 
                 // image question
                 const fetchImage = await fetch(
-                  url.value+"api/images");
+                  "/api/images");
                 images.value = await fetchImage.json();
 
                 // user
-                const fetchUser = await fetch( url.value+"api/user/" + getUserId.value);
+                const fetchUser = await fetch( "/api/user/" + getUserId.value);
                 user.value = await fetchUser.json();
             };
             fetchData();
@@ -71,7 +72,7 @@
 
             //add xp
             const addExperience = (idUser) => {
-                fetch(url.value+"api/user/xp", {
+                fetch("/api/user/xp", {
                     method: "POST",
                     headers: new Headers({
                         "Content-Type": "application/json",

@@ -2,7 +2,17 @@
 export default {
   components: {},
   setup() {
-    console.log("setupRanking");
+    
+    //fetch question & reponse
+      const fetchData = async () => {
+          // user
+          const fetchUser = await fetch( "/api/user/" + getUserId.value);
+          user.value = await fetchUser.json();
+      };
+      fetchData();
+
+
+
   },
 };
 </script>
