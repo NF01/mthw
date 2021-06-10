@@ -47,15 +47,14 @@ Route::prefix('api')->group(function () {
 
     Route::middleware(['auth'])->group(function () {
 
-    //POST
-    //Instance
+        //POST
+        //Instance
 
-    //Experience
-    Route::Post('/user/xp', [ApiControllerPOST::class, 'addXpToUser']);
+        //Experience
+        Route::Post('/user/xp', [ApiControllerPOST::class, 'addXpToUser']);
 
-    //PUT //update user
-    Route::put('/user', [ApiControllerPUT::class, 'updateUser']);
-
+        //PUT //update user
+        Route::put('/user', [ApiControllerPUT::class, 'updateUser']);
     });
 
     Route::middleware(['auth', 'admin'])->group(function () {
@@ -65,19 +64,17 @@ Route::prefix('api')->group(function () {
         //image
         Route::Post('/image', [ApiControllerPOST::class, 'postimage']);
 
-    //DELETE
-    //Instance
-    Route::Delete('/question', [ApiControllerDELETE::class, 'deleteinstance']);
-    //Image
+        //DELETE
+        //Instance
+        Route::Delete('/question', [ApiControllerDELETE::class, 'deleteinstance']);
+        //Image
         Route::Delete('/image', [ApiControllerDELETE::class, 'deleteimage']);
 
 
-    //PUT (update)
-    //Instance
-    Route::Put('/question', [ApiControllerPUT::class, 'updatequestion']);
-    Route::Put('/reponse', [ApiControllerPUT::class, 'updateresponse']);
-
-
+        //PUT (update)
+        //Instance
+        Route::Put('/question', [ApiControllerPUT::class, 'updatequestion']);
+        Route::Put('/reponse', [ApiControllerPUT::class, 'updateresponse']);
     });
 });
 
@@ -89,15 +86,15 @@ Route::get('/', function () {
 });
 
 
- Route::group(['middleware' => ['auth','csrf']], function () {
-     Route::get('/profil', function () {
+Route::group(['middleware' => ['auth', 'csrf']], function () {
+    Route::get('/profil', function () {
 
-          if (Auth::user()->isAdmin == 1) {
+        if (Auth::user()->isAdmin == 1) {
             //   echo 'Im admin!!';
-          }
-          return view('vue');
-     });
- });
+        }
+        return view('vue');
+    });
+});
 
 // if (auth()->check()) {
 //     Route::get('/user', function () {
@@ -105,9 +102,9 @@ Route::get('/', function () {
 //     });
 // }
 
-Route::get('/home', function () {
-    return view('vue')->with('auth_user',  auth()->user());
-});
+// Route::get('/home', function () {
+//     return view('vue')->with('auth_user',  auth()->user());
+// });
 
 
 //Vue routing

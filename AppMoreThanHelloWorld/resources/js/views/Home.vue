@@ -135,7 +135,7 @@ export default {
       </div>
     </div>
   </div>
-  <div class="row text-center">
+  <div class="row text-center mx-0">
     <router-link
       :to="{
         name: 'quizz',
