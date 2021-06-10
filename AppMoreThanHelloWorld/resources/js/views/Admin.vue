@@ -8,18 +8,6 @@ export default {
     const closeModal = () => (isModalVisible.value = false);
 
     //add question
-    const fetchpostQ = async () => {
-      const result = await fetch("http://127.0.0.1:8000/api/questions", {
-        method: "POST",
-        headers: new Headers({
-          "Content-Type": "application/json",
-        }),
-        body: JSON.stringify({
-          enonceQuestion: "test from fetch api zuzuzuzu  3",
-          typeQuestion: 1,
-          idEtapeQuestion: 2,
-        }),
-      });
 
             //add question
             const fetchpostQ = async () => {
@@ -54,8 +42,10 @@ export default {
       closeModal,
       fetchPostQuestion,
       scrollToTop,
-    };
+    }
+    
   },
+
 };
 </script>
 
