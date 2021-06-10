@@ -21,6 +21,9 @@
     <script>
         window.idUser = {{ auth()->user()->id }};
         // console.log("blade : " + window.idUser);
+        window.url = "http://127.0.0.1:8000/";
+        
+
     </script>
  
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

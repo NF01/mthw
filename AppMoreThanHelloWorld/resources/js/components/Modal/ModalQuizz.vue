@@ -50,7 +50,7 @@
   }
 
   .modal {
-    height: 70%;
+    height: 100%;
     background: #FFFFFF;
     box-shadow: 2px 2px 20px 1px;
     overflow-x: auto;
