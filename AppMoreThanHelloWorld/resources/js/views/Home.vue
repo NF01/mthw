@@ -6,9 +6,10 @@ export default {
   props: {},
   setup(props, context) {
     const chapitres = ref([]);
+    const url = ref(window.url);
 
     const fetchChapitre = async () => {
-      const result = await fetch("http://127.0.0.1:8000/api/chapitres/");
+      const result = await fetch(url.value+"api/chapitres/");
       const data = await result.json();
       chapitres.value = data;
       //   console.log(chapitres.value);
