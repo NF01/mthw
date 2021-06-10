@@ -49,6 +49,11 @@ export default {
             ></a>
           </div>
         </div>
+        <div class="row text-center justify-content-center">
+          <a href="/logout" class="btn btn-primary small mx-auto"
+            >Se déconnecter</a
+          >
+        </div>
       </div>
     </div>
   </div>
