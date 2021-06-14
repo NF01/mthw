@@ -11,7 +11,7 @@
 
 <template>
     <div class="modal-backdrop">
-        <div class="modal">
+        <div class="modals">
             <header class="modal-header">
                 <slot name="header">
                     This is the default title!
@@ -39,7 +39,7 @@
     </div>
 </template>
 
-<style scoped>
+<style>
   .modal-backdrop {
     position: fixed;
     top: 0;

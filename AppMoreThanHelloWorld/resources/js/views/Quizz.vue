@@ -1,252 +1,331 @@
 <script>
-    import {
-        computed,
-        reactive,
-        ref,
-    } from "vue";
-    import Progressbar from "../components/Progressbar.vue";
-    import ModalQuizz from "../components/Modal/ModalQuizz.vue";
-    import ModalEnd from "../components/Modal/ModalEnd.vue";
+import { computed, reactive, ref } from "vue";
+import Progressbar from "../components/Progressbar.vue";
+import ModalQuizz from "../components/Modal/ModalQuizz.vue";
+import ModalEnd from "../components/Modal/ModalEnd.vue";
 
-    export default {
-        components: {
-            Progressbar,
-            ModalEnd,
-            ModalQuizz,
-        },
-        props: {
-            idChapitre: {
-                default: "1"
-            },
-        },
-        setup(props, context) {
-            const questions = ref([]);
-            const reponses = ref([]);
-            const images = ref([]);
-            const user = ref([]);
-            const countQuestion = ref(0);
-            const score = ref(0);
-            const nbOfQuestion = ref(8);
-            const XpbyQuestion= ref(166);
-            const getUserId = ref(window.idUser);
-            const url = ref(window.urlProd);
-            // const url = ref(process.env.URL);
-            // console.log(url.value);
-            
-            //fetch question & reponse
-            const fetchData = async () => {
-                const getQuestion = await fetch(
-                    "/api/questions/idC/" + props.idChapitre
-                );
-                questions.value = await getQuestion.json();
+export default {
+  components: {
+    Progressbar,
+    ModalEnd,
+    ModalQuizz,
+  },
+  props: {
+    idChapitre: {
+      default: "1",
+    },
+  },
+  setup(props, context) {
+    const questions = ref([]);
+    const reponses = ref([]);
+    const images = ref([]);
+    const user = ref([]);
+    const countQuestion = ref(0);
+    const score = ref(0);
+    const nbOfQuestion = ref(8);
+    const XpbyQuestion = ref(166);
+    const getUserId = ref(window.idUser);
+    const url = ref(window.urlProd);
+    // const url = ref(process.env.URL);
+    // console.log(url.value);
 
-                const getReponse = await fetch(
-                     "/api/reponses"
-                );
-                reponses.value = await getReponse.json();
+    //fetch question & reponse
+    const fetchData = async () => {
+      const getQuestion = await fetch("/api/questions/idC/" + props.idChapitre);
+      questions.value = await getQuestion.json();
 
-                // image question
-                const fetchImage = await fetch(
-                  "/api/images");
-                images.value = await fetchImage.json();
+      const getReponse = await fetch("/api/reponses");
+      reponses.value = await getReponse.json();
 
-                // user
-                const fetchUser = await fetch( "/api/user/" + getUserId.value);
-                user.value = await fetchUser.json();
-            };
-            fetchData();
+      // image question
+      const fetchImage = await fetch("/api/images");
+      images.value = await fetchImage.json();
 
+      // user
+      const fetchUser = await fetch("/api/user/" + getUserId.value);
+      user.value = await fetchUser.json();
+    };
+    fetchData();
 
-            //quizz gameplay
-            const nextQuestion = (reponse) => {
-                if (reponse.statut == 1) {
-                    score.value = score.value + 1;
-                    isModalVisible.value = "QuestionModalRight";
-                } else {
-                    isModalVisible.value = "QuestionModalWrong";
-                }
-                countQuestion.value = countQuestion.value + 1;
-            };
-            
-
-
-            //add xp
-            const addExperience = (idUser) => {
-                fetch("/api/user/xp", {
-                    method: "POST",
-                    headers: new Headers({
-                        "Content-Type": "application/json",
-                    }),
-                    body: JSON.stringify({
-                        idUser: idUser,
-                        xp: score.value * XpbyQuestion.value
-                    }),
-                });
-            };
-            
-
-
-            //endquizz
-            const endQuizz = (() => {
-                isModalVisible.value = "QuestionModalEnd";
-            })
-
-            const isModalVisible = ref("");
-            const closeModal = () => (isModalVisible.value = false);
-
-
-            //return vue
-            return {
-                questions,
-                reponses,
-                countQuestion,
-                nextQuestion,
-                isModalVisible,
-                closeModal,
-                score,
-                endQuizz,
-                addExperience,
-                getUserId,
-                images,
-                nbOfQuestion,
-                user,
-                XpbyQuestion,
-            };
-        },
+    //quizz gameplay
+    const nextQuestion = (reponse) => {
+      if (reponse.statut == 1) {
+        score.value = score.value + 1;
+        isModalVisible.value = "QuestionModalRight";
+      } else {
+        isModalVisible.value = "QuestionModalWrong";
+      }
+      countQuestion.value = countQuestion.value + 1;
     };
 
+    //add xp
+    const addExperience = (idUser) => {
+      fetch("/api/user/xp", {
+        method: "POST",
+        headers: new Headers({
+          "Content-Type": "application/json",
+        }),
+        body: JSON.stringify({
+          idUser: idUser,
+          xp: score.value * XpbyQuestion.value,
+        }),
+      });
+    };
+
+    //endquizz
+    const endQuizz = () => {
+      isModalVisible.value = "QuestionModalEnd";
+    };
+
+    const isModalVisible = ref("");
+    const closeModal = () => (isModalVisible.value = false);
+
+    //return vue
+    return {
+      questions,
+      reponses,
+      countQuestion,
+      nextQuestion,
+      isModalVisible,
+      closeModal,
+      score,
+      endQuizz,
+      addExperience,
+      getUserId,
+      images,
+      nbOfQuestion,
+      user,
+      XpbyQuestion,
+    };
+  },
+};
 </script>
 
 <template>
-    <h1>Quizz</h1>
-
-    <p v-if="questions[countQuestion]">
-        {{ questions[countQuestion].enonce }}
+  <div class="container">
+    <header class="row border-bottom py-4 my-4">
+      <div class="col-auto">
+        <button href="#return">Fermer</button>
+      </div>
+      <div class="col text-center">
+        <h1 class="mb-1">Quizz</h1>
+      </div>
+    </header>
+    <div class="row">
+      <div class="col pb-4">
+        <progressbar :count="countQuestion"></progressbar>
+      </div>
+    </div>
+    <p v-if="questions[countQuestion]" class="pb-6">
+      {{ questions[countQuestion].enonce }}
     </p>
 
     <template v-for="image in images" :key="image.idImage">
-        <template v-if="questions[countQuestion].idImage == image.idImage">
-            <img :src="image.url">
-        </template>
+      <template v-if="questions[countQuestion].idImage == image.idImage">
+        <img :src="image.url" />
+      </template>
     </template>
+  </div>
 
-    <progressbar :count="countQuestion"></progressbar>
-
-
-    <ul v-if="countQuestion <= nbOfQuestion">
-        <template v-for="reponse in reponses" :key="reponse.idReponse">
-            <template v-if="reponse.enonce">
-                <template v-if="reponse.idQuestion === questions[countQuestion].idQuestion">
-                    <button class="btn btn-primary" @click="nextQuestion(reponse);">
-                        {{ reponse.enonce }}
-                    </button>
-                </template>
-            </template>
-
-            <template v-if="reponse.idImage">
-                <template v-if="reponse.idQuestion === questions[countQuestion].idQuestion">
-                    <template v-for="image in images" :key="image.idImage">
-                        <template class="afficheImg" v-if="reponse.idImage == image.idImage">
-                            <img :src="image.url" @click="nextQuestion(reponse)">
-                        </template>
-                    </template>
-                </template>
-            </template>
+  <ul class="container" v-if="countQuestion <= nbOfQuestion">
+    <div class="row">
+      <template v-for="reponse in reponses" :key="reponse.idReponse">
+        <template v-if="reponse.enonce">
+          <template
+            v-if="reponse.idQuestion === questions[countQuestion].idQuestion"
+          >
+            <div class="col-md-6 mb-3">
+              <button
+                class="btn btn-secondary full-width"
+                @click="nextQuestion(reponse)"
+              >
+                {{ reponse.enonce }}
+              </button>
+            </div>
+          </template>
         </template>
-    </ul>
 
-
-
-
-
-
-    <modal-quizz v-show="isModalVisible == 'QuestionModalRight'" @close="closeModal">
-        <template v-slot:header>
-            <h3>Tip top !</h3>
+        <template v-if="reponse.idImage">
+          <template
+            v-if="reponse.idQuestion === questions[countQuestion].idQuestion"
+          >
+            <template v-for="image in images" :key="image.idImage">
+              <template
+                class="afficheImg"
+                v-if="reponse.idImage == image.idImage"
+              >
+                <div class="container">
+                  <img :src="image.url" @click="nextQuestion(reponse)" />
+                </div>
+              </template>
+            </template>
+          </template>
         </template>
-        <template v-slot:body>
-            <p> + {{XpbyQuestion}} "edelweiss"</p>
-            <template v-for="reponse in reponses" :key="reponse.idReponse">
-                <p v-if="reponse.idQuestion  == questions[countQuestion].idQuestion-1">
-                    <!-- +1 because displaying is not updated yet -->
-                    {{ reponse.anecdote }}
-                </p>
-            </template>
+      </template>
+    </div>
+  </ul>
+
+  <modal-quizz
+    class="modal-right"
+    v-show="isModalVisible == 'QuestionModalRight'"
+    @close="closeModal"
+  >
+    <template v-slot:header>
+      <h3 class="vert">Tip top !</h3>
+    </template>
+    <template v-slot:body>
+      <div class="container">
+        <div class="row">
+          <div class="col text-center mb-3">
+            <span class="vert">
+              + {{ XpbyQuestion }}
+              <img
+                class="edelweiss-point"
+                src="/img/edelweiss.png"
+                alt="points"
+              />
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <template v-for="reponse in reponses" :key="reponse.idReponse">
+        <p class="text-center" v-if="reponse.idQuestion == questions[countQuestion].idQuestion - 1">
+          <!-- +1 because displaying is not updated yet -->
+          {{ reponse.anecdote }}
+        </p>
+      </template>
+    </template>
+    <template v-slot:footer>
+      <template v-if="countQuestion == nbOfQuestion">
+        <template v-if="user.experience > 1000 * idChapitre">
+          <button @click="endQuizz()">fin du quizz</button>
         </template>
-        <template v-slot:footer>
-            <template v-if="countQuestion == nbOfQuestion ">
-                <template v-if="user.experience > 1000*idChapitre">
-                  <button @click="endQuizz();">fin du quizz</button>
-                </template>
-                <template v-if="user.experience <= 1000*idChapitre">
-                  <button @click="endQuizz();addExperience(getUserId)">fin du quizz</button>
-                </template>
-            </template>
-            <template v-else>
-                <button type="button" @click="closeModal()">
-                    Suivant
-                </button>
-            </template>
+        <template v-if="user.experience <= 1000 * idChapitre">
+          <button
+            @click="
+              endQuizz();
+              addExperience(getUserId);
+            "
+          >
+            fin du quizz
+          </button>
         </template>
-    </modal-quizz>
+      </template>
+      <template v-else>
+        <button
+          class="btn btn-primary full-width"
+          type="button"
+          @click="closeModal()"
+        >
+          Suivant
+        </button>
+      </template>
+    </template>
+  </modal-quizz>
 
-    <modal-quizz v-show="isModalVisible == 'QuestionModalWrong'" @close="closeModal">
-        <template v-slot:header>Faux :’(</template>
-        <template v-slot:body>+0 "edelweiss"</template>
-        <template v-slot:footer>
-            <template v-if="countQuestion == nbOfQuestion ">
-                <template v-if="user.experience > 1000*idChapitre">
-                  <button @click="endQuizz();">fin du quizz</button>
-                </template>
-                <template v-if="user.experience <= 1000*idChapitre">
-                  <button @click="endQuizz();addExperience(getUserId)">fin du quizz</button>
-                </template>
-            </template>
-            <template v-else>
-                <button type="button" @click="closeModal()">
-                    Suivant
-                </button>
-            </template>
+  <modal-quizz
+    class="modal-wrong"
+    v-show="isModalVisible == 'QuestionModalWrong'"
+    @close="closeModal"
+  >
+    <template v-slot:header>
+      <h3 class="rouge">Faux :’(</h3>
+    </template>
+    <template v-slot:body>
+      <div class="container">
+        <div class="row">
+          <div class="col text-center mb-3">
+            <span class="rouge">
+              +0
+              <img
+                class="edelweiss-point"
+                src="/img/edelweiss.png"
+                alt="points"
+              />
+            </span>
+          </div>
+        </div>
+      </div>
+    </template>
+    <template v-slot:footer>
+      <template v-if="countQuestion == nbOfQuestion">
+        <template v-if="user.experience > 1000 * idChapitre">
+          <button @click="endQuizz()">fin du quizz</button>
         </template>
-    </modal-quizz>
+        <template v-if="user.experience <= 1000 * idChapitre">
+          <button
+            @click="
+              endQuizz();
+              addExperience(getUserId);
+            "
+          >
+            fin du quizz
+          </button>
+        </template>
+      </template>
+      <template v-else>
+        <button class="btn btn-primary full-width" type="button" @click="closeModal()">
+          Suivant   
+        </button>
+      </template>
+    </template>
+  </modal-quizz>
 
+  <modal-end v-show="isModalVisible == 'QuestionModalEnd'" @close="closeModal">
+    <template v-slot:header>Fin du quizz</template>
+    <template v-slot:body>
+      <p>Réponse juste : {{ score }} / {{ questions.length }}</p>
 
-    <modal-end v-show="isModalVisible == 'QuestionModalEnd'" @close="closeModal">
-        <template v-slot:header>Fin du quizz</template>
-        <template v-slot:body>
-            <p>Réponse juste : {{ score }} / {{ questions.length }}</p>
+      <template v-if="user">
+        <template
+          v-if="user.experience + score * XpbyQuestion >= 1000 * idChapitre"
+        >
+          <p>Bravo tu passe au niveau suivant !</p>
 
-            <template v-if="user">
-                <template v-if="user.experience+(score*XpbyQuestion) >= 1000*idChapitre">
-                    <p>Bravo tu passe au niveau suivant !</p>
+          <button>
+            <router-link to="/accueil">retour</router-link>
+          </button>
+        </template>
+        <template
+          v-if="user.experience + score * XpbyQuestion < 1000 * idChapitre"
+        >
+          <p>
+            Tu n'as pas assez d'Edelweiss pour passer à la prochaine étape.
+            Retente ta chance
+          </p>
 
-                    <button>
-                        <router-link to="/accueil">retour</router-link>
-                    </button>
-                    
-                </template>
-                <template v-if="user.experience+(score*XpbyQuestion) < 1000*idChapitre">
-                    <p>Tu n'as pas assez d'Edelweiss pour passer à la prochaine étape. Retente ta chance</p>
-
-                    <!-- <button>
+          <!-- <button>
                         <router-link :to="/quizz/idChapitre">Rejouer</router-link>
                     </button> -->
-                    <button>
-                        <router-link to="/accueil">retour</router-link>
-                    </button>
-                </template>
-            </template>
-
+          <button>
+            <router-link to="/accueil">retour</router-link>
+          </button>
         </template>
+      </template>
+    </template>
 
-
-
-        <template v-slot:footer>footer</template>
-    </modal-end>
-
+    <template v-slot:footer>footer</template>
+  </modal-end>
 </template>
 
 
 
 <style scoped>
+.edelweiss-point {
+  margin-left: 15px;
+  width: 30px;
+}
+.vert {
+  color: #28a745;
+}
+.rouge {
+  color: #da291c;
+}
+.modal-false {
+  height: 30%;
+}
+.row-right {
+  background-color: #28a745;
+}
 </style>

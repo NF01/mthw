@@ -10,8 +10,9 @@
 </script> 
 
 <template>
-    <div class="modal-backdrop">
-        <div class="modal">
+<div class="modal-background">
+    <div class="custom-modal">
+        <div class="modal-bottom">
             <header class="modal-header">
                 <slot name="header">
                     This is the default title!
@@ -24,7 +25,7 @@
                 </slot>
             </section>
 
-            <footer class="modal-footer">
+            <footer class="modal-footer justify-content-center">
                 <slot name="footer">
                 <button type="button" class="btn-green" @click="close">
                     Suivant
@@ -33,12 +34,45 @@
             </footer>
         </div>
     </div>
+    </div>
 </template>
 
 <style scoped>
-  .modal-backdrop {
+.modal-background {
     position: fixed;
     top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0, 0.5);
+}
+.custom-modal {
+  position: fixed;
+    bottom: 0;
+    left: 0;
+    background: #fff;
+    width: 100%;
+    } 
+    .modal-right .custom-modal {
+    border-top: solid 15px #28a745;
+}
+    .modal-wrong .custom-modal{
+    border-top: solid 15px #da291c;
+}
+
+    .custom-modal::before
+    {
+      /* content:''; */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.178);
+    width: 100%;
+    height: 100vh;
+    }
+
+   .modal-backdrop {
+    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
@@ -50,15 +84,17 @@
   }
 
   .modal {
-    height: 100%;
+    display: inline-block;
+    height: 50%;
+    text-align:center;
     background: #FFFFFF;
-    box-shadow: 2px 2px 20px 1px;
+    box-shadow: 2px 2px 20px 1px #28a745;
     overflow-x: auto;
     display: flex;
     flex-direction: column;
   }
 
-  .modal-header,
+ .modal-header,
   .modal-footer {
     padding: 15px;
     display: flex;
@@ -66,6 +102,7 @@
 
   .modal-header {
     position: relative;
+        padding-top: 25px;
     border-bottom: 1px solid #eeeeee;
     color: #4AAE9B;
     justify-content: space-between;
@@ -100,5 +137,5 @@
     background: #4AAE9B;
     border: 1px solid #4AAE9B;
     border-radius: 2px;
-  }
+  } 
 </style>
