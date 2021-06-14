@@ -1,8 +1,8 @@
 :root {
     --primary-color: #DA291C;
     --primary-color-hover: #cc1b0f;
-    --play-color: #202675;
-    --play-color-hover: rgb(24, 29, 98);
+    --play-color: #252f7f;
+    --play-color-hover: #141c61;
 }
 
 
@@ -91,6 +91,10 @@ body {
     .rails {
         height: 4200px;
     }
+
+    .badge-container {
+        line-height: 23vw !important;
+    }
 }
 
 
@@ -117,6 +121,11 @@ body {
     overflow-x: hidden;
 }
 
+.badge-container img {
+    width: 95%;
+    height: 95%;
+}
+
 .badge-container {
     height: 23vw;
     width: 23vw;
@@ -130,8 +139,13 @@ body {
     box-shadow: rgb(0 0 0 / 15%) 0 8px 16px;
 }
 
+/* 
 .badges-container .locked {
     background-color: #E5E5E5;
+} */
+
+.badge-container img.locked {
+    filter: grayscale(100%);
 }
 
 .primary,
@@ -298,10 +312,3 @@ body {
     margin: 0 auto;
     text-align: center;
 }
-
-/* MODAL */
-
-
-
-
-/* END MODAL */

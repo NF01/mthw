@@ -77,24 +77,41 @@ Route::prefix('api')->group(function () {
         Route::Put('/reponse', [ApiControllerPUT::class, 'updateresponse']);
     });
 });
-
+Route::redirect('/', '/accueil');
 Auth::routes();
-
-//Login routing
-Route::get('/', function () {
-    return view('auth.login');
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::get('/nouveau-compte', function () {
+    return view('vue_register');
 });
 
-
-Route::group(['middleware' => ['auth', 'csrf']], function () {
-    Route::get('/profil', function () {
-
-        if (Auth::user()->isAdmin == 1) {
-            //   echo 'Im admin!!';
-        }
+Route::get('{view}', function () {
+    if (Auth::user()) {
+        // echo 'im logged';
         return view('vue');
-    });
+    } else {
+        // echo 'im not logged in';
+        return view('vue_auth');
+    }
+})->where(['view' => 'vue|admin|accueil|info|quizz|ranking|profil|experience']);
+
+Route::get('/quizz/{number}', function ($number) {
+    return view('vue')->with('vue', $number);
+})->where(['number' => '[0-9]+']);
+
+Route::get('/{any}', function () {
+    // return abort(404);
+    return redirect('/');
 });
+
+// Route::group(['middleware' => ['auth', 'csrf']], function () {
+//     Route::get('/profil', function () {
+
+//         if (Auth::user()->isAdmin == 1) {
+//             //   echo 'Im admin!!';
+//         }
+//         return view('vue');
+//     });
+// });
 
 // if (auth()->check()) {
 //     Route::get('/user', function () {
@@ -105,14 +122,3 @@ Route::group(['middleware' => ['auth', 'csrf']], function () {
 // Route::get('/home', function () {
 //     return view('vue')->with('auth_user',  auth()->user());
 // });
-
-
-//Vue routing
-
-Route::get('{vue}', function ($vue) {
-    return view('vue')->with('vue', $vue);
-})->where(['vue' => 'vue|admin|accueil|info|quizz|quizz/2|quizz/1|ranking|profil|experience']);
-
-Route::get('/{any}', function () {
-    return abort(404);
-});

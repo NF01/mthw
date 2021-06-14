@@ -24,12 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(auth()->check())
-        {
+        if (auth()->check()) {
             echo 'YOOOO<br>';
         };
-        if(Auth::check())
-        {
+        if (Auth::check()) {
             echo 'Yess bg';
         };
 

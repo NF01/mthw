@@ -1,21 +1,13 @@
 <script>
-    import {
-        computed,
-        ref,
-        watch,
-        watchEffect
-    } from 'vue';
+import { computed, ref, watch, watchEffect } from "vue";
 
-    export default {
-        components: {
-            
-        },
-        props: {
-        },
-        setup(props, context) {
-
-        }
-    }
+export default {
+  components: {},
+  props: {},
+  setup(props, context) {
+    const URL = "/svg";
+  },
+};
 </script>
 
 
@@ -44,6 +36,7 @@
             
         </div>
     </div>
+  </div>
 </template>
 
 <style>

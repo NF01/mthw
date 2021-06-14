@@ -17,6 +17,8 @@ class EtapesSeeder extends Seeder
 
         $noms = ['Genève', 'Vaud', 'Fribourg', 'Valais', 'Tessin', 'Grison', 'Lucerne', 'Schaffouse', 'Bâle', 'Berne', 'Neuchâtel', 'Lavaux'];
 
+        $badges = ['0-Ovomaltine.svg', '1-rivella.svg', '2-fondue.svg', '3-Toblerone.svg', '4-IceTea.svg', '5-Cenovis.svg', '6-Chocolat.svg', '7-Chips.svg', '8-Lackerli.svg', '9-Fromage.svg', '10-Sugus.svg', '11-Aromate.svg'];
+
         $etapes = ['jet-deau-geneve.svg', 'chateau-chillon.svg', 'cailler-broc.svg', 'cervin.svg', 'bellinzone-chateau.svg', 'parc-national.svg', 'pont-lucerne.svg', 'chute du rhin.svg', 'zoo-bale.svg', 'palais-federal.svg', 'creux_du_van.svg', 'lavaux.svg'];
 
         $count = 0;
@@ -26,7 +28,7 @@ class EtapesSeeder extends Seeder
                 'idEtape' => $i,
                 'nom' => $noms[$count],
                 'illustrationUrl' => $etapes[$count],
-                'badgeUrl' => 'badgeUrl ' . $i
+                'badgeUrl' => $badges[$count],
             ]);
             $count++;
         }

@@ -12,13 +12,12 @@ export default {
       const result = await fetch("/api/chapitres/");
       const data = await result.json();
       chapitres.value = data;
-      //   console.log(chapitres.value);
     };
     fetchChapitre();
     const getUserId = ref(window.idUser);
-    // console.log("useridHome" + getUserId.value);
+    const URL = ref(window.URL);
 
-    return { getUserId, chapitres };
+    return { getUserId, chapitres, URL };
   },
 };
 </script>
@@ -38,7 +37,7 @@ export default {
           <div class="row text-center justify-content-center">
             <img
               class="illustration-background-first"
-              :src="'svg/' + chapitres[0].illustrationUrl"
+              :src="URL + chapitres[0].illustrationUrl"
               alt=""
               width="250px"
               height="100%"
@@ -60,7 +59,7 @@ export default {
         <div class="container-train">
           <img
             class="train"
-            src="/svg/train-top-entier.svg"
+            :src="URL + 'train-top-entier.svg'"
             alt=""
             width="50px"
             height="auto"
@@ -80,7 +79,7 @@ export default {
                 <img
                   v-if="chapitre.idEtape % 2 != 0"
                   class="illustration-background"
-                  :src="'svg/' + chapitre.illustrationUrl"
+                  :src="URL + chapitre.illustrationUrl"
                   alt=""
                   width="250px"
                   height="100%"
@@ -90,7 +89,7 @@ export default {
                 <img
                   v-if="chapitre.idEtape % 2 == 0"
                   class="illustration-background"
-                  :src="'svg/' + chapitre.illustrationUrl"
+                  :src="URL + chapitre.illustrationUrl"
                   alt=""
                   width="250px"
                   height="100%"
@@ -115,7 +114,7 @@ export default {
           <div class="row text-center justify-content-center">
             <img
               class="illustration-background-end"
-              :src="'svg/' + chapitres[chapitres.length - 1].illustrationUrl"
+              :src="URL + chapitres[chapitres.length - 1].illustrationUrl"
               alt=""
               width="250px"
               height="100%"

@@ -17,7 +17,7 @@ class ReponsesSeeder extends Seeder
         $idQuestion = 1;
         $statut = true;
 
-        for ($i = 1; $i <= 176; $i++) {
+        for ($i = 1; $i <= 216; $i++) {
             DB::table('reponses')->insert([
                 'enonce' => 'Réponse n°' . $i,
                 // 'ordre' => rand(0, 10),
@@ -30,7 +30,7 @@ class ReponsesSeeder extends Seeder
             }
             if ($i % 2 == 0) {
                 $statut = true;
-            }else{
+            } else {
                 $statut = false;
             }
         }

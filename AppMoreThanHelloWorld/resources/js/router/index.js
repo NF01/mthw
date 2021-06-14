@@ -5,12 +5,16 @@ import Quizz from "../views/Quizz.vue";
 import Info from "../views/Info.vue";
 import Profil from "../views/Profil.vue";
 import Ranking from "../views/Ranking.vue";
-import Experience from "../views/Experience.vue";
 
 const routes = [
   {
     path: "/accueil",
     name: "accueil",
+    component: Home,
+  },
+  {
+    path: "/nouveau-compte",
+    name: "nouveau-compte",
     component: Home,
   },
   {
@@ -38,12 +42,7 @@ const routes = [
     path: "/ranking",
     name: "ranking",
     component: Ranking,
-  },
-  {
-    path: "/experience",
-    name: "experience",
-    component: Experience,
-  },
+  }
 
 ];
 
