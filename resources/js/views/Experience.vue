@@ -19,7 +19,7 @@ export default {
     console.log(getUserId.value);
 
     const addExperience = (idUser) => {
-      console.log("fetchxp  " + idUser);
+      // console.log("fetchxp  " + idUser);
       fetch(URL_PREFIX.value + "api/user/xp", {
         method: "POST",
         headers: new Headers({

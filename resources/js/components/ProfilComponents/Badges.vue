@@ -6,10 +6,11 @@ export default {
   components: {},
   props: {},
   setup(props, context) {
+    const getUserId = ref(window.idUser);
     const URL_PREFIX = ref(window.URL_PREFIX);
     const vectorURL = ref(window.vectorURL);
     const badges = ref([]);
-    const currentUserLevel = ref([8]);
+    const currentUserLevel = ref([]);
 
     const fetchBadge = async () => {
       const result = await fetch(URL_PREFIX.value + "api/badges/");
@@ -19,7 +20,16 @@ export default {
     };
     fetchBadge();
 
-    const URL = ref(window.URL);
+    const getUserLevel = async () => {
+      const result = await fetch(
+        URL_PREFIX.value + "api/user/" + getUserId.value + "/level"
+      );
+      const level = await result.json();
+      var lvl = level;
+      currentUserLevel.value = ++lvl;
+      console.log(currentUserLevel.value);
+    };
+    getUserLevel();
 
     return { badges, currentUserLevel, vectorURL, URL_PREFIX };
   },
@@ -38,12 +48,19 @@ export default {
         <h2>Badges</h2>
         <div class="container-scroll">
           <div style="flex-wrap: initial; display: inline-flex">
-            <template
+            <!-- <template
               v-for="badge in badges.slice(0, currentUserLevel - 1)"
               :key="badge.idEtape"
-            >
+            > -->
+            <template v-for="badge in badges" :key="badge.idEtape">
               <div class="badge-container">
-                <img :src="URL_PREFIX + vectorURL + badge.badgeUrl" alt="" />
+                <img
+                  :src="URL_PREFIX + vectorURL + badge.badgeUrl"
+                  alt=""
+                  v-bind:class="[
+                    badge.idEtape < currentUserLevel ? activeClass : 'locked',
+                  ]"
+                />
               </div>
             </template>
           </div>

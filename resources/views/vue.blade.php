@@ -19,7 +19,7 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/js/uikit-icons.min.js"></script>
 
     <script>
-        window.idUser = {{ auth()->user()->id }};
+        window.idUser = '<?php echo $_SESSION['idUser']; ?>';
 
         // URL FOR PRODUCTION
         // window.URL_PREFIX = '/mthw/';

@@ -38,6 +38,7 @@ Route::prefix('api')->group(function () {
 
     //User
     Route::get('/user/{n}', [ApiControllerGET::class, 'getUserFromId']);
+    Route::get('/user/{n}/level', [ApiControllerGET::class, 'getUserLevelFromIdUser']);
     Route::get('/users/xp', [ApiControllerGET::class, 'getUsersSortByXp']);
 
     //Badge
@@ -84,12 +85,16 @@ Route::get('/nouveau-compte', function () {
     return view('vue_register');
 });
 
+
+
 Route::get('{view}', function () {
-    if (Auth::user()) {
-        // echo 'im logged';
+
+    $idUser = Auth::user() ? Auth::user()->id : -1;
+    $_SESSION['idUser'] = $idUser;
+
+    if ($idUser != -1) {
         return view('vue');
     } else {
-        // echo 'im not logged in';
         return view('vue_auth');
     }
 })->where(['view' => 'vue|admin|accueil|info|quizz|ranking|profil|experience']);

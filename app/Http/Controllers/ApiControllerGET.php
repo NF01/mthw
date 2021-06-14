@@ -84,15 +84,24 @@ class ApiControllerGET extends Controller
 
     public function getUsersSortByXp()
     {
-
-        $result=User::orderByDesc('experience')->get()    ;
+        $result = User::orderByDesc('experience')->get();
         return $this->exportToJson($result);
+    }
+
+    public function getUserLevelFromIdUser($idUser)
+    {
+        $EXPERIENCE_FOR_EACH_LEVEL = 1000;
+
+        $result = User::firstWhere('id', $idUser);
+        $experience = $result != null ? $result->experience : 0;
+        $level = floor($experience / $EXPERIENCE_FOR_EACH_LEVEL);
+        return $level;
     }
 
     public function getAllBadges()
     {
 
-        $result=Etape::select(['idEtape','badgeUrl'])->get();
+        $result = Etape::select(['idEtape', 'badgeUrl'])->get();
         return $this->exportToJson($result);
     }
 

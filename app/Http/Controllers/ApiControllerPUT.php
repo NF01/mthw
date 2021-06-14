@@ -13,9 +13,10 @@ class ApiControllerPUT extends Controller
 {
 
 
-    public function updatequestion(Request $request) {
+    public function updatequestion(Request $request)
+    {
 
-        $id=$request->input("id");
+        $id = $request->input("id");
 
         question::find($id)->update(array(
             "enonce" => $request->input("newenonce"),
@@ -25,39 +26,28 @@ class ApiControllerPUT extends Controller
         ));
     }
 
-    public function updateresponse(Request $request) {
+    public function updateresponse(Request $request)
+    {
+        $id = $request->input("id");
 
-        $id=$request->input("id");
-
-        reponse::where("idReponse",$id)->update(array(
+        reponse::where("idReponse", $id)->update(array(
             "enonce" => $request->input("newenonce"),
             "statut" => $request->input("newstatus"),
             "anecdote" => $request->input("newanectode"),
             "idQuestion" => $request->input("newidQuestion"),
             "idImage" => $request->input("newidImage")
         ));
-
-
     }
 
-    public function updateUser(Request $request) {
+    public function updateUser(Request $request)
+    {
 
-        $id=$request->input("id");
+        $id = $request->input("id");
 
-        User::where("id",$id)->update(array(
+        User::where("id", $id)->update(array(
             "name" => $request->input("newUserName"),
             "email" => $request->input("newsUserEmail"),
-            'password' => Hash::make($request->input("newPassword")),
+            "password" => Hash::make($request->input("newPassword")),
         ));
-
-
     }
-
-
-
-
-
-
-
-
 }

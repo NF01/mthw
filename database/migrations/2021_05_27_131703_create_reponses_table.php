@@ -17,10 +17,10 @@ class CreateReponsesTable extends Migration
         Schema::dropIfExists('reponses');
         Schema::create('reponses', function (Blueprint $table) {
             $table->id('idReponse');
-            $table->tinyText('enonce');
+            $table->tinyText('enonce')->nullable();
             // $table->tinyInteger('ordre');
             $table->boolean('statut');
-            $table->string('anecdote', 400);
+            $table->string('anecdote', 400)->nullable();
             $table->foreignId('idQuestion')->constrained('questions', 'idQuestion');
             $table->foreignId('idImage')->nullable()->constrained('images', 'idImage');;
 

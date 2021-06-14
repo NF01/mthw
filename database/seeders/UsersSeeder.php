@@ -18,25 +18,25 @@ class UsersSeeder extends Seeder
 
         $users = [
             array(
-                'admin', 'admin@admin.ch', '123', '9999'
+                'admin', 'admin@admin.ch', '123', '3400'
             ),
             array(
-                'user', 'user@user.ch', '123', '150'
+                'user', 'user@user.ch', '123', '5700'
             ),
             array(
-                'user1', 'user1@user.ch', '123', '1960'
+                'user1', 'user1@user.ch', '123', '3500'
             ),
             array(
-                'user2', 'user2@user.ch', '123', '2635'
+                'user2', 'user2@user.ch', '123', '6700'
             ),
             array(
-                'user3', 'user3@user.ch', '123', '530'
+                'user3', 'user3@user.ch', '123', '8100'
             ),
             array(
-                'user4', 'user4@user.ch', '123', '234'
+                'user4', 'user4@user.ch', '123', '4000'
             ),
             array(
-                'user5', 'user5@user.ch', '123', '590'
+                'user5', 'user5@user.ch', '123', '7300'
             ),
         ];
 

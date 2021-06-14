@@ -1,4 +1,5 @@
 <script>
+import { computed, ref, watch, watchEffect } from "vue";
 import Badges from "../components/ProfilComponents/Badges.vue";
 import Resultat from "../components/ProfilComponents/Resultat.vue";
 
@@ -7,7 +8,28 @@ export default {
     Badges,
     Resultat,
   },
-  setup(props, context) {},
+  setup(props, context) {
+    const updateUser = async () => {
+      const getUserId = ref(window.idUser);
+      const URL_PREFIX = ref(window.URL_PREFIX);
+
+      // const name = ref(pseudo);
+      // console.log(name.value);
+
+      fetch(URL_PREFIX.value + "api/user", {
+        method: "PUT",
+        headers: new Headers({
+          "Content-Type": "application/json",
+        }),
+        body: JSON.stringify({
+          // name: ,
+          // email: ,
+          // password ,
+        }),
+      });
+    };
+    return { updateUser, URL_PREFIX };
+  },
 };
 </script>
 
@@ -50,7 +72,7 @@ export default {
           </div>
         </div>
         <div class="row text-center justify-content-center">
-          <a href="/logout" class="btn btn-primary small mx-auto"
+          <a :href="URL_PREFIX + 'logout'" class="btn btn-primary small mx-auto"
             >Se déconnecter</a
           >
         </div>
@@ -60,7 +82,7 @@ export default {
 
   <div id="edit" class="uk-flex-top" uk-modal>
     <div class="uk-modal-dialog uk-margin-auto-vertical modal-login px-3 py-2">
-      <form method="POST" action="{{ route('login') }}" class="col px-2">
+      <form method="PUT" v-on:submit.prevent="updateUser()" class="col px-2">
         <header class="row border-bottom py-2">
           <div class="col-auto">
             <button
@@ -78,13 +100,12 @@ export default {
             <div class="form-group">
               <label for="pseudo">Pseudo</label>
               <input
+                v-model="pseudo"
                 type="pseudo"
                 id="pseudo"
                 class="form-control"
                 name="pseudo"
-                value="TopioMaster"
                 autocomplete="pseudo"
-                placeholder="TopioMaster"
                 autofocus
               />
             </div>
@@ -95,10 +116,7 @@ export default {
                 id="email"
                 class="form-control"
                 name="email"
-                value="TopioMaster@gmail.com"
                 autocomplete="email"
-                placeholder="email@exemple.com"
-                autofocus
               />
             </div>
             <div class="form-group">
@@ -109,7 +127,6 @@ export default {
                 class="form-control"
                 name="password"
                 autocomplete="current-password"
-                placeholder="**********"
               />
             </div>
           </div>
