@@ -17,6 +17,12 @@ class ReponsesSeeder extends Seeder
         $idQuestion = 1;
         $statut = true;
 
+
+        $enonce = ['Genève', 'Vaud', 'Fribourg', 'Valais', 'Tessin', 'Grison', 'Lucerne', 'Schaffouse', 'Bâle', 'Berne', 'Neuchâtel', 'Lavaux'];
+        $anectode = ['', 'Vaud', 'Fribourg', 'Valais', 'Tessin', 'Grison', 'Lucerne', 'Schaffouse', 'Bâle', 'Berne', 'Neuchâtel', 'Lavaux'];
+        $idQuestion_ = ['Genève', 'Vaud', 'Fribourg', 'Valais', 'Tessin', 'Grison', 'Lucerne', 'Schaffouse', 'Bâle', 'Berne', 'Neuchâtel', 'Lavaux'];
+
+
         for ($i = 1; $i <= 216; $i++) {
             DB::table('reponses')->insert([
                 'enonce' => 'Réponse n°' . $i,

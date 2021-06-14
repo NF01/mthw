@@ -15,6 +15,11 @@ class QuestionsSeeder extends Seeder
     public function run()
     {
 
+        $enonce = ['Genève', 'Vaud', 'Fribourg', 'Valais', 'Tessin', 'Grison', 'Lucerne', 'Schaffouse', 'Bâle', 'Berne', 'Neuchâtel', 'Lavaux'];
+        // $idType = ['Genève', 'Vaud', 'Fribourg', 'Valais', 'Tessin', 'Grison', 'Lucerne', 'Schaffouse', 'Bâle', 'Berne', 'Neuchâtel', 'Lavaux'];
+        $idEtape_ = ['Genève', 'Vaud', 'Fribourg', 'Valais', 'Tessin', 'Grison', 'Lucerne', 'Schaffouse', 'Bâle', 'Berne', 'Neuchâtel', 'Lavaux'];
+        $idImage = ['Genève', 'Vaud', 'Fribourg', 'Valais', 'Tessin', 'Grison', 'Lucerne', 'Schaffouse', 'Bâle', 'Berne', 'Neuchâtel', 'Lavaux'];
+
         $idEtape = 1;
         // DB::table('questions')->delete();
         for ($i = 1; $i <= 108; $i++) {
@@ -22,7 +27,8 @@ class QuestionsSeeder extends Seeder
                 'enonce' => 'Question n°' . $i,
                 // 'ordre' => rand(0, 10),
                 'idType' => rand(1, 3),
-                'idEtape' => $idEtape
+                'idEtape' => $idEtape,
+                'idImage' => $idImage[$i]
             ]);
             if ($i % 9 == 0) {
                 $idEtape++;
