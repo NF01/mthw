@@ -9,23 +9,6 @@ export default {
 
     //add question
 
-            //add question
-            const fetchpostQ = async () => {
-                const result = await fetch("/api/questions", {
-                    method: "POST",
-                    headers: new Headers({
-                        'Content-Type': 'application/json'
-                    }),
-                    body: JSON.stringify({
-                        enonceQuestion: "test from fetch api zuzuzuzu  3",
-                        typeQuestion: 1,
-                        idEtapeQuestion: 2,
-                    })
-                })
-                // const data = await result.json();
-                // console.log(data);
-            };
-
     const fetchPostQuestion = () => fetchpostQ();
     var rootElement = document.documentElement;
     function scrollToTop() {
@@ -42,8 +25,8 @@ export default {
       closeModal,
       fetchPostQuestion,
       scrollToTop,
-    }
     
+  }
   },
 
 };
@@ -113,7 +96,7 @@ export default {
       <div
         class="uk-modal-dialog uk-margin-auto-vertical modal-login px-3 py-2"
       >
-        <form method="POST" action="{{ route('login') }}" class="col px-2">
+        <div class="col px-2"><!-- form-->
           <header class="row border-bottom py-2">
             <div class="col-auto">
               <button
@@ -160,13 +143,13 @@ export default {
           <div class="row border-top pt-4 mt-auto">
             <div class="col">
               <div class="row my-3">
-                <button type="submit" class="btn btn-primary full-width">
+                <div class="btn btn-primary full-width"><!--button-->
                   Valider
-                </button>
+                </div>
               </div>
             </div>
           </div>
-        </form>
+        </div><!--from-->
       </div>
     </div>
     <!--Modal page 2-->
@@ -174,7 +157,7 @@ export default {
       <div
         class="uk-modal-dialog uk-margin-auto-vertical modal-login px-3 py-2"
       >
-        <form method="POST" action="{{ route('login') }}" class="col px-2">
+        <form method="POST" action="" class="col px-2">
           <header class="row border-bottom py-2">
             <div class="col-auto">
               <button
@@ -269,7 +252,7 @@ export default {
       <div
         class="uk-modal-dialog uk-margin-auto-vertical modal-login px-3 py-2"
       >
-        <form method="POST" action="{{ route('login') }}" class="col px-2">
+        <form method="POST" action="" class="col px-2">
           <header class="row border-bottom py-2">
             <div class="col-auto">
               <button
@@ -370,7 +353,7 @@ export default {
       <div
         class="uk-modal-dialog uk-margin-auto-vertical modal-login px-3 py-2"
       >
-        <form method="POST" action="{{ route('login') }}" class="col px-2">
+        <form method="POST" action="" class="col px-2">
           <header class="row border-bottom py-2">
             <div class="col-auto">
               <button
@@ -458,7 +441,7 @@ export default {
       <div
         class="uk-modal-dialog uk-margin-auto-vertical modal-login px-3 py-2"
       >
-        <form method="POST" action="{{ route('login') }}" class="col px-2">
+        <form method="POST" action="" class="col px-2">
           <header class="row border-bottom py-2">
             <div class="col-auto">
               <button
@@ -560,7 +543,7 @@ export default {
       <div
         class="uk-modal-dialog uk-margin-auto-vertical modal-login px-3 py-2"
       >
-        <form method="POST" action="{{ route('login') }}" class="col px-2">
+        <form method="POST" action="" class="col px-2">
           <header class="row border-bottom py-2">
             <div class="col-auto">
               <button
@@ -662,7 +645,7 @@ export default {
       <div
         class="uk-modal-dialog uk-margin-auto-vertical modal-login px-3 py-2"
       >
-        <form method="POST" action="{{ route('login') }}" class="col px-2">
+        <form method="POST" action="" class="col px-2">
           <header class="row border-bottom py-2">
             <div class="col-auto">
               <button

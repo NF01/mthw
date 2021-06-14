@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "../views/Home.vue";
-import Admin from "../views/Admin.vue";
+// import Admin from "../views/Admin.vue";
+import Admin from "../views/Adminv2.vue";
 import Quizz from "../views/Quizz.vue";
 import Info from "../views/Info.vue";
 import Profil from "../views/Profil.vue";
