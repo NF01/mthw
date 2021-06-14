@@ -16,6 +16,8 @@ export default {
     },
   },
   setup(props, context) {
+    const URL_PREFIX = ref(window.URL_PREFIX);
+
     const questions = ref([]);
     const reponses = ref([]);
     const images = ref([]);
@@ -25,7 +27,8 @@ export default {
     const nbOfQuestion = ref(8);
     const XpbyQuestion = ref(166);
     const getUserId = ref(window.idUser);
-    const url = ref(window.urlProd);
+    // const url = ref(window.urlProd);
+
     // const url = ref(process.env.URL);
     // console.log(url.value);
 
@@ -388,8 +391,8 @@ export default {
   background-color: #28a745;
 }
 @media (min-width: 768px) {
-.double:first-child {
+  .double:first-child {
     text-align: right !important;
-}
+  }
 }
 </style>
