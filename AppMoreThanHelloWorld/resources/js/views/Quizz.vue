@@ -387,4 +387,9 @@ export default {
 .row-right {
   background-color: #28a745;
 }
+@media (min-width: 768px) {
+.double:first-child {
+    text-align: right !important;
+}
+}
 </style>
