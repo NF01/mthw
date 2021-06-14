@@ -10,6 +10,10 @@ body {
     font-size: 20px;
 }
 
+#app {
+    padding-bottom: 150px;
+}
+
 .custom-nav {
     box-shadow: rgb(0 0 0 / 20%) 0 8px 16px;
     background: white;
@@ -220,6 +224,7 @@ body {
     border: none;
     box-shadow: rgba(0, 0, 0, .15) 0 6px 15px;
 }
+
 .btn-secondary {
     color: var(--primary-color);
     border: 1px solid var(--primary-color);
@@ -312,3 +317,106 @@ body {
     margin: 0 auto;
     text-align: center;
 }
+
+
+/* MODAL */
+
+
+.modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 250;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.custom-modal {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: #fff;
+    width: 100%;
+}
+
+.modal-right .custom-modal {
+    border-top: solid 15px #28a745;
+}
+
+.modal-wrong .custom-modal {
+    border-top: solid 15px #da291c;
+}
+
+.custom-modal::before {
+    /* content:''; */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.178);
+    width: 100%;
+    height: 100vh;
+}
+
+.modal-backdrop {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column-reverse;
+}
+
+.modal {
+    display: inline-block;
+    height: 50%;
+    text-align: center;
+    background: #ffffff;
+    box-shadow: 2px 2px 20px 1px #28a745;
+    overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header,
+.modal-footer {
+    padding: 15px;
+    display: flex;
+}
+
+.modal-header {
+    position: relative;
+    padding-top: 25px;
+    border-bottom: 1px solid #eeeeee;
+    color: #4aae9b;
+    justify-content: space-between;
+}
+
+.modal-footer {
+    border-top: 1px solid #eeeeee;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.modal-body {
+    position: relative;
+    padding: 20px 10px;
+}
+
+.btn-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    font-size: 20px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #4aae9b;
+    background: transparent;
+}
+
+/* END MODAL */

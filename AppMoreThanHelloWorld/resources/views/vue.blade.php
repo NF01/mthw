@@ -19,7 +19,18 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/js/uikit-icons.min.js"></script>
 
     <script>
-        window.URL = '/svg/';
+        window.idUser = {{ auth()->user()->id }};
+
+        // URL FOR PRODUCTION
+        // window.URL_PREFIX = '/mthw/';
+        
+        // DEV URL
+        window.URL_PREFIX = '/';
+
+        window.imageURL = 'img/';
+        window.vectorURL = 'svg/';
+        window.edelweissURL = 'edelweiss.png';
+
         
     </script>
 

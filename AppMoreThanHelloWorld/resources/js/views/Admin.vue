@@ -3,6 +3,8 @@ import { ref, watch, watchEffect } from "vue";
 export default {
   components: {},
   setup(props, context) {
+    const URL_PREFIX = ref(window.URL_PREFIX);
+
     const isModalVisible = ref("");
     const showModal = () => (isModalVisible.value = true);
     const closeModal = () => (isModalVisible.value = false);
@@ -25,10 +27,8 @@ export default {
       closeModal,
       fetchPostQuestion,
       scrollToTop,
-    
-  }
+    };
   },
-
 };
 </script>
 
@@ -47,47 +47,51 @@ export default {
       <div class="col-lg-8 mx-auto px-0">
         <div class="row row-btn">
           <a class="btn btn-primary mx-auto edit-icon" href="#edit1" uk-toggle
-            >Ajouter</a>
-            <a class="btn btn-primary mx-auto edit-icon" href="#edit2" uk-toggle
-            >Ajouter</a>
-            <a class="btn btn-primary mx-auto edit-icon" href="#edit3" uk-toggle
-            >Ajouter</a>
-            <a class="btn btn-primary mx-auto edit-icon" href="#edit4" uk-toggle
-            >Ajouter</a>
-            <a class="btn btn-primary mx-auto edit-icon" href="#edit5" uk-toggle
-            >Ajouter</a>
-            <a class="btn btn-primary mx-auto edit-icon" href="#edit6" uk-toggle
-            >Ajouter</a>
-            <a class="btn btn-primary mx-auto edit-icon" href="#edit7" uk-toggle
+            >Ajouter</a
+          >
+          <a class="btn btn-primary mx-auto edit-icon" href="#edit2" uk-toggle
+            >Ajouter</a
+          >
+          <a class="btn btn-primary mx-auto edit-icon" href="#edit3" uk-toggle
+            >Ajouter</a
+          >
+          <a class="btn btn-primary mx-auto edit-icon" href="#edit4" uk-toggle
+            >Ajouter</a
+          >
+          <a class="btn btn-primary mx-auto edit-icon" href="#edit5" uk-toggle
+            >Ajouter</a
+          >
+          <a class="btn btn-primary mx-auto edit-icon" href="#edit6" uk-toggle
+            >Ajouter</a
+          >
+          <a class="btn btn-primary mx-auto edit-icon" href="#edit7" uk-toggle
             >Ajouter</a
           >
         </div>
       </div>
     </div>
     <!--Close modal-->
-    <div id="close" class="uk-flex-top " uk-modal>
+    <div id="close" class="uk-flex-top" uk-modal>
       <div
         class="uk-modal-dialog uk-margin-auto-vertical modal-login px-3 py-2"
       >
-      <div class="col pt-4">
-        <p>Es-tu sûr de vouloir annuler la nouvelle question ?</p>
-      </div>
-      <div class="row border-top pt-4 mt-auto">
-            <div class="col">
-              <div class="row my-3">
-                <div class="col">
-                  <button class="btn btn-primary full-width">
-                  Oui
-                </button>
-                </div>
-                <div class="col">
-                  <button type="submit" class="btn btn-secondary full-width">
+        <div class="col pt-4">
+          <p>Es-tu sûr de vouloir annuler la nouvelle question ?</p>
+        </div>
+        <div class="row border-top pt-4 mt-auto">
+          <div class="col">
+            <div class="row my-3">
+              <div class="col">
+                <button class="btn btn-primary full-width">Oui</button>
+              </div>
+              <div class="col">
+                <button type="submit" class="btn btn-secondary full-width">
                   Non
                 </button>
-                </div>
               </div>
             </div>
           </div>
+        </div>
       </div>
     </div>
 
@@ -96,13 +100,14 @@ export default {
       <div
         class="uk-modal-dialog uk-margin-auto-vertical modal-login px-3 py-2"
       >
-        <div class="col px-2"><!-- form-->
+        <div class="col px-2">
+          <!-- form-->
           <header class="row border-bottom py-2">
             <div class="col-auto">
               <button
                 class="uk-button uk-modal-close-default"
                 type="button"
-                href="#close" 
+                href="#close"
                 uk-toggle
               ></button>
             </div>
@@ -143,17 +148,19 @@ export default {
           <div class="row border-top pt-4 mt-auto">
             <div class="col">
               <div class="row my-3">
-                <div class="btn btn-primary full-width"><!--button-->
+                <div class="btn btn-primary full-width">
+                  <!--button-->
                   Valider
                 </div>
               </div>
             </div>
           </div>
-        </div><!--from-->
+        </div>
+        <!--from-->
       </div>
     </div>
     <!--Modal page 2-->
-     <div id="edit2" class="uk-flex-top" uk-modal>
+    <div id="edit2" class="uk-flex-top" uk-modal>
       <div
         class="uk-modal-dialog uk-margin-auto-vertical modal-login px-3 py-2"
       >
@@ -173,73 +180,121 @@ export default {
           <div class="row align-items-center">
             <div class="col py-default">
               <div class="container">
-              <h3>À quelle étape appartient la question ?</h3>
-              <div class="row">
-                <div class="col">
-                <div type="button" class="btn btn-secondary  canton-btn full-width mb-3">Vaud</div>
+                <h3>À quelle étape appartient la question ?</h3>
+                <div class="row">
+                  <div class="col">
+                    <div
+                      type="button"
+                      class="btn btn-secondary canton-btn full-width mb-3"
+                    >
+                      Vaud
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div
+                      type="button"
+                      class="btn btn-secondary canton-btn full-width"
+                    >
+                      Lucerne
+                    </div>
+                    <div class="w-100"></div>
+                  </div>
                 </div>
-                 <div class="col">
-                <div type="button" class="btn btn-secondary  canton-btn full-width">Lucerne</div>
-                <div class="w-100"></div>
+                <div class="row">
+                  <div class="col">
+                    <div
+                      type="button"
+                      class="btn btn-secondary canton-btn full-width mb-3"
+                    >
+                      Fribourg
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div
+                      type="button"
+                      class="btn btn-secondary canton-btn full-width"
+                    >
+                      Schaffouse
+                    </div>
+                    <div class="w-100"></div>
+                  </div>
                 </div>
-              </div>       
-              <div class="row">
-                <div class="col">
-                <div type="button" class="btn btn-secondary  canton-btn full-width mb-3">Fribourg</div>
+                <div class="row">
+                  <div class="col">
+                    <div
+                      type="button"
+                      class="btn btn-secondary canton-btn full-width mb-3"
+                    >
+                      Valais
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div
+                      type="button"
+                      class="btn btn-secondary canton-btn full-width"
+                    >
+                      Bâle
+                    </div>
+                    <div class="w-100"></div>
+                  </div>
                 </div>
-                 <div class="col">
-                <div type="button" class="btn btn-secondary canton-btn full-width">Schaffouse</div>
-                <div class="w-100"></div>
+                <div class="row">
+                  <div class="col">
+                    <div
+                      type="button"
+                      class="btn btn-secondary canton-btn full-width mb-3"
+                    >
+                      Tessin
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div
+                      type="button"
+                      class="btn btn-secondary canton-btn full-width"
+                    >
+                      Berne
+                    </div>
+                    <div class="w-100"></div>
+                  </div>
                 </div>
-              </div>            
-              <div class="row">
-                <div class="col">
-                <div type="button" class="btn btn-secondary canton-btn full-width mb-3">Valais</div>
+                <div class="row">
+                  <div class="col">
+                    <div
+                      type="button"
+                      class="btn btn-secondary canton-btn full-width mb-3"
+                    >
+                      Grisons
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div
+                      type="button"
+                      class="btn btn-secondary canton-btn full-width"
+                    >
+                      Neuchâtel
+                    </div>
+                    <div class="w-100"></div>
+                  </div>
                 </div>
-                 <div class="col">
-                <div type="button" class="btn btn-secondary canton-btn full-width">Bâle</div>
-                <div class="w-100"></div>
+                <div class="d-flex justify-content-center">
+                  <input
+                    class="btn btn-secondary canton-btn col-5 input-mobile"
+                    value="Lavaux"
+                  />
                 </div>
-              </div> 
-              <div class="row">
-                <div class="col">
-                <div type="button" class="btn btn-secondary canton-btn full-width mb-3">Tessin</div>
-                </div>
-                 <div class="col">
-                <div type="button" class="btn btn-secondary canton-btn full-width">Berne</div>
-                <div class="w-100"></div>
-                </div>
-              </div>
-               <div class="row">
-                <div class="col">
-                <div type="button" class="btn btn-secondary canton-btn full-width mb-3">Grisons</div>
-                </div>
-                 <div class="col">
-                <div type="button" class="btn btn-secondary canton-btn full-width">Neuchâtel</div>
-                <div class="w-100"></div>
-                </div>
-              </div>
-               <div class="d-flex justify-content-center">
-               <input
-                class="btn btn-secondary canton-btn col-5 input-mobile"
-                value="Lavaux"
-              />
               </div>
             </div>
-          </div>
           </div>
           <div class="row border-top pt-4 mt-auto">
             <div class="col">
               <div class="row my-3">
                 <div class="col">
-                  <button class="btn btn-secondary full-width">
-                  Retour
-                </button>
+                  <button class="btn btn-secondary full-width">Retour</button>
                 </div>
                 <div class="col">
                   <button type="submit" class="btn btn-primary full-width">
-                  Valider
-                </button>
+                    Valider
+                  </button>
                 </div>
               </div>
             </div>
@@ -248,7 +303,7 @@ export default {
       </div>
     </div>
     <!--Modal page 3 vrai faux image-->
-    <div id="edit3" class="uk-flex-top uk-modal-container " uk-modal>
+    <div id="edit3" class="uk-flex-top uk-modal-container" uk-modal>
       <div
         class="uk-modal-dialog uk-margin-auto-vertical modal-login px-3 py-2"
       >
@@ -265,7 +320,7 @@ export default {
               <h2 class="mb-1">Ajouter</h2>
             </div>
           </header>
-          
+
           <div class="container">
             <div class="row pt-5">
               <div class="col head-question">
@@ -276,44 +331,44 @@ export default {
             <div class="row">
               <div class="col">
                 <h3>Question</h3>
-              <textarea
-                class="input-modal full-width"
-                row="3"
-                placeholder="Quelle est la question ?"
-              ></textarea
-              ><br />
-              <div class="custom-file">
-                <input
-                  type="file"
-                  class="custom-file-input"
-                  id="customFileLang"
-                  lang="fr"
-                />
-                <label class="custom-file-label" for="customFileLang"
-                  >Charger une image
-                </label>
-              </div>
+                <textarea
+                  class="input-modal full-width"
+                  row="3"
+                  placeholder="Quelle est la question ?"
+                ></textarea
+                ><br />
+                <div class="custom-file">
+                  <input
+                    type="file"
+                    class="custom-file-input"
+                    id="customFileLang"
+                    lang="fr"
+                  />
+                  <label class="custom-file-label" for="customFileLang"
+                    >Charger une image
+                  </label>
+                </div>
               </div>
             </div>
             <div class="row pt-4">
               <div class="col">
-                  <h3>Réponse</h3>
+                <h3>Réponse</h3>
               </div>
             </div>
             <div class="row">
               <div class="col">
                 <input
-                      type="button"
-                      class="btn btn-secondary full-width mb-3"
-                      value="Vrai"
-                    />
+                  type="button"
+                  class="btn btn-secondary full-width mb-3"
+                  value="Vrai"
+                />
               </div>
               <div class="col">
                 <input
                   type="button"
                   class="btn btn-secondary full-width"
                   value="Faux"
-                  />
+                />
               </div>
               <div class="w-100"></div>
             </div>
@@ -328,18 +383,16 @@ export default {
               </div>
             </div>
           </div>
-           <div class="row border-top pt-4 mt-auto">
+          <div class="row border-top pt-4 mt-auto">
             <div class="col">
               <div class="row my-3">
                 <div class="col">
-                  <button class="btn btn-secondary full-width">
-                  Retour
-                </button>
+                  <button class="btn btn-secondary full-width">Retour</button>
                 </div>
                 <div class="col">
                   <button type="submit" class="btn btn-primary full-width">
-                  Valider
-                </button>
+                    Valider
+                  </button>
                 </div>
               </div>
             </div>
@@ -349,7 +402,7 @@ export default {
     </div>
 
     <!--Modal page 3 vrai faux sans image-->
-    <div id="edit4" class="uk-flex-top uk-modal-container " uk-modal>
+    <div id="edit4" class="uk-flex-top uk-modal-container" uk-modal>
       <div
         class="uk-modal-dialog uk-margin-auto-vertical modal-login px-3 py-2"
       >
@@ -376,32 +429,32 @@ export default {
             <div class="row">
               <div class="col">
                 <h3>Question</h3>
-              <textarea
-                class="input-modal full-width"
-                row="3"
-                placeholder="Quelle est la question ?"
-              ></textarea>
+                <textarea
+                  class="input-modal full-width"
+                  row="3"
+                  placeholder="Quelle est la question ?"
+                ></textarea>
               </div>
             </div>
             <div class="row pt-4">
               <div class="col">
-                  <h3>Réponse</h3>
+                <h3>Réponse</h3>
               </div>
             </div>
             <div class="row">
               <div class="col">
                 <input
-                      type="button"
-                      class="btn btn-secondary full-width mb-3"
-                      value="Vrai"
-                    />
+                  type="button"
+                  class="btn btn-secondary full-width mb-3"
+                  value="Vrai"
+                />
               </div>
               <div class="col">
                 <input
                   type="button"
                   class="btn btn-secondary full-width"
                   value="Faux"
-                  />
+                />
               </div>
               <div class="w-100"></div>
             </div>
@@ -416,18 +469,16 @@ export default {
               </div>
             </div>
           </div>
-           <div class="row border-top pt-4 mt-auto">
+          <div class="row border-top pt-4 mt-auto">
             <div class="col">
               <div class="row my-3">
                 <div class="col">
-                  <button class="btn btn-secondary full-width">
-                  Retour
-                </button>
+                  <button class="btn btn-secondary full-width">Retour</button>
                 </div>
                 <div class="col">
                   <button type="submit" class="btn btn-primary full-width">
-                  Valider
-                </button>
+                    Valider
+                  </button>
                 </div>
               </div>
             </div>
@@ -437,7 +488,7 @@ export default {
     </div>
 
     <!--Modal page 3 vrai faux sans image-->
-    <div id="edit5" class="uk-flex-top uk-modal-container " uk-modal>
+    <div id="edit5" class="uk-flex-top uk-modal-container" uk-modal>
       <div
         class="uk-modal-dialog uk-margin-auto-vertical modal-login px-3 py-2"
       >
@@ -464,11 +515,11 @@ export default {
             <div class="row">
               <div class="col">
                 <h3>Question</h3>
-              <textarea
-                class="input-modal full-width"
-                row="3"
-                placeholder="Quelle est la question ?"
-              ></textarea>
+                <textarea
+                  class="input-modal full-width"
+                  row="3"
+                  placeholder="Quelle est la question ?"
+                ></textarea>
               </div>
             </div>
             <div class="row pt-4">
@@ -480,30 +531,29 @@ export default {
               <div class="col">
                 <p>Vrai :</p>
                 <div class="custom-file">
-                    
-                    <input
-                      type="file"
-                      class="custom-file-input"
-                      id="customFileLang"
-                      lang="fr"
-                    />
-                    <label class="custom-file-label" for="customFileLang"
-                      >Vrai image
-                    </label>
-                  </div>
+                  <input
+                    type="file"
+                    class="custom-file-input"
+                    id="customFileLang"
+                    lang="fr"
+                  />
+                  <label class="custom-file-label" for="customFileLang"
+                    >Vrai image
+                  </label>
+                </div>
               </div>
               <div class="col">
                 <p>Faux :</p>
                 <div class="custom-file">
-                    <input
-                      type="file"
-                      class="custom-file-input"
-                      id="customFileLang"
-                      lang="fr"
-                    />
-                    <label class="custom-file-label" for="customFileLang"
-                      >Fausse image
-                    </label>
+                  <input
+                    type="file"
+                    class="custom-file-input"
+                    id="customFileLang"
+                    lang="fr"
+                  />
+                  <label class="custom-file-label" for="customFileLang"
+                    >Fausse image
+                  </label>
                 </div>
               </div>
               <div class="w-100"></div>
@@ -519,18 +569,16 @@ export default {
               </div>
             </div>
           </div>
-           <div class="row border-top pt-4 mt-auto">
+          <div class="row border-top pt-4 mt-auto">
             <div class="col">
               <div class="row my-3">
                 <div class="col">
-                  <button class="btn btn-secondary full-width">
-                  Retour
-                </button>
+                  <button class="btn btn-secondary full-width">Retour</button>
                 </div>
                 <div class="col">
                   <button type="submit" class="btn btn-primary full-width">
-                  Valider
-                </button>
+                    Valider
+                  </button>
                 </div>
               </div>
             </div>
@@ -625,14 +673,12 @@ export default {
             <div class="col">
               <div class="row my-3">
                 <div class="col">
-                  <button class="btn btn-secondary full-width">
-                  Retour
-                </button>
+                  <button class="btn btn-secondary full-width">Retour</button>
                 </div>
                 <div class="col">
                   <button type="submit" class="btn btn-primary full-width">
-                  Valider
-                </button>
+                    Valider
+                  </button>
                 </div>
               </div>
             </div>
@@ -716,14 +762,12 @@ export default {
             <div class="col">
               <div class="row my-3">
                 <div class="col">
-                  <button class="btn btn-secondary full-width">
-                  Retour
-                </button>
+                  <button class="btn btn-secondary full-width">Retour</button>
                 </div>
                 <div class="col">
                   <button type="submit" class="btn btn-primary full-width">
-                  Valider
-                </button>
+                    Valider
+                  </button>
                 </div>
               </div>
             </div>
@@ -796,14 +840,14 @@ export default {
   </div>
   <div class="col">
     <div class="row">
-        <div class="col">
-          <a @click="scrollToTop()" id="scrollToTopBtn">
-            <img src="/img/fleche.png" />
-          </a>
-        </div>
+      <div class="col">
+        <a @click="scrollToTop()" id="scrollToTopBtn">
+          <img src="/img/fleche.png" />
+        </a>
       </div>
+    </div>
   </div>
-  
+
   <div>
     <button @click="fetchPostQuestion()">update</button>
   </div>
@@ -868,7 +912,7 @@ option:hover {
   padding: 15px 62px 15px 62px;
 }
 @media (max-width: 576px) {
-  .canton-btn{
+  .canton-btn {
     font-size: 13px;
   }
 }

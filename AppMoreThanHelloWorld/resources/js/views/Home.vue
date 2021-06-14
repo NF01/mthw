@@ -5,19 +5,20 @@ export default {
   components: {},
   props: {},
   setup(props, context) {
+    const getUserId = ref(window.idUser);
+    const URL_PREFIX = ref(window.URL_PREFIX);
+    const vectorURL = ref(window.vectorURL);
+
     const chapitres = ref([]);
 
-
     const fetchChapitre = async () => {
-      const result = await fetch("/api/chapitres/");
+      const result = await fetch(URL_PREFIX.value + "api/chapitres/");
       const data = await result.json();
       chapitres.value = data;
     };
     fetchChapitre();
-    const getUserId = ref(window.idUser);
-    const URL = ref(window.URL);
 
-    return { getUserId, chapitres, URL };
+    return { getUserId, chapitres, vectorURL, URL_PREFIX };
   },
 };
 </script>
@@ -37,7 +38,7 @@ export default {
           <div class="row text-center justify-content-center">
             <img
               class="illustration-background-first"
-              :src="URL + chapitres[0].illustrationUrl"
+              :src="URL_PREFIX + vectorURL + chapitres[0].illustrationUrl"
               alt=""
               width="250px"
               height="100%"
@@ -59,7 +60,7 @@ export default {
         <div class="container-train">
           <img
             class="train"
-            :src="URL + 'train-top-entier.svg'"
+            :src="URL_PREFIX + vectorURL + 'train-top-entier.svg'"
             alt=""
             width="50px"
             height="auto"
@@ -79,7 +80,7 @@ export default {
                 <img
                   v-if="chapitre.idEtape % 2 != 0"
                   class="illustration-background"
-                  :src="URL + chapitre.illustrationUrl"
+                  :src="URL_PREFIX + vectorURL + chapitre.illustrationUrl"
                   alt=""
                   width="250px"
                   height="100%"
@@ -89,7 +90,7 @@ export default {
                 <img
                   v-if="chapitre.idEtape % 2 == 0"
                   class="illustration-background"
-                  :src="URL + chapitre.illustrationUrl"
+                  :src="URL_PREFIX + vectorURL + chapitre.illustrationUrl"
                   alt=""
                   width="250px"
                   height="100%"
@@ -114,7 +115,11 @@ export default {
           <div class="row text-center justify-content-center">
             <img
               class="illustration-background-end"
-              :src="URL + chapitres[chapitres.length - 1].illustrationUrl"
+              :src="
+                URL_PREFIX +
+                vectorURL +
+                chapitres[chapitres.length - 1].illustrationUrl
+              "
               alt=""
               width="250px"
               height="100%"

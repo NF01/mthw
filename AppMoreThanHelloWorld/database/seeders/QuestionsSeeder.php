@@ -28,7 +28,7 @@ class QuestionsSeeder extends Seeder
                 // 'ordre' => rand(0, 10),
                 'idType' => rand(1, 3),
                 'idEtape' => $idEtape,
-                'idImage' => $idImage[$i]
+                // 'idImage' => $idImage[$i]
             ]);
             if ($i % 9 == 0) {
                 $idEtape++;

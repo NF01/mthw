@@ -6,11 +6,13 @@ export default {
   components: {},
   props: {},
   setup(props, context) {
+    const URL_PREFIX = ref(window.URL_PREFIX);
+    const vectorURL = ref(window.vectorURL);
     const badges = ref([]);
     const currentUserLevel = ref([8]);
 
     const fetchBadge = async () => {
-      const result = await fetch("http://127.0.0.1:8000/api/badges/");
+      const result = await fetch(URL_PREFIX.value + "api/badges/");
       const data = await result.json();
       badges.value = data;
       // console.log(badges.value);
@@ -19,7 +21,7 @@ export default {
 
     const URL = ref(window.URL);
 
-    return { badges, currentUserLevel, URL };
+    return { badges, currentUserLevel, vectorURL, URL_PREFIX };
   },
   computed: {
     productChunks() {
@@ -41,7 +43,7 @@ export default {
               :key="badge.idEtape"
             >
               <div class="badge-container">
-                <img :src="URL + badge.badgeUrl" alt="" />
+                <img :src="URL_PREFIX + vectorURL + badge.badgeUrl" alt="" />
               </div>
             </template>
           </div>
@@ -82,11 +84,10 @@ export default {
               :key="badge.idEtape"
             >
               <img
-                :src="URL + badge.badgeUrl"
+                :src="URL_PREFIX + vectorURL + badge.badgeUrl"
                 alt=""
                 v-bind:class="[
                   badge.idEtape < currentUserLevel ? activeClass : 'locked',
-                  errorClass,
                 ]"
               />
             </div>

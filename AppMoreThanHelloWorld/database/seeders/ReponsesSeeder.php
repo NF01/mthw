@@ -21,6 +21,7 @@ class ReponsesSeeder extends Seeder
         $enonce = ['Genève', 'Vaud', 'Fribourg', 'Valais', 'Tessin', 'Grison', 'Lucerne', 'Schaffouse', 'Bâle', 'Berne', 'Neuchâtel', 'Lavaux'];
         $anectode = ['', 'Vaud', 'Fribourg', 'Valais', 'Tessin', 'Grison', 'Lucerne', 'Schaffouse', 'Bâle', 'Berne', 'Neuchâtel', 'Lavaux'];
         $idQuestion_ = ['Genève', 'Vaud', 'Fribourg', 'Valais', 'Tessin', 'Grison', 'Lucerne', 'Schaffouse', 'Bâle', 'Berne', 'Neuchâtel', 'Lavaux'];
+        $idImage = ['Genève', 'Vaud', 'Fribourg', 'Valais', 'Tessin', 'Grison', 'Lucerne', 'Schaffouse', 'Bâle', 'Berne', 'Neuchâtel', 'Lavaux'];
 
 
         for ($i = 1; $i <= 216; $i++) {
@@ -29,7 +30,8 @@ class ReponsesSeeder extends Seeder
                 // 'ordre' => rand(0, 10),
                 'statut' => $statut,
                 'anecdote' => 'Mon anecdote - ' . $i,
-                'idQuestion' => $idQuestion
+                'idQuestion' => $idQuestion,
+                // 'idImage' => $idImage[$i]
             ]);
             if ($i % 2 == 0) {
                 $idQuestion++;
