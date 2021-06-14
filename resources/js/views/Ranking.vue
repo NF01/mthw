@@ -40,7 +40,7 @@ export default {
 </script>
 
 <template>
-  <div class="row text-center">
+  <div class="container text-center">
     <div class="col">
       <h1 class="mx-auto pt-3">Classement</h1>
     </div>
@@ -124,6 +124,9 @@ export default {
 </template>
 
 <style scoped>
+section.container.caption {
+  text-align: center;
+}
 #podium {
   width: 90vw;
   max-width: 600px;
@@ -226,7 +229,7 @@ span {
     position: absolute;
     top: 30%;
     left: 42%;
-    transform: translate(-23vw, 3vw);
+    transform: translate(-26vw, 3vw);
     font-size: 15px;
   }
 
@@ -234,7 +237,7 @@ span {
     position: absolute;
     top: 23%;
     left: 50%;
-    transform: translate(-7vw, -5vw);
+    transform: translate(-10vw, -5vw);
     font-size: 15px;
   }
 
@@ -242,7 +245,7 @@ span {
     position: absolute;
     top: 33%;
     left: 48%;
-    transform: translate(19vw, 15vw);
+    transform: translate(16vw, 15vw);
     font-size: 15px;
   }
 }

@@ -76,4 +76,14 @@ export default {
 .navigation > col:not(:last-child)::after {
   content: "|";
 }
+
+.navigation .img-nav {
+  filter: grayscale(100%);
+  opacity: 0.6;
+}
+
+a.router-link-active.router-link-exact-active .img-nav {
+  filter: none;
+  opacity: 1;
+}
 </style>
