@@ -94,7 +94,6 @@ $> php artisan db:seed
 > >
 > > ```html
 > > <script>
-> > 	// DEV URL
 > >     window.URL_PREFIX = '/test1/';//test1 est ici pour l'exemple
 > > </script>
 > > ```
