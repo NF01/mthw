@@ -102,68 +102,106 @@ export default {
 </script>
 
 <template>
-  <div class="container">
-    <header class="row border-bottom py-4 my-4">
-      <div class="col-auto">
-        <button href="#return">Fermer</button>
-      </div>
-      <div class="col text-center">
-        <h1 class="mb-1">Quizz</h1>
-      </div>
+<div class="container pt-4">
+    <div class="row">
+        <div class="col-auto">
+              <button
+                class="uk-close-large"
+                href="#return"
+                uk-toggle
+                uk-close
+              ></button>
+            </div>
+    </div>
+    <header class="row border-bottom pb-4 mb-4">
+            
+            <div class="col text-center">
+              <h1 class="mb-1">Étape</h1>
+            </div>
     </header>
     <div class="row">
-      <div class="col pb-4">
-        <progressbar :count="countQuestion"></progressbar>
+        <div class="col pb-4">
+            <progressbar :count="countQuestion"></progressbar>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col pb-6 text-center">
+             <p v-if="questions[countQuestion]">
+                {{ questions[countQuestion].enonce }}
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <template v-for="image in images" :key="image.idImage">
+                <template v-if="questions[countQuestion].idImage == image.idImage">
+                    <img class="w-50 border" :src="image.url">
+                </template>
+            </template>
+        </div>    
+    </div>
+</div>
+    
+
+    <ul class="container" v-if="countQuestion <= nbOfQuestion">
+        <div class="row mt-4">
+        <template v-for="reponse in reponses" :key="reponse.idReponse">
+            <template v-if="reponse.enonce">
+                <template v-if="reponse.idQuestion === questions[countQuestion].idQuestion">
+                            <div class="col-md-6 mb-3">
+                                <button class="btn btn-secondary full-width" @click="nextQuestion(reponse);">
+                                    {{ reponse.enonce }}
+                                </button>
+                            </div>
+                    
+                </template>
+            </template>
+
+            <template v-if="reponse.idImage">
+                <template v-if="reponse.idQuestion === questions[countQuestion].idQuestion">
+                    <template v-for="image in images" :key="image.idImage">
+                        <template class="afficheImg" v-if="reponse.idImage == image.idImage">
+                            <div class="col-md-6 mb-3 text-center text-md-left double">
+                                <img class="w-50 border" :src="image.url" @click="nextQuestion(reponse)">
+                            </div>
+                        </template>
+                    </template>
+                </template>
+            </template>
+        </template>
+        </div>
+    </ul>
+
+
+<!--Close modal-->
+    <div id="return" class="uk-flex-top " uk-modal>
+      <div
+        class="uk-modal-dialog uk-margin-auto-vertical modal-login px-3 py-2"
+      >
+      <div class="col pt-4">
+        <p>Es-tu sûr de vouloir quitter le quizz ?</p>
+      </div>
+      <div class="row border-top pt-4 mt-auto">
+            <div class="col">
+              <div class="row my-3">
+                <div class="col">
+                    <router-link to="/accueil">
+                        <button class="btn btn-primary full-width uk-modal-close">
+                        Oui
+                        </button>
+                    </router-link>
+                  
+                </div>
+                <div class="col">
+                  <button type="submit" class="btn btn-secondary full-width uk-modal-close">
+                  Non
+                </button>
+                </div>
+              </div>
+            </div>
+          </div>
       </div>
     </div>
-    <p v-if="questions[countQuestion]" class="pb-6">
-      {{ questions[countQuestion].enonce }}
-    </p>
-
-    <template v-for="image in images" :key="image.idImage">
-      <template v-if="questions[countQuestion].idImage == image.idImage">
-        <img :src="image.url" />
-      </template>
-    </template>
-  </div>
-
-  <ul class="container" v-if="countQuestion <= nbOfQuestion">
-    <div class="row">
-      <template v-for="reponse in reponses" :key="reponse.idReponse">
-        <template v-if="reponse.enonce">
-          <template
-            v-if="reponse.idQuestion === questions[countQuestion].idQuestion"
-          >
-            <div class="col-md-6 mb-3">
-              <button
-                class="btn btn-secondary full-width"
-                @click="nextQuestion(reponse)"
-              >
-                {{ reponse.enonce }}
-              </button>
-            </div>
-          </template>
-        </template>
-
-        <template v-if="reponse.idImage">
-          <template
-            v-if="reponse.idQuestion === questions[countQuestion].idQuestion"
-          >
-            <template v-for="image in images" :key="image.idImage">
-              <template
-                class="afficheImg"
-                v-if="reponse.idImage == image.idImage"
-              >
-                <div class="container">
-                  <img :src="image.url" @click="nextQuestion(reponse)" />
-                </div>
-              </template>
-            </template>
-          </template>
-        </template>
-      </template>
-    </div>
-  </ul>
 
   <modal-quizz
     class="modal-right"

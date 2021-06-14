@@ -27,13 +27,14 @@
     .progressbar{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
   }
 
   .progressbar-item{
     width: 20px;
     height: 10px;
     border-radius: 4px;
+    margin-right: 15px;
   }
 
   .red {
