@@ -29,4 +29,9 @@ export default {
 </template>
 
 <style scoped>
+.modal {
+  height: 100%;
+
+}
+
 </style>
