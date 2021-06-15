@@ -19,7 +19,7 @@ class CreateQuestionsTable extends Migration
             $table->id('idQuestion');
             $table->tinyText('enonce');
             // $table->tinyInteger('ordre');
-            $table->foreignId('idType')->constrained('types', 'idType');
+            // $table->foreignId('idType')->constrained('types', 'idType');
             $table->foreignId('idEtape')->constrained('etapes', 'idEtape');;
             $table->foreignId('idImage')->nullable()->constrained('images', 'idImage');;
         });

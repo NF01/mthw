@@ -15,11 +15,11 @@ class ImagesSeeder extends Seeder
     public function run()
     {
         $images = ['url1', 'url2', 'url3'];
-        
+
         // DB::table('images')->delete();
-        for ($i = 0; $i < count($images); $i++) {
+        for ($i = 0; $i < 100; $i++) {
             DB::table('images')->insert([
-                'url' => $images[$i]
+                'url' => $i
             ]);
         }
     }
