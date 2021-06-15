@@ -262,7 +262,7 @@ export default {
           name: 'quizz',
           params: { idChapitre: parseInt(currentUserLevel) },
         }"
-        class="btn btn-primary mx-auto full-width fixed-bottom"
+        class="btn btn-primary ml-auto mr-3 full-width fixed-bottom"
       >
         Jouer
       </router-link>
