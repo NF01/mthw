@@ -1,4 +1,4 @@
-<script>
+  <script>
 import { computed, ref, watch, watchEffect } from "vue";
 
 export default {
@@ -63,17 +63,18 @@ export default {
 };
 </script>
 
-<template>
+  <template>
   <div class="custom-nav">
     <div class="row">
       <div class="col">
         <a class="mx-auto edit-icon" href="#infos" uk-toggle
-            ><img src="/svg/information-button.svg" alt="infos" class="info"></a
-          >
+          ><img src="/svg/information-button.svg" alt="infos" class="info"
+        /></a>
       </div>
-      <div class="col text-right">{{user.experience}}</div>
     </div>
+    <div class="col text-right">{{ user.experience }}</div>
   </div>
+
   <div class="container home-container">
     <div class="row mx-0">
       <div class="col-lg-8 mx-auto px-0 py-5">
@@ -249,59 +250,71 @@ export default {
       >
         Jouer
       </router-link>
-    </a>
-  </template> -->
+    </div>
+  </div>
 
   <!--Infos modal-->
   <div id="infos" class="uk-flex-top uk-modal-container" uk-modal>
-      <div
-        class="uk-modal-dialog uk-margin-auto-vertical px-3 py-2"
-      >
-      
-          <header class="row border-bottom py-2">
-            <div class="col-auto">
-              <button
-                class="uk-modal-close-default"
-                type="button"
-                uk-close
-              ></button>
-            </div>
-            <div class="col text-center">
-              <h2 class="mb-1">Infos</h2>
-            </div>
-          </header>
-
-          <div class="container" uk-overflow-auto>
-            <div class="row pt-5">
-              <div class="col">
-                <p class="text-justify">“Ça joue ?!” est une application créée par MTHW, rassemblant sept étudiants, dans le cadre d’un cours en ingénierie des médias.
-                   Dans la mesure où ceci est réalisé dans un but pédagogique, nous déclinons toute responsabilité en cas de bug.</p>
-                   <h2>“Ça joue ?!” Quésaco ?</h2>
-                <p class="text-justify">
-                  Le but du jeu est de t’offrir un petit tour de Suisse à travers différents cantons en suivant notre ligne de train.<br> Dans chacun des arrêts,
-                  tu découvriras un quizz portant sur le canton en question. Dans ces quizz tu découvriras des questions sur le patois, les clichés,
-                  les expressions, mais aussi sur des faits typiquement suisses et bien d’autres choses. Afin de valider une étape et de passer au canton suivant,
-                  il te faudra réunir 1000 Edelweiss en répondant à ces fameuses questions. Ce qui nous fait au moins 6 réponses justes pour pouvoir avancer. 
-                  À la fin de chaque étape, tu recevras un badge représentant un aliment typique de la région où tu te trouves. Tu pourras aussi recevoir,
-                  tout au long du jeu, d’autres badges mystères pour féliciter tes hauts faits.<br>
-                  Une fois arrivé au Lavaux, le jeu est terminé et tu recevras ton dernier badge. <br> Exceptionnellement, jusqu’au 20 juillet, 
-                  une fois que tu as terminé le jeu, ton adresse mail sera ajoutée au tirage au sort pour gagner deux billets de train journaliers en 1ère classe valable dans toute la Suisse. 
-                  Le tirage au sort est effectué par les CFF sous contrôle d’un huissier de justice et n’est pas accessible aux employés des CFF ni aux personnes ayant participé à la création du jeu. 
-                  Après le tirage au sort, les CFF contacteront par mail la personne ayant gagné. Ainsi, tu pourras peut-être faire le tour de Suisse que nous t’avons proposé dans l’application, 
-                  mais en vrai, et riche de tout ce que tu auras appris dans l’application « Ça joue ?! ».
-                </p>
-              </div>
-            </div>
+    <div class="uk-modal-dialog uk-margin-auto-vertical px-3 py-2">
+      <header class="row border-bottom py-2">
+        <div class="col-auto">
+          <button
+            class="uk-modal-close-default"
+            type="button"
+            uk-close
+          ></button>
+        </div>
+        <div class="col text-center">
+          <h2 class="mb-1">Infos</h2>
+        </div>
+      </header>
+      <div class="container" uk-overflow-auto>
+        <div class="row pt-5">
+          <div class="col">
+            <p class="text-justify">
+              “Ça joue ?!” est une application créée par MTHW, rassemblant sept
+              étudiants, dans le cadre d’un cours en ingénierie des médias. Dans
+              la mesure où ceci est réalisé dans un but pédagogique, nous
+              déclinons toute responsabilité en cas de bug.
+            </p>
+            <h2>“Ça joue ?!” Quésaco ?</h2>
+            <p class="text-justify">
+              Le but du jeu est de t’offrir un petit tour de Suisse à travers
+              différents cantons en suivant notre ligne de train.<br />
+              Dans chacun des arrêts, tu découvriras un quizz portant sur le
+              canton en question. Dans ces quizz tu découvriras des questions
+              sur le patois, les clichés, les expressions, mais aussi sur des
+              faits typiquement suisses et bien d’autres choses. Afin de valider
+              une étape et de passer au canton suivant, il te faudra réunir 1000
+              Edelweiss en répondant à ces fameuses questions. Ce qui nous fait
+              au moins 6 réponses justes pour pouvoir avancer. À la fin de
+              chaque étape, tu recevras un badge représentant un aliment typique
+              de la région où tu te trouves. Tu pourras aussi recevoir, tout au
+              long du jeu, d’autres badges mystères pour féliciter tes hauts
+              faits.<br />
+              Une fois arrivé au Lavaux, le jeu est terminé et tu recevras ton
+              dernier badge. <br />
+              Exceptionnellement, jusqu’au 20 juillet, une fois que tu as
+              terminé le jeu, ton adresse mail sera ajoutée au tirage au sort
+              pour gagner deux billets de train journaliers en 1ère classe
+              valable dans toute la Suisse. Le tirage au sort est effectué par
+              les CFF sous contrôle d’un huissier de justice et n’est pas
+              accessible aux employés des CFF ni aux personnes ayant participé à
+              la création du jeu. Après le tirage au sort, les CFF contacteront
+              par mail la personne ayant gagné. Ainsi, tu pourras peut-être
+              faire le tour de Suisse que nous t’avons proposé dans
+              l’application, mais en vrai, et riche de tout ce que tu auras
+              appris dans l’application « Ça joue ?! ».
+            </p>
           </div>
-          
+        </div>
       </div>
     </div>
-
+  </div>
 </template>
 
-<style scoped>
+  <style scoped>
 .info {
   width: 25px;
 }
-
 </style>

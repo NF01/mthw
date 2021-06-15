@@ -18,7 +18,7 @@ class UsersSeeder extends Seeder
 
         $users = [
             array(
-                'admin', 'admin@admin.ch', '123', '3400', 1
+                'admin', 'admin@admin.ch', '123', '7400', 1
             ),
             array(
                 'user', 'user@user.ch', '123', '5700', 0
