@@ -424,11 +424,20 @@ export default {
                                 </div>
                             </div>
 
+                            <template v-if="idChapitre <12">
                             <div class="row text-center">
                                 <div class="col pl-4">
                                     <p>Bravo tu passes au niveau suivant ! </p>
                                 </div>
                             </div>
+                            </template>
+                            <template v-if="idChapitre >=12">
+                            <div class="row text-center">
+                                <div class="col pl-4">
+                                    <p>Bravo tu as finis le jeux, tu participe donc au tirage au sort ! </p>
+                                </div>
+                            </div>
+                            </template>
 
                             <div class="row text-center">
                                 <div class="col pl-4">
