@@ -26,6 +26,7 @@ export default {
             const images = ref([]);
             const user = ref([]);
             const chapitres = ref([]);
+            const badges = ref([]);
             const countQuestion = ref(0);
             const score = ref(0);
             const nbOfQuestion = ref(8);
@@ -51,17 +52,21 @@ export default {
       const fetchImage = await fetch(URL_PREFIX.value + "api/images");
       images.value = await fetchImage.json();
 
-                //etapes
-                const fetchEtapes = await fetch(URL_PREFIX.value + "api/chapitres/");
-                chapitres.value = await fetchEtapes.json();
+       //etapes
+       const fetchEtapes = await fetch(URL_PREFIX.value + "api/chapitres/");
+       chapitres.value = await fetchEtapes.json();
 
-                // user
-                const fetchUser = await fetch(
-                    URL_PREFIX.value + "api/user/" + getUserId.value
-                );
-                user.value = await fetchUser.json();
-            };
-            fetchData();
+       // user
+        const fetchUser = await fetch(
+        URL_PREFIX.value + "api/user/" + getUserId.value
+            );
+        user.value = await fetchUser.json();
+
+        // badges
+        const fetchBadges = await fetch(URL_PREFIX.value + "api/badges/");
+        badges.value = await fetchBadges.json();
+        };
+        fetchData();
 
             //quizz gameplay
             const nextQuestion = (reponse) => {
@@ -126,7 +131,8 @@ export default {
       imageURL,
       edelweissURL,
       vectorURL,
-                chapitres
+      chapitres,
+      badges,
     };
   },
 };
@@ -390,7 +396,7 @@ export default {
 
         <template v-slot:body>
             <div class="container col-lg-6 mx-auto">
-
+                        <p>Réponses justes : {{ score }} / {{ questions.length -1 }}</p>
                         <p> Total : {{ score * XpbyQuestion}}
                             <img class="edelweiss-point" :src="URL_PREFIX + imageURL + edelweissURL" alt="points" />
                         </p>
@@ -403,9 +409,11 @@ export default {
                             <div class="row">
                                 <div class="col text-center pr-0">
                                     <template v-for="chapitre in chapitres" :key="chapitre.idChapitre">
-                                        <p class="btn btn-play small mx-auto etape" v-if="parseInt(idChapitre) + 1 == chapitre.idEtape">
-                                        {{chapitre.nom}} 
-                                        </p>
+                                        <router-link to="/accueil">
+                                            <p class="btn btn-play small mx-auto etape" v-if="parseInt(idChapitre) + 1 == chapitre.idEtape">
+                                            {{chapitre.nom}} 
+                                            </p>
+                                        </router-link>
                                     </template>
                                 </div>
                             </div>
@@ -423,10 +431,17 @@ export default {
                             </div>
 
                             <div class="row text-center">
-                                <div class="col pl-4 pt-4">
+                                <div class="col pl-4">
                                     <h3>Ton nouveau badge :</h3>
-                                    <img src="/svg/8-Lackerli.svg" alt="Nouveau badge" class="badge-recu">
-                                    <p class="pt-2">Läckerli de Bâle</p>
+                                    <template v-for="badge in badges" :key="badge.idEtape">
+                                        <div v-if="badge.idEtape == idChapitre">
+                                            <img
+                                            :src="URL_PREFIX + vectorURL + badge.badgeUrl"
+                                            alt="Nouveau badge"
+                                            class="badge-recu pt-2"
+                                            />
+                                        </div>
+                                    </template>
                                 </div>
                             </div>
                         </div>
@@ -465,9 +480,10 @@ export default {
         </template>
 
         <template v-slot:footer>
-                <router-link to="/accueil" class="btn btn-primary full-width">Retour</router-link>
+                <router-link to="/accueil" class="btn btn-primary full-width">Suivant</router-link>
         </template>
     </modal-end>
+    <div></div>
 </template>
 
 
@@ -495,7 +511,10 @@ export default {
 }
 
     .badge-recu {
-    height: 105px;
+    height: 115px;
+    border: 4px solid var(--primary-color);
+    border-radius: 25px;
+    padding: 5px;
     }
 
     .train-badge {
