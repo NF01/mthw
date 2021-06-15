@@ -20,6 +20,7 @@
 
     <script>
         window.idUser = '<?php echo (isset($_SESSION['idUser'])?$_SESSION['idUser']:-1) ?>';
+        window.isAdmin = '<?php echo (isset($_SESSION['isAdmin'])?$_SESSION['isAdmin']:0) ?>';
 
         // URL FOR PRODUCTION
         // window.URL_PREFIX = '/mthw/';

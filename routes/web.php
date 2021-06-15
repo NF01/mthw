@@ -92,12 +92,23 @@ Route::get('{view}', function () {
     $idUser = Auth::user() ? Auth::user()->id : -1;
     $_SESSION['idUser'] = $idUser;
 
+    isAdmin();
+
     if ($idUser != -1) {
         return view('vue');
     } else {
         return view('vue_auth');
     }
-})->where(['view' => 'vue|admin|accueil|info|quizz|ranking|profil|experience']);
+})->where(['view' => 'vue|accueil|info|quizz|ranking|profil|experience']);
+
+Route::get('admin', function () {
+    if (isAdmin() == 1) {
+        return view('vue');
+    } else {
+        return redirect('/accueil');
+    }
+});
+
 
 Route::get('/quizz/{number}', function ($number) {
     return view('vue')->with('vue', $number);
@@ -107,6 +118,13 @@ Route::get('/{any}', function () {
     // return abort(404);
     return redirect('/');
 });
+
+function isAdmin()
+{
+    $isAdmin = Auth::user() ? Auth::user()->isAdmin : 0;
+    $_SESSION['isAdmin'] = $isAdmin;
+    return $isAdmin;
+}
 
 // Route::group(['middleware' => ['auth', 'csrf']], function () {
 //     Route::get('/profil', function () {

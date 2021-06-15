@@ -18,25 +18,25 @@ class UsersSeeder extends Seeder
 
         $users = [
             array(
-                'admin', 'admin@admin.ch', '123', '3400'
+                'admin', 'admin@admin.ch', '123', '3400', 1
             ),
             array(
-                'user', 'user@user.ch', '123', '5700'
+                'user', 'user@user.ch', '123', '5700', 0
             ),
             array(
-                'user1', 'user1@user.ch', '123', '3500'
+                'user1', 'user1@user.ch', '123', '3500', 0
             ),
             array(
-                'user2', 'user2@user.ch', '123', '6700'
+                'user2', 'user2@user.ch', '123', '6700', 0
             ),
             array(
-                'user3', 'user3@user.ch', '123', '8100'
+                'user3', 'user3@user.ch', '123', '8100', 0
             ),
             array(
-                'user4', 'user4@user.ch', '123', '4000'
+                'user4', 'user4@user.ch', '123', '4000', 0
             ),
             array(
-                'user5', 'user5@user.ch', '123', '7300'
+                'user5', 'user5@user.ch', '123', '7300', 0
             ),
         ];
 
@@ -46,7 +46,9 @@ class UsersSeeder extends Seeder
                 'name' => $user[0],
                 'email' => $user[1],
                 'password' => Hash::make($user[2]),
-                'experience' => $user[3]
+                'experience' => $user[3],
+                'isAdmin' => $user[4],
+
             ]);
         }
     }

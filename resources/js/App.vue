@@ -7,8 +7,8 @@ export default {
   setup(props, context) {
     const URL_PREFIX = ref(window.URL_PREFIX);
     const vectorURL = ref(window.vectorURL);
-
-    return { vectorURL, URL_PREFIX };
+    const isAdmin = ref(window.isAdmin);
+    return { vectorURL, URL_PREFIX, isAdmin };
   },
 };
 </script>
@@ -16,7 +16,7 @@ export default {
 
 <template>
   <router-view />
-  <div class="row navigation py-4">
+  <div class="row navigation">
     <div class="col-lg-8 mx-auto">
       <div class="row">
         <div class="col">
@@ -43,7 +43,7 @@ export default {
               class="img-nav"
           /></router-link>
         </div>
-        <div class="col">
+        <div class="col" v-if="isAdmin == 1">
           <router-link to="/admin"
             ><img
               :src="URL_PREFIX + vectorURL + 'question_couleur.svg'"
@@ -68,6 +68,8 @@ export default {
   text-align: center;
   width: 100%;
   margin: auto;
+  padding-top: 1.3rem;
+  padding-bottom: 1.3rem;
 }
 .img-nav {
   width: 70px;
