@@ -21,16 +21,17 @@ export default {
     const imageURL = ref(window.imageURL);
     const edelweissURL = ref(window.edelweissURL);
 
-    const questions = ref([]);
-    const reponses = ref([]);
-    const images = ref([]);
-    const user = ref([]);
-    const countQuestion = ref(0);
-    const score = ref(0);
-    const nbOfQuestion = ref(8);
-    const XpbyQuestion = ref(125);
-    const getUserId = ref(window.idUser);
-    // const url = ref(window.urlProd);
+            const questions = ref([]);
+            const reponses = ref([]);
+            const images = ref([]);
+            const user = ref([]);
+            const chapitres = ref([]);
+            const countQuestion = ref(0);
+            const score = ref(0);
+            const nbOfQuestion = ref(8);
+            const XpbyQuestion = ref(125);
+            const getUserId = ref(window.idUser);
+            // const url = ref(window.urlProd);
 
     // const url = ref(process.env.URL);
     // console.log(url.value);
@@ -50,26 +51,30 @@ export default {
       const fetchImage = await fetch(URL_PREFIX.value + "api/images");
       images.value = await fetchImage.json();
 
-      // user
-      const fetchUser = await fetch(
-        URL_PREFIX.value + "api/user/" + getUserId.value
-      );
-      user.value = await fetchUser.json();
-    };
-    fetchData();
+                //etapes
+                const fetchEtapes = await fetch(URL_PREFIX.value + "api/chapitres/");
+                chapitres.value = await fetchEtapes.json();
 
-    //quizz gameplay
-    const nextQuestion = (reponse) => {
-      if (reponse.statut == 1) {
-        score.value = score.value + 1;
-        isModalVisible.value = "QuestionModalRight";
-      } else {
-        isModalVisible.value = "QuestionModalWrong";
-      }
-      // countQuestion.value = countQuestion.value + 1;
-    };
-    //nxt question
-    const addCount = () => (countQuestion.value = countQuestion.value + 1);
+                // user
+                const fetchUser = await fetch(
+                    URL_PREFIX.value + "api/user/" + getUserId.value
+                );
+                user.value = await fetchUser.json();
+            };
+            fetchData();
+
+            //quizz gameplay
+            const nextQuestion = (reponse) => {
+                if (reponse.statut == 1) {
+                    score.value = score.value + 1;
+                    isModalVisible.value = "QuestionModalRight";
+                } else {
+                    isModalVisible.value = "QuestionModalWrong";
+                }
+                // countQuestion.value = countQuestion.value + 1;
+            };
+            //nxt question
+            const addCount = (() => countQuestion.value = countQuestion.value + 1);
 
     //add xp
     const addExperience = (idUser) => {
@@ -121,33 +126,45 @@ export default {
       imageURL,
       edelweissURL,
       vectorURL,
+                chapitres
     };
   },
 };
 </script>
 
 <template>
-  <div class="container pt-4">
-    <div class="row">
-      <div class="col-auto">
-        <button
-          class="uk-close-large"
-          href="#return"
-          uk-toggle
-          uk-close
-        ></button>
-      </div>
+    <div class="container pt-4">
+        <div class="row">
+            <div class="col-auto">
+                <button class="uk-close-large" href="#return" uk-toggle uk-close></button>
+            </div>
+        </div>
+        <header class="row border-bottom pb-4 mb-4">
+            <div class="col text-center">
+                <template v-for="chapitre in chapitres" :key="chapitre.idChapitre">
+                        <h1 class="mb-1" v-if="idChapitre == chapitre.idEtape">
+                        {{chapitre.nom}}
+                        </h1>
+                </template>
+            </div>
+        </header>
+        <div class="row">
+            <div class="col pb-4">
+                <progressbar :count="countQuestion"></progressbar>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col text-center">
+                <template v-for="image in images" :key="image.idImage">
+                    <template v-if="questions[countQuestion].idImage == image.idImage">
+                        <img class="w-50 border" :src="image.url" />
+                    </template>
+                </template>
+            </div>
+        </div>
     </div>
-    <header class="row border-bottom pb-4 mb-4">
-      <div class="col text-center">
-        <h1 class="mb-1">Étape</h1>
-      </div>
-    </header>
-    <div class="row">
-      <div class="col pb-4">
-        <progressbar :count="countQuestion"></progressbar>
-      </div>
-    </div>
+  
     <div class="row">
       <div class="col pb-6 text-center">
         <p v-if="questions[countQuestion]">
@@ -164,7 +181,6 @@ export default {
         </template>
       </div>
     </div>
-  </div>
 
   <ul class="container" v-if="countQuestion <= nbOfQuestion">
     <div class="row mt-4">
@@ -372,70 +388,86 @@ export default {
       <h1>Fin du quizz</h1>
     </template>
 
-    <template v-slot:body>
-      <div class="container col-lg-6 mx-auto">
-        <div class="row">
-          <div class="col">
-            <p>Réponses justes : {{ score }} / {{ questions.length - 1 }}</p>
+        <template v-slot:body>
+            <div class="container col-lg-6 mx-auto">
 
-            <p>
-              +{{ score * XpbyQuestion }}
-              <img
-                class="edelweiss-point"
-                :src="URL_PREFIX + imageURL + edelweissURL"
-                alt="points"
-              />
-            </p>
-          </div>
-        </div>
+                        <p> Total : {{ score * XpbyQuestion}}
+                            <img class="edelweiss-point" :src="URL_PREFIX + imageURL + edelweissURL" alt="points" />
+                        </p>
+                    </div>
+            
+                <template v-if="user">
+                    <template v-if="user.experience + score * XpbyQuestion >= 1000 * idChapitre">
+                        <div class="container">
 
-        <template v-if="user">
-          <template
-            v-if="user.experience + score * XpbyQuestion >= 1000 * idChapitre"
-          >
-            <!-- <div class="row">
-                            <div class="col">
-                                <p class="btn btn-play small mx-auto">Étape</p>
+                            <div class="row">
+                                <div class="col text-center pr-0">
+                                    <template v-for="chapitre in chapitres" :key="chapitre.idChapitre">
+                                        <p class="btn btn-play small mx-auto etape" v-if="parseInt(idChapitre) + 1 == chapitre.idEtape">
+                                        {{chapitre.nom}} 
+                                        </p>
+                                    </template>
+                                </div>
                             </div>
-                        </div> -->
 
-            <div class="row text-right border-bottom my-4">
-              <div class="col pt-4 pr-4">
-                <img
-                  class="w-50"
-                  :src="URL_PREFIX + vectorURL + 'train-entier.svg'"
-                  alt="train"
-                />
-              </div>
-            </div>
+                            <div class="row text-right border-bottom my-4">
+                                <div class="col pr-0">
+                                    <img class="train-badge" src="/svg/train-entier.svg" alt="train" />
+                                </div>
+                            </div>
 
-            <div class="row text-left">
-              <div class="col pl-4 pt-4">
-                <p>
-                  Bravo tu passes au niveau suivant ! <br />
-                  Bienvenue à Nouvelle étape
-                </p>
-              </div>
-            </div>
-          </template>
-          <template
-            v-if="user.experience + score * XpbyQuestion < 1000 * idChapitre"
-          >
-            <p>
-              Tu n'as pas assez d'Edelweiss pour passer à la prochaine étape.
-              Retente ta chance
-            </p>
-          </template>
+                            <div class="row text-center">
+                                <div class="col pl-4">
+                                    <p>Bravo tu passes au niveau suivant ! </p>
+                                </div>
+                            </div>
+
+                            <div class="row text-center">
+                                <div class="col pl-4 pt-4">
+                                    <h3>Ton nouveau badge :</h3>
+                                    <img src="/svg/8-Lackerli.svg" alt="Nouveau badge" class="badge-recu">
+                                    <p class="pt-2">Läckerli de Bâle</p>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    <template v-if="user.experience + score * XpbyQuestion < 1000 * idChapitre">
+                        <div class="container">
+
+                            <div class="row">
+                                <div class="col text-center pr-0">
+                                    <template v-for="chapitre in chapitres" :key="chapitre.idChapitre">
+                                        <p class="btn btn-play small mx-auto etape" v-if="idChapitre == chapitre.idEtape">
+                                        {{chapitre.nom}} 
+                                        </p>
+                                    </template>
+                                </div>
+                            </div>
+
+                            <div class="row text-left border-bottom my-4">
+                                <div class="col pl-0">
+                                    <img class="train-badge" src="/svg/train-entier.svg" alt="train" />
+                                </div>
+                            </div>
+
+                            <div class="row text-center">
+                                <div class="col pl-4 pt-4">
+                                    <p>
+                                        Tu n'as pas assez d'Edelweiss pour passer à la prochaine étape.<br>
+                                        Retente ta chance !
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </template>
+                </template>
         </template>
-      </div>
-    </template>
 
-    <template v-slot:footer>
-      <router-link to="/accueil" class="btn btn-primary full-width"
-        >Retour</router-link
-      >
-    </template>
-  </modal-end>
+        <template v-slot:footer>
+                <router-link to="/accueil" class="btn btn-primary full-width">Retour</router-link>
+        </template>
+    </modal-end>
 </template>
 
 
@@ -462,9 +494,22 @@ export default {
   background-color: #28a745;
 }
 
-@media (min-width: 768px) {
-  .double:first-child {
-    text-align: right !important;
-  }
-}
+    .badge-recu {
+    height: 105px;
+    }
+
+    .train-badge {
+        width: 250px;
+    }
+    .etape {
+        font-size: 15px;
+        padding: 10px;
+    }
+
+    @media (min-width: 768px) {
+        .double:first-child {
+            text-align: right !important;
+        }
+    }
+
 </style>

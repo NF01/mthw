@@ -14,7 +14,6 @@ export default {
     <div class="modal">
       <header class="modal-header">
         <slot name="header"> This is the default title! </slot>
-        <button type="button" class="btn-close" @click="close">x</button>
       </header>
 
       <section class="modal-body">
@@ -31,6 +30,7 @@ export default {
 <style scoped>
 .modal {
   height: 100%;
+  overflow-y: auto;
 
 }
 
