@@ -77,7 +77,7 @@ export default {
       <p class="col-2 points">{{ allUser[3].experience }}</p>
       <div class="col-2">
         <img
-          class=""
+          class="edelweiss"
           :src="URL_PREFIX + imageURL + edelweissURL"
           alt="points"
         />
@@ -89,7 +89,7 @@ export default {
       <p class="col-2 points">{{ allUser[4].experience }}</p>
       <div class="col-2">
         <img
-          class=""
+          class="edelweiss"
           :src="URL_PREFIX + imageURL + edelweissURL"
           alt="points"
         />
@@ -116,7 +116,7 @@ export default {
           <p class="col-2 points">{{ user.experience }}</p>
           <div class="col-2">
             <img
-              class=""
+              class="edelweiss"
               :src="URL_PREFIX + imageURL + edelweissURL"
               alt="points"
             />
@@ -135,7 +135,14 @@ section.container.caption {
   width: 90vw;
   max-width: 600px;
   padding-top: 8rem;
-  padding-bottom: 3rem;
+  padding-bottom: 3rem; 
+   /*   
+  padding-top: 150px;
+  padding-bottom: 30px;*/
+  margin-left: auto;
+  margin-right: auto;
+    /* position: absolute; */
+  display: block;
 }
 
 #espace {
@@ -143,6 +150,9 @@ section.container.caption {
   min-width: 8px;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 .pseudo {
@@ -158,17 +168,22 @@ section.container.caption {
   padding-right: 5px;
 }
 
+/*
 .image {
   width: 30px;
   display: block;
   margin-left: 0;
 }
+*/
 
+.edelweiss {
+ width: 30px;
+}
 .place2 {
   position: absolute;
   top: 30%;
   left: 50%;
-  transform: translate(-285%, -20%);
+  transform: translate(-200%, 20%);
   color: #2d327d;
 }
 
@@ -176,7 +191,7 @@ section.container.caption {
   position: absolute;
   top: 15%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0%);
   color: #da291c;
 }
 
@@ -184,7 +199,7 @@ section.container.caption {
   position: absolute;
   top: 33%;
   left: 50%;
-  transform: translate(182%, 100%);
+  transform: translate(90%,140%);
   color: #f7db3e;
 }
 
@@ -196,7 +211,37 @@ section.container.caption {
 span {
   font-weight: bold;
 }
+@media (max-width: 767px) {
+  .image {
+    width: 20px;
+    text-align: left;
+  }
 
+  .place2 {
+    position: absolute;
+    top: 30%;
+    left: 45%;
+    transform: translate(-19vw, 3vw);
+    font-size: 18px;
+  }
+
+  .place1 {
+    position: absolute;
+    top: 23%;
+    left: 52%;
+    transform: translate(-20%, -50%);
+    font-size: 18px;
+  }
+
+  .place3 {
+    position: absolute;
+    top: 33%;
+    left: 50%;
+    transform: translate(22vw, 15vw);
+    font-size: 18px;
+  }
+}
+/*
 @media (max-width: 576px) {
   .image {
     width: 20px;
@@ -227,30 +272,30 @@ span {
     font-size: 15px;
   }
 }
-
+*/
 @media (max-width: 575.98px) {
   .place2 {
     position: absolute;
     top: 30%;
     left: 42%;
-    transform: translate(-26vw, 3vw);
-    font-size: 15px;
+    transform: translate(-26vw, 10vw);
+    font-size: 13px;
   }
 
   .place1 {
     position: absolute;
     top: 23%;
     left: 50%;
-    transform: translate(-10vw, -5vw);
-    font-size: 15px;
+    transform: translate(-11vw, 2vw);
+    font-size: 13px;
   }
 
   .place3 {
     position: absolute;
     top: 33%;
     left: 48%;
-    transform: translate(16vw, 15vw);
-    font-size: 15px;
+    transform: translate(16vw, 22vw);
+    font-size: 13px;
   }
 }
 </style>

@@ -28,8 +28,34 @@ class QuestionsSeeder extends Seeder
          "Que signifie l'expression neuchâteloise : Il fait une de ces cramines.", "Quelle marque de chocolat en poudre est produite dans le canton de Neuchâtel ?", "Comment s'appellent les habitants de Boudevilliers ?", "Combien de personnes y a-t-il eu à la fête des vendanges de 2019 ?", "Que signifie l'expression neuchâteloise : être à la kouéte.", "Comment s'appellent les habitants de Montmollin  ?", "La dernière exposition nationale a eu lieu en partie à Neuchâtel.", "Laquelle de ces communes neuchâteloises existe en Suisse ?", "Bonus", 
          "Ce mot est typique suisse : la maman de jour.", "Laquelle de ces marques est suisse ?", "Il est interdit de tirer la chasse d'eau après 22h00 en Suisse.", "Ce mot est typique suisse : les bobettes.", "Quelle est l’année de naissance de la Suisse ?", "En Suisse, quel est le petit nom de la personne qui ne prend pas le volant lors de soirées arrosées ?", "Ce mot est typique suisse : le bancomat.", "En Suisse, nous sommes les plus gros importateurs de nourriture par habitant au monde.", "Bonus" ];
         // $idType = ['Genève', 'Vaud', 'Fribourg', 'Valais', 'Tessin', 'Grison', 'Lucerne', 'Schaffouse', 'Bâle', 'Berne', 'Neuchâtel', 'Lavaux'];
-        $idEtape_ = ['Genève', 'Vaud', 'Fribourg', 'Valais', 'Tessin', 'Grison', 'Lucerne', 'Schaffouse', 'Bâle', 'Berne', 'Neuchâtel', 'Lavaux'];
-        $idImage = ['Genève', 'Vaud', 'Fribourg', 'Valais', 'Tessin', 'Grison', 'Lucerne', 'Schaffouse', 'Bâle', 'Berne', 'Neuchâtel', 'Lavaux'];
+        $idEtape_ = [
+            '1', 'Genève', 'Genève', 'Genève', 'Genève', 'Genève', 'Genève', 'Genève', 'Genève', 
+            'Vaud', 'Vaud','Vaud','Vaud','Vaud','Vaud','Vaud','Vaud','Vaud',
+            'Fribourg', 'Fribourg', 'Fribourg', 'Fribourg', 'Fribourg', 'Fribourg', 'Fribourg', 'Fribourg', 'Fribourg', 
+            'Valais', 'Valais', 'Valais', 'Valais', 'Valais', 'Valais', 'Valais', 'Valais', 'Valais',
+            'Tessin', 'Tessin', 'Tessin', 'Tessin', 'Tessin', 'Tessin', 'Tessin', 'Tessin', 'Tessin', 
+            'Grison', 'Grison', 'Grison', 'Grison', 'Grison', 'Grison', 'Grison', 'Grison', 'Grison',
+            'Lucerne', 'Lucerne','Lucerne','Lucerne','Lucerne','Lucerne','Lucerne','Lucerne','Lucerne',
+            'Schaffouse','Schaffouse','Schaffouse','Schaffouse','Schaffouse','Schaffouse','Schaffouse','Schaffouse','Schaffouse', 
+            'Bâle','Bâle','Bâle','Bâle','Bâle','Bâle','Bâle','Bâle','Bâle',
+            'Berne', 'Berne', 'Berne', 'Berne', 'Berne', 'Berne', 'Berne', 'Berne', 'Berne',
+            'Neuchâtel','Neuchâtel','Neuchâtel','Neuchâtel','Neuchâtel','Neuchâtel','Neuchâtel','Neuchâtel','Neuchâtel',
+            'Lavaux','Lavaux','Lavaux','Lavaux','Lavaux','Lavaux','Lavaux','Lavaux','Lavaux',
+        ];
+        $idImage = [
+            '', '', 1, '', '', '2', '', '', '',
+            '7', '', '10', '11','','','','14','',
+            '','','','17','18','','19','','',
+            '','','','','','24','25','','',
+            '','','','','','','','','',
+            '','','','','32','33','','34','',
+            '','','','','','39','','','',
+            '','','','','','','48','','',
+            '','','53','','','56','','57','',
+            '','58','','','61','','','','',
+            '','','','66','','','','','',
+            '','','69','','70','','71','72','',
+        ];
 
         $idEtape = 1;
         // DB::table('questions')->delete();
