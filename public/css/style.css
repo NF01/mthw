@@ -213,6 +213,10 @@ body {
     z-index: 99;
 }
 
+.btn-play.red {
+    background: var(--primary-color);
+}
+
 .btn-play:hover,
 .btn-play:focus,
 .btn-play:active {
@@ -423,4 +427,3 @@ body {
 }
 
 /* END MODAL */
-

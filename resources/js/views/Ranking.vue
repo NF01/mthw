@@ -40,9 +40,13 @@ export default {
 </script>
 
 <template>
-  <div class="container text-center">
-    <div class="col">
-      <h1 class="mx-auto pt-3">Classement</h1>
+  <div class="container">
+    <div class="row mx-0">
+      <div class="col-lg-8 mx-auto px-0">
+        <div class="row header">
+          <h1>Classement</h1>
+        </div>
+      </div>
     </div>
   </div>
   <section class="container caption">
