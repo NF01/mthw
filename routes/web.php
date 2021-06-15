@@ -110,8 +110,9 @@ Route::get('admin', function () {
 });
 
 
-Route::get('/quizz/{number}', function ($number) {
-    return view('vue')->with('vue', $number);
+Route::get('/quizz/{number}', function () {
+    // return view('vue');
+    return redirect('/accueil');
 })->where(['number' => '[0-9]+']);
 
 Route::get('/{any}', function () {

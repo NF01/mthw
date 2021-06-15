@@ -135,13 +135,13 @@ section.container.caption {
   width: 90vw;
   max-width: 600px;
   padding-top: 8rem;
-  padding-bottom: 3rem; 
-   /*   
+  padding-bottom: 3rem;
+  /*   
   padding-top: 150px;
   padding-bottom: 30px;*/
   margin-left: auto;
   margin-right: auto;
-    /* position: absolute; */
+  /* position: absolute; */
   display: block;
 }
 
@@ -177,29 +177,30 @@ section.container.caption {
 */
 
 .edelweiss {
- width: 30px;
-}
-.place2 {
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-200%, 20%);
-  color: #2d327d;
+  width: 30px;
 }
 
 .place1 {
   position: absolute;
   top: 15%;
   left: 50%;
-  transform: translate(-50%, 0%);
+  transform: translate(-50%, -40%);
   color: #da291c;
+}
+
+.place2 {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-192%, -15%);
+  color: #2d327d;
 }
 
 .place3 {
   position: absolute;
   top: 33%;
   left: 50%;
-  transform: translate(90%,140%);
+  transform: translate(94%, 110%);
   color: #f7db3e;
 }
 
@@ -217,19 +218,18 @@ span {
     text-align: left;
   }
 
-  .place2 {
-    position: absolute;
-    top: 30%;
-    left: 45%;
-    transform: translate(-19vw, 3vw);
-    font-size: 18px;
-  }
-
   .place1 {
     position: absolute;
     top: 23%;
     left: 52%;
-    transform: translate(-20%, -50%);
+    transform: translate(-15%, -110%);
+    font-size: 18px;
+  }
+  .place2 {
+    position: absolute;
+    top: 30%;
+    left: 45%;
+    transform: translate(-134%, -3%);
     font-size: 18px;
   }
 
@@ -237,7 +237,7 @@ span {
     position: absolute;
     top: 33%;
     left: 50%;
-    transform: translate(22vw, 15vw);
+    transform: translate(155%, 136%);
     font-size: 18px;
   }
 }
@@ -274,19 +274,19 @@ span {
 }
 */
 @media (max-width: 575.98px) {
-  .place2 {
-    position: absolute;
-    top: 30%;
-    left: 42%;
-    transform: translate(-26vw, 10vw);
-    font-size: 13px;
-  }
-
   .place1 {
     position: absolute;
     top: 23%;
     left: 50%;
-    transform: translate(-11vw, 2vw);
+    transform: translate(-10vw, -1vw);
+    font-size: 13px;
+  }
+
+  .place2 {
+    position: absolute;
+    top: 30%;
+    left: 42%;
+    transform: translate(-24.5vw, 7vw);
     font-size: 13px;
   }
 
@@ -294,7 +294,7 @@ span {
     position: absolute;
     top: 33%;
     left: 48%;
-    transform: translate(16vw, 22vw);
+    transform: translate(16vw, 18vw);
     font-size: 13px;
   }
 }
