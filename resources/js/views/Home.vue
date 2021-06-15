@@ -9,16 +9,40 @@ export default {
     const URL_PREFIX = ref(window.URL_PREFIX);
     const vectorURL = ref(window.vectorURL);
 
+    const user = ref([]);
+    const currentUserLevel = ref([]);
+
+
     const chapitres = ref([]);
+
+
+    const fetchUser = async () => {
+      const result = await fetch(URL_PREFIX.value + "api/user/" + getUserId.value);
+      user.value = await result.json();
+      console.log(user.value);
+    };
+    fetchUser();
+
+    const getUserLevel = async () => {
+      const result = await fetch(
+        URL_PREFIX.value + "api/user/" + getUserId.value + "/level"
+      );
+      const level = await result.json();
+      var lvl = level;
+      currentUserLevel.value = ++lvl;
+      console.log(currentUserLevel.value);
+    };
+    getUserLevel();
 
     const fetchChapitre = async () => {
       const result = await fetch(URL_PREFIX.value + "api/chapitres/");
       const data = await result.json();
       chapitres.value = data;
+      console.log(chapitres.value);
     };
     fetchChapitre();
 
-    return { getUserId, chapitres, vectorURL, URL_PREFIX };
+    return { getUserId, chapitres, vectorURL, URL_PREFIX, user, currentUserLevel };
   },
 };
 </script>
@@ -27,7 +51,7 @@ export default {
   <div class="custom-nav">
     <div class="row">
       <div class="col">i</div>
-      <div class="col text-right">790</div>
+      <div class="col text-right">{{user.experience}}</div>
     </div>
   </div>
   <div class="container pb-5">
@@ -78,6 +102,9 @@ export default {
             <div class="row justify-content-center">
               <div class="illustration-left col text-right">
                 <img
+                :class="[
+                    chapitre.idEtape <= currentUserLevel ? activeClass : 'chapter-locked',
+                  ]"               
                   v-if="chapitre.idEtape % 2 != 0"
                   class="illustration-background"
                   :src="URL_PREFIX + vectorURL + chapitre.illustrationUrl"
@@ -88,6 +115,9 @@ export default {
               </div>
               <div class="illustration-right col text-left">
                 <img
+                :class="[
+                    chapitre.idEtape <= currentUserLevel ? activeClass : 'chapter-locked',
+                  ]"
                   v-if="chapitre.idEtape % 2 == 0"
                   class="illustration-background"
                   :src="URL_PREFIX + vectorURL + chapitre.illustrationUrl"
@@ -97,7 +127,9 @@ export default {
                 />
               </div>
             </div>
-            <div class="row">
+            <div class="row"><!-- v-if="user.experience > 1000 * idChapitre"-->
+
+            <template v-if="chapitre.idEtape <= currentUserLevel ">
               <router-link
                 :to="{
                   name: 'quizz',
@@ -107,6 +139,17 @@ export default {
               >
                 {{ chapitre.nom }}
               </router-link>
+            </template>
+
+            <template v-if="chapitre.idEtape > currentUserLevel">
+              <div
+                class="btn btn-play small mx-auto chapter-locked"
+              >
+                {{ chapitre.nom }}
+              </div>
+            </template>
+
+
             </div>
           </div>
         </template>
@@ -114,6 +157,9 @@ export default {
         <div class="town" v-if="chapitres[chapitres.length - 1]">
           <div class="row text-center justify-content-center">
             <img
+            :class="[
+                    chapitres[chapitres.length - 1].idEtape <= currentUserLevel ? activeClass : 'chapter-locked',
+                  ]"
               class="illustration-background-end"
               :src="
                 URL_PREFIX +
@@ -126,6 +172,7 @@ export default {
             />
           </div>
           <div class="row">
+            <template v-if="chapitres[chapitres.length - 1].idEtape <= currentUserLevel ">
             <router-link
               :to="{
                 name: 'quizz',
@@ -135,6 +182,15 @@ export default {
             >
               {{ chapitres[chapitres.length - 1].nom }}
             </router-link>
+            </template>
+            <template v-if="chapitres[chapitres.length - 1].idEtape > currentUserLevel">
+              <div
+                class="btn btn-play small mx-auto chapter-locked"
+              >
+                {{ chapitres[chapitres.length - 1].nom }}
+              </div>
+
+            </template>
           </div>
         </div>
       </div>

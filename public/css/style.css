@@ -115,6 +115,9 @@ body {
     padding: 0;
 }
 
+.chapter-locked {
+    filter: grayscale(100%);
+}
 
 
 /* End home */
@@ -420,3 +423,4 @@ body {
 }
 
 /* END MODAL */
+

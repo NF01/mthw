@@ -3,7 +3,7 @@ import { ref, watch, watchEffect } from "vue";
 import ModalAdmin from "../components/Modal/ModalAdmin.vue";
 
 export default {
-  components: { ModalAdmin },
+  components: {ModalAdmin},
   setup(props, context) {
     const URL_PREFIX = ref(window.URL_PREFIX);
 
@@ -11,50 +11,79 @@ export default {
     // const typeQuestion = ref();
     const questionChapitre = ref();
     const questionAdded = ref();
-
-    const typeQuestion = ref();
+    const typeQuestionId = ref();
+    const typeQuestionModal = ref();
+    const idImageQuestion = ref();
     //1
     const fetchPostImage = async () => {
       // const getQuestion = await fetch("/api/questions/idC/" + props.idChapitre);
       // questions.value = await getQuestion.json();
-    };
+      };
     // fetchPostImage() au clic ;
 
     //2
     const fetchpostQ = async () => {
-      const result = await fetch(URL_PREFIX.value + "api/question", {
+    // const result = await fetch("http://localhost/mthw/AppMoreThanHelloWorld/public/api/question",
+    const result = await fetch("/api/question",
+      {
         method: "POST",
-        headers: new Headers({ "Content-Type": "application/json" }),
-        credentials: "include",
+        headers: new Headers({ 'Content-Type': 'application/json' }),
+        credentials: 'include',
         body: JSON.stringify({
-          enonceQuestion: "test from fetch api zuzuzuzu  4",
-          typeQuestion: 1,
-          idEtapeQuestion: 2,
-          idImageQuestion: 3,
-        }),
-      });
-      // const data = await result.json();
-      // console.log(data);
-    };
+          enonceQuestion: questionAdded.value,
+          typeQuestion: typeQuestionId.value,
+          idEtapeQuestion: questionChapitre.value,
+          idImageQuestion: idImageQuestion.value,
+        })
+      })
+    const dataQ = await result.json();
+    // console.log(dataQ);
+  };
 
     //3
-    const fetchPostReponse = async () => {};
+    const fetchpostR = async () => {
+    const result = await fetch("/api/reponse",
+      {
+        method: "POST",
+        headers: new Headers({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify({
+          enonceResponse: "test from fetch api reponse",
+          ordreResponse: 1,
+          statutResponse: 1,
+          anecdoteResponse: "ediedjeidj",
+          idQuestionResponse: 14,
+          idImageResponse: 1
+        })
+      })
+    const dataR = await result.json();
+    console.log(dataR);
+  };
 
-    //log
-    const log = () => {
-      // console.log(typeQuestion.value);
-      // console.log(questionChapitre.value);
-      // console.log("modal : "+isModalVisible.value);
-      console.log("modal : " + questionAdded.value);
+    //set question type
+    const setQuestionType = (modal,id) => {
+      typeQuestionModal.value = modal;
+      typeQuestionId.value = id; 
+
     };
 
+
+
+    //log
+    const log = (()=> {
+      console.log("modal : "+typeQuestionModal.value);
+      console.log("type : "+typeQuestionId.value);
+      console.log("idchapitre : "+questionChapitre.value);
+      // console.log("modal : "+isModalVisible.value);
+      console.log("question : " + questionAdded.value);
+      });
+    
     //modal
     const isModalVisible = ref("");
     // const showModal = () => (isModalVisible.value = true);
     const closeModal = () => {
       isModalVisible.value = false;
       console.log(isModalVisible.value);
-    };
+      };
 
     const questionTypeModal = ref("");
     const questionTypeModalfct = (typeQuestion) => {
@@ -74,14 +103,17 @@ export default {
       // showModal,
       closeModal,
       fetchpostQ,
+      fetchpostR,
       scrollToTop,
-      typeQuestion,
+      typeQuestionModal,
       questionChapitre,
       log,
       questionTypeModalfct,
       questionAdded,
-    };
+      setQuestionType
+  }
   },
+
 };
 </script>
 
@@ -99,736 +131,687 @@ export default {
     <div class="row mx-0">
       <div class="col-lg-8 mx-auto px-0">
         <div class="row row-btn">
-          <button @click="isModalVisible = 'adminAddQuestion'">Ajouter</button>
+          <button @click="isModalVisible='adminAddQuestion'">
+            Ajouter
+          </button>
         </div>
       </div>
     </div>
   </div>
 
-  <!--Modal typequestion-->
-  <modal-admin
-    v-show="isModalVisible == 'adminAddQuestion'"
-    @close="closeModal"
-  >
-    <template v-slot:header>
-      <h3>Ajouter</h3>
-    </template>
-    <template v-slot:body>
-      <h3>Quel est le type de la question ?</h3>
-      <input
-        type="button"
-        class="btn btn-secondary full-width input-mobile"
-        value="Vrai/Faux avec image"
-        @click="typeQuestion = 'VFImage'"
-      />
-      <input
-        type="button"
-        class="btn btn-secondary full-width input-mobile"
-        value="Vrai/Faux sans image"
-        @click="typeQuestion = 'VF'"
-      />
-      <input
-        type="button"
-        class="btn btn-secondary full-width input-mobile"
-        value="Vrai/Faux avec réponse en image"
-        @click="typeQuestion = 'VFReponseImage'"
-      />
-      <input
-        type="button"
-        class="btn btn-secondary full-width input-mobile"
-        value="QCM avec image"
-        @click="typeQuestion = 'QCMImage'"
-      />
-      <input
-        type="button"
-        class="btn btn-secondary full-width input-mobile"
-        value="QCM sans image"
-        @click="typeQuestion = 'QCM'"
-      />
-    </template>
-    <template v-slot:footer>
-      <button
-        type="button"
-        @click="
-          isModalVisible = 'adminChapitre';
-          log();
-        "
-      >
-        Suivant
-      </button>
-    </template>
-  </modal-admin>
-
-  <!--Modal chapitre-->
-  <modal-admin v-show="isModalVisible == 'adminChapitre'" @close="closeModal">
-    <template v-slot:header>
-      <h3>Ajouter</h3>
-    </template>
-    <template v-slot:body>
-      <h3>À quelle étape appartient la question ?</h3>
-      <div class="row">
-        <div class="col">
-          <div
-            type="button"
-            class="btn btn-secondary canton-btn full-width mb-3"
-            @click="questionChapitre = 1"
-          >
-            Genève
-          </div>
-        </div>
-        <div class="col">
-          <div
-            type="button"
-            class="btn btn-secondary canton-btn full-width mb-3"
-            @click="questionChapitre = 2"
-          >
-            Vaud
-          </div>
-        </div>
-        <div class="col">
-          <div
-            type="button"
-            class="btn btn-secondary canton-btn full-width"
-            @click="questionChapitre = 3"
-          >
-            Lucerne
-          </div>
-          <div class="w-100"></div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div
-            type="button"
-            class="btn btn-secondary canton-btn full-width mb-3"
-            @click="questionChapitre = 4"
-          >
-            Fribourg
-          </div>
-        </div>
-        <div class="col">
-          <div
-            type="button"
-            class="btn btn-secondary canton-btn full-width"
-            @click="questionChapitre = 5"
-          >
-            Schaffouse
-          </div>
-          <div class="w-100"></div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div
-            type="button"
-            class="btn btn-secondary canton-btn full-width mb-3"
-            @click="questionChapitre = 6"
-          >
-            Valais
-          </div>
-        </div>
-        <div class="col">
-          <div
-            type="button"
-            class="btn btn-secondary canton-btn full-width"
-            @click="questionChapitre = 7"
-          >
-            Bâle
-          </div>
-          <div class="w-100"></div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div
-            type="button"
-            class="btn btn-secondary canton-btn full-width mb-3"
-            @click="questionChapitre = 8"
-          >
-            Tessin
-          </div>
-        </div>
-        <div class="col">
-          <div
-            type="button"
-            class="btn btn-secondary canton-btn full-width"
-            @click="questionChapitre = 9"
-          >
-            Berne
-          </div>
-          <div class="w-100"></div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div
-            type="button"
-            class="btn btn-secondary canton-btn full-width mb-3"
-            @click="questionChapitre = 10"
-          >
-            Grisons
-          </div>
-        </div>
-        <div class="col">
-          <div
-            type="button"
-            class="btn btn-secondary canton-btn full-width"
-            @click="questionChapitre = 11"
-          >
-            Neuchâtel
-          </div>
-          <div class="w-100"></div>
-        </div>
-      </div>
-      <div class="d-flex justify-content-center">
-        <input
-          class="btn btn-secondary canton-btn col-5 input-mobile"
-          value="Lavaux"
-        />
-      </div>
-    </template>
-    <template v-slot:footer>
-      <button
-        type="button"
-        @click="
-          isModalVisible = typeQuestion;
-          log();
-        "
-      >
-        Suivant
-      </button>
-    </template>
-  </modal-admin>
-
-  <!--Modal page 3 vrai faux image-->
-  <modal-admin v-if="isModalVisible == 'VFImage'" @close="closeModal">
-    <template v-slot:header>
-      <h3>Ajouter</h3>
-    </template>
-    <template v-slot:body>
-      <header class="row border-bottom py-2">
-        <div class="col-auto">
-          <button
-            class="uk-modal-close-default"
-            type="button"
-            uk-close
-          ></button>
-        </div>
-        <div class="col text-center">
-          <h2 class="mb-1">Ajouter</h2>
-        </div>
-      </header>
-
-      <div class="container">
-        <div class="row pt-5">
-          <div class="col head-question">
-            <p>Type : Vrai/faux avec image</p>
-            <p>Étape : Vaud</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <h3>Question</h3>
-            <textarea
-              class="input-modal full-width"
-              row="3"
-              placeholder="Quelle est la question ?"
-            ></textarea
-            ><br />
-            <div class="custom-file">
-              <input
-                type="file"
-                class="custom-file-input"
-                id="customFileLang"
-                lang="fr"
+    <!--Modal typequestion-->
+    <modal-admin v-show="isModalVisible == 'adminAddQuestion'" @close="closeModal">
+       <template v-slot:header>
+            <h3>Ajouter</h3>
+        </template>
+        <template v-slot:body>
+          <h3>Quel est le type de la question ?</h3>
+          <input
+                type="button"
+                class="btn btn-secondary full-width input-mobile"
+                value="Vrai/Faux avec image"
+                @click="setQuestionType('VFImage',1)"
               />
-              <label class="custom-file-label" for="customFileLang"
-                >Charger une image
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="row pt-4">
-          <div class="col">
-            <h3>Réponse</h3>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <input
-              type="button"
-              class="btn btn-secondary full-width mb-3"
-              value="Vrai"
-            />
-          </div>
-          <div class="col">
-            <input
-              type="button"
-              class="btn btn-secondary full-width"
-              value="Faux"
-            />
-          </div>
-          <div class="w-100"></div>
-        </div>
-        <div class="row pt-4 pb-5">
-          <div class="col">
-            <h3>Anecdote liée</h3>
-            <textarea
-              class="input-modal full-width"
-              row="3"
-              placeholder="Ajouter une anecdote s'il y en a une."
-            ></textarea>
-          </div>
-        </div>
-      </div>
-      <div class="row border-top pt-4 mt-auto">
-        <div class="col">
-          <div class="row my-3">
-            <div class="col">
-              <button class="btn btn-secondary full-width">Retour</button>
-            </div>
-            <div class="col">
-              <button type="submit" class="btn btn-primary full-width">
-                Valider
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </template>
-    <template v-slot:footer>
-      <button
-        type="button"
-        @click="
-          isModalVisible = '';
-          log();
-        "
-      >
-        Suivant
-      </button>
-    </template>
-  </modal-admin>
-
-  <!--Modal page 3 vrai faux sans image-->
-  <modal-admin v-if="isModalVisible == 'VF'" @close="closeModal">
-    <template v-slot:header>
-      <h3>Ajouter</h3>
-    </template>
-    <template v-slot:body>
-      <header class="row border-bottom py-2">
-        <div class="col-auto">
-          <button
-            class="uk-modal-close-default"
-            type="button"
-            uk-close
-          ></button>
-        </div>
-        <div class="col text-center">
-          <h2 class="mb-1">Ajouter</h2>
-        </div>
-      </header>
-      <div class="container">
-        <div class="row pt-5">
-          <div class="col head-question">
-            <p>Type : Vrai/faux sans image</p>
-            <p>Étape : Vaud</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <h3>Question</h3>
-            <textarea
-              v-model="questionAdded"
-              class="input-modal full-width"
-              row="3"
-              placeholder="Quelle est la question ?"
-            ></textarea>
-          </div>
-        </div>
-        <div class="row pt-4">
-          <div class="col">
-            <h3>Réponse</h3>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <input
-              type="button"
-              class="btn btn-secondary full-width mb-3"
-              value="Vrai"
-            />
-          </div>
-          <div class="col">
-            <input
-              type="button"
-              class="btn btn-secondary full-width"
-              value="Faux"
-            />
-          </div>
-          <div class="w-100"></div>
-        </div>
-        <div class="row pt-4 pb-5">
-          <div class="col">
-            <h3>Anecdote liée</h3>
-            <textarea
-              class="input-modal full-width"
-              row="3"
-              placeholder="Ajouter une anecdote s'il y en a une."
-            ></textarea>
-          </div>
-        </div>
-      </div>
-      <div class="row border-top pt-4 mt-auto">
-        <div class="col">
-          <div class="row my-3">
-            <div class="col">
-              <button class="btn btn-secondary full-width">Retour</button>
-            </div>
-            <div class="col">
-              <button type="submit" class="btn btn-primary full-width">
-                Valider
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </template>
-    <template v-slot:footer>
-      <button
-        type="button"
-        @click="
-          isModalVisible = '';
-          log();
-          fetchpostQ();
-        "
-      >
-        Suivant
-      </button>
-    </template>
-  </modal-admin>
-
-  <!--Modal page 3 vrai faux reponse image-->
-  <modal-admin v-if="isModalVisible == 'VFReponseImage'" @close="closeModal">
-    <template v-slot:header>
-      <h3>Ajouter</h3>
-    </template>
-    <template v-slot:body>
-      <header class="row border-bottom py-2">
-        <div class="col-auto">
-          <button
-            class="uk-modal-close-default"
-            type="button"
-            uk-close
-          ></button>
-        </div>
-        <div class="col text-center">
-          <h2 class="mb-1">Ajouter</h2>
-        </div>
-      </header>
-      <div class="container">
-        <div class="row pt-5">
-          <div class="col head-question">
-            <p>Type : Vrai/faux avec réponse en image</p>
-            <p>Étape : Vaud</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <h3>Question</h3>
-            <textarea
-              class="input-modal full-width"
-              row="3"
-              placeholder="Quelle est la question ?"
-            ></textarea>
-          </div>
-        </div>
-        <div class="row pt-4">
-          <div class="col">
-            <h3>Réponse</h3>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <p>Vrai :</p>
-            <div class="custom-file">
               <input
-                type="file"
-                class="custom-file-input"
-                id="customFileLang"
-                lang="fr"
+                type="button"
+                class="btn btn-secondary full-width input-mobile"
+                value="Vrai/Faux sans image"
+                 @click="setQuestionType('VF',2)"
               />
-              <label class="custom-file-label" for="customFileLang"
-                >Vrai image
-              </label>
-            </div>
-          </div>
-          <div class="col">
-            <p>Faux :</p>
-            <div class="custom-file">
               <input
-                type="file"
-                class="custom-file-input"
-                id="customFileLang"
-                lang="fr"
+                type="button"
+                class="btn btn-secondary full-width input-mobile"
+                value="Vrai/Faux avec réponse en image"
+                @click="setQuestionType('VFReponseImage',typeQuestionId = 3)"
               />
-              <label class="custom-file-label" for="customFileLang"
-                >Fausse image
-              </label>
-            </div>
-          </div>
-          <div class="w-100"></div>
-        </div>
-        <div class="row pt-4 pb-5">
-          <div class="col">
-            <h3>Anecdote liée</h3>
-            <textarea
-              class="input-modal full-width"
-              row="3"
-              placeholder="Ajouter une anecdote s'il y en a une."
-            ></textarea>
-          </div>
-        </div>
-      </div>
-      <div class="row border-top pt-4 mt-auto">
-        <div class="col">
-          <div class="row my-3">
-            <div class="col">
-              <button class="btn btn-secondary full-width">Retour</button>
-            </div>
-            <div class="col">
-              <button type="submit" class="btn btn-primary full-width">
-                Valider
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </template>
-    <template v-slot:footer>
-      <button
-        type="button"
-        @click="
-          isModalVisible = '';
-          log();
-        "
-      >
-        Suivant
-      </button>
-    </template>
-  </modal-admin>
-  <!--Modal qcm avec image-->
-  <modal-admin v-if="isModalVisible == 'QCMImage'" @close="closeModal">
-    <template v-slot:header>
-      <h3>Ajouter</h3>
-    </template>
-    <template v-slot:body>
-      <header class="row border-bottom py-2">
-        <div class="col-auto">
-          <button
-            class="uk-modal-close-default"
-            type="button"
-            uk-close
-          ></button>
-        </div>
-        <div class="col text-center">
-          <h2 class="mb-1">Ajouter</h2>
-        </div>
-      </header>
-      <div class="container">
-        <div class="row pt-5">
-          <div class="col head-question">
-            <p>Type : QCM avec image</p>
-            <p>Étape : Vaud</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <h3>Question</h3>
-            <div class="row">
-              <div class="col">
-                <textarea
-                  class="input-modal full-width"
-                  placeholder="Réponse juste"
-                ></textarea>
-              </div>
-              <div class="col">
-                <textarea
-                  class="input-modal full-width"
-                  placeholder="Réponse fausse"
-                ></textarea>
+              <input
+                type="button"
+                class="btn btn-secondary full-width input-mobile"
+                value="QCM avec image"
+                @click="setQuestionType('QCMImage',4)"
+              />
+              <input
+                type="button"
+                class="btn btn-secondary full-width input-mobile"
+                value="QCM sans image"
+                @click="setQuestionType('QCM',5)"
+              />
+
+            
+        </template>
+        <template v-slot:footer>
+
+                <button type="button" @click="isModalVisible='adminChapitre';log()">
+                    Suivant
+                </button>
+
+        </template>
+    </modal-admin>
+
+    
+    <!--Modal chapitre-->
+    <modal-admin v-show="isModalVisible == 'adminChapitre'" @close="closeModal">
+       <template v-slot:header>
+            <h3>Ajouter</h3>
+        </template>
+        <template v-slot:body>
+          <h3>À quelle étape appartient la question ?</h3>
+          <div class="row">
+                <div class="col">
+                <div  type="button" class="btn btn-secondary  canton-btn full-width mb-3"
+                @click="questionChapitre = 1"
+                >Genève</div>
+                </div>
+                <div class="col">
+                <div  type="button" class="btn btn-secondary  canton-btn full-width mb-3"
+                @click="questionChapitre = 2"
+                >Vaud</div>
+                </div>
+                 <div class="col">
+                <div type="button" class="btn btn-secondary  canton-btn full-width"
+                @click="questionChapitre = 3"
+                >Lucerne</div>
                 <div class="w-100"></div>
+                </div>
+              </div>       
+              <div class="row">
+                <div class="col">
+                <div type="button" class="btn btn-secondary  canton-btn full-width mb-3"
+                @click="questionChapitre = 4"
+                >Fribourg</div>
+                </div>
+                 <div class="col">
+                <div type="button" class="btn btn-secondary canton-btn full-width"
+                @click="questionChapitre = 5"
+                >Schaffouse</div>
+                <div class="w-100"></div>
+                </div>
+              </div>            
+              <div class="row">
+                <div class="col">
+                <div type="button" class="btn btn-secondary canton-btn full-width mb-3"
+                @click="questionChapitre = 6"
+                >Valais</div>
+                </div>
+                 <div class="col">
+                <div type="button" class="btn btn-secondary canton-btn full-width"
+                @click="questionChapitre = 7"
+                >Bâle</div>
+                <div class="w-100"></div>
+                </div>
+              </div> 
+              <div class="row">
+                <div class="col">
+                <div type="button" class="btn btn-secondary canton-btn full-width mb-3"
+                @click="questionChapitre = 8"
+                >Tessin</div>
+                </div>
+                 <div class="col">
+                <div type="button" class="btn btn-secondary canton-btn full-width"
+                @click="questionChapitre = 9"
+                >Berne</div>
+                <div class="w-100"></div>
+                </div>
+              </div>
+               <div class="row">
+                <div class="col">
+                <div type="button" class="btn btn-secondary canton-btn full-width mb-3"
+                @click="questionChapitre = 10"
+                >Grisons</div>
+                </div>
+                 <div class="col">
+                <div type="button" class="btn btn-secondary canton-btn full-width"
+                @click="questionChapitre = 11"
+                >Neuchâtel</div>
+                <div class="w-100"></div>
+                </div>
+              </div>
+               <div class="d-flex justify-content-center">
+               <input
+                class="btn btn-secondary canton-btn col-5 input-mobile"
+                value="Lavaux"
+              />
+              </div>
+
+            
+        </template>
+        <template v-slot:footer>
+            
+                <button type="button" @click="isModalVisible=typeQuestionModal;log()">
+                    Suivant
+                </button>
+
+        </template>
+    </modal-admin>
+
+    <!--Modal page 3 vrai faux image-->
+    <modal-admin v-if="isModalVisible == 'VFImage'" @close="closeModal">
+       <template v-slot:header>
+            <h3>Ajouter</h3>
+        </template>
+        <template v-slot:body>
+          <header class="row border-bottom py-2">
+            <div class="col-auto">
+              <button
+                class="uk-modal-close-default"
+                type="button"
+                uk-close
+              ></button>
+            </div>
+            <div class="col text-center">
+              <h2 class="mb-1">Ajouter</h2>
+            </div>
+          </header>
+          
+          <div class="container">
+            <div class="row pt-5">
+              <div class="col head-question">
+                <p>Type : Vrai/faux avec image</p>
+                <p>Étape : Vaud</p>
               </div>
             </div>
             <div class="row">
               <div class="col">
-                <textarea
-                  class="input-modal full-width"
-                  placeholder="Réponse fausse"
-                ></textarea>
+                <h3>Question</h3>
+              <textarea
+                class="input-modal full-width"
+                row="3"
+                placeholder="Quelle est la question ?"
+              ></textarea
+              ><br />
+              <div class="custom-file">
+                <input
+                  type="file"
+                  class="custom-file-input"
+                  id="customFileLang"
+                  lang="fr"
+                />
+                <label class="custom-file-label" for="customFileLang"
+                  >Charger une image
+                </label>
               </div>
-              <div class="col">
-                <textarea
-                  class="input-modal full-width"
-                  placeholder="Réponse fausse"
-                ></textarea>
-                <div class="w-100"></div>
               </div>
             </div>
-            <br />
-            <div class="custom-file">
-              <input
-                type="file"
-                class="custom-file-input"
-                id="customFileLang"
-                lang="fr"
-              />
-              <label class="custom-file-label" for="customFileLang"
-                >Charger une image
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="row pt-4 pb-5">
-          <div class="col">
-            <h3>Anecdote liée</h3>
-            <textarea
-              class="input-modal full-width"
-              row="3"
-              placeholder="Ajouter une anecdote s'il y en a une."
-            ></textarea>
-          </div>
-        </div>
-      </div>
-      <div class="row border-top pt-4 mt-auto">
-        <div class="col">
-          <div class="row my-3">
-            <div class="col">
-              <button class="btn btn-secondary full-width">Retour</button>
-            </div>
-            <div class="col">
-              <button type="submit" class="btn btn-primary full-width">
-                Valider
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </template>
-    <template v-slot:footer>
-      <button
-        type="button"
-        @click="
-          isModalVisible = '';
-          log();
-        "
-      >
-        Suivant
-      </button>
-    </template>
-  </modal-admin>
-
-  <!--Modal qcm sans image-->
-  <modal-admin v-if="isModalVisible == 'QCM'" @close="closeModal">
-    <template v-slot:header>
-      <h3>Ajouter</h3>
-    </template>
-    <template v-slot:body>
-      <header class="row border-bottom py-2">
-        <div class="col-auto">
-          <button
-            class="uk-modal-close-default"
-            type="button"
-            uk-close
-          ></button>
-        </div>
-        <div class="col text-center">
-          <h2 class="mb-1">Ajouter</h2>
-        </div>
-      </header>
-      <div class="container">
-        <div class="row pt-5">
-          <div class="col head-question">
-            <p>Type : QCM sans image</p>
-            <p>Étape : Vaud</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <h3>Question</h3>
-            <div class="row">
+            <div class="row pt-4">
               <div class="col">
-                <textarea
-                  class="input-modal full-width"
-                  placeholder="Réponse juste"
-                ></textarea>
-              </div>
-              <div class="col">
-                <textarea
-                  class="input-modal full-width"
-                  placeholder="Réponse fausse"
-                ></textarea>
-                <div class="w-100"></div>
+                  <h3>Réponse</h3>
               </div>
             </div>
             <div class="row">
               <div class="col">
-                <textarea
-                  class="input-modal full-width"
-                  placeholder="Réponse fausse"
-                ></textarea>
+                <input
+                      type="button"
+                      class="btn btn-secondary full-width mb-3"
+                      value="Vrai"
+                    />
               </div>
               <div class="col">
+                <input
+                  type="button"
+                  class="btn btn-secondary full-width"
+                  value="Faux"
+                  />
+              </div>
+              <div class="w-100"></div>
+            </div>
+            <div class="row pt-4 pb-5">
+              <div class="col">
+                <h3>Anecdote liée</h3>
                 <textarea
                   class="input-modal full-width"
-                  placeholder="Réponse fausse"
+                  row="3"
+                  placeholder="Ajouter une anecdote s'il y en a une."
                 ></textarea>
-                <div class="w-100"></div>
               </div>
             </div>
-            <br />
           </div>
-        </div>
-        <div class="row pt-4 pb-5">
-          <div class="col">
-            <h3>Anecdote liée</h3>
-            <textarea
-              class="input-modal full-width"
-              row="3"
-              placeholder="Ajouter une anecdote s'il y en a une."
-            ></textarea>
-          </div>
-        </div>
-      </div>
-      <div class="row border-top pt-4 mt-auto">
-        <div class="col">
-          <div class="row my-3">
+           <div class="row border-top pt-4 mt-auto">
             <div class="col">
-              <button class="btn btn-secondary full-width">Retour</button>
-            </div>
-            <div class="col">
-              <button type="submit" class="btn btn-primary full-width">
-                Valider
-              </button>
+              <div class="row my-3">
+                <div class="col">
+                  <button class="btn btn-secondary full-width">
+                  Retour
+                </button>
+                </div>
+                <div class="col">
+                  <button type="submit" class="btn btn-primary full-width">
+                  Valider
+                </button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </template>
-    <template v-slot:footer>
-      <button
-        type="button"
-        @click="
-          isModalVisible = '';
-          log();
-        "
-      >
-        Suivant
-      </button>
-    </template>
-  </modal-admin>
 
-  <!--Liste des questions-->
-  <div class="container">
+
+
+
+        </template>
+        <template v-slot:footer>
+            
+                <button type="button" @click="isModalVisible='';log()">
+                    Suivant
+                </button>
+           
+        </template>
+    </modal-admin>
+
+
+    
+    <!--Modal page 3 vrai faux sans image-->
+    <modal-admin v-if="isModalVisible == 'VF'" @close="closeModal">
+       <template v-slot:header>
+            <h3>Ajouter</h3>
+        </template>
+        <template v-slot:body>
+          <header class="row border-bottom py-2">
+            <div class="col-auto">
+              <button
+                class="uk-modal-close-default"
+                type="button"
+                uk-close
+              ></button>
+            </div>
+            <div class="col text-center">
+              <h2 class="mb-1">Ajouter</h2>
+            </div>
+          </header>
+          <div class="container">
+            <div class="row pt-5">
+              <div class="col head-question">
+                <p>Type : Vrai/faux sans image</p>
+                <p>Étape : Vaud</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h3>Question</h3>
+              <textarea
+                v-model="questionAdded"
+                class="input-modal full-width"
+                row="3"
+                placeholder="Quelle est la question ?"
+              ></textarea>
+              </div>
+            </div>
+            <div class="row pt-4">
+              <div class="col">
+                  <h3>Réponse</h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <input
+                      type="button"
+                      class="btn btn-secondary full-width mb-3"
+                      value="Vrai"
+                    />
+              </div>
+              <div class="col">
+                <input
+                  type="button"
+                  class="btn btn-secondary full-width"
+                  value="Faux"
+                  />
+              </div>
+              <div class="w-100"></div>
+            </div>
+            <div class="row pt-4 pb-5">
+              <div class="col">
+                <h3>Anecdote liée</h3>
+                <textarea
+                  class="input-modal full-width"
+                  row="3"
+                  placeholder="Ajouter une anecdote s'il y en a une."
+                ></textarea>
+              </div>
+            </div>
+          </div>
+           <div class="row border-top pt-4 mt-auto">
+            <div class="col">
+              <div class="row my-3">
+                <div class="col">
+                  <button class="btn btn-secondary full-width">
+                  Retour
+                </button>
+                </div>
+                <div class="col">
+                  <button type="submit" class="btn btn-primary full-width">
+                  Valider
+                </button>
+                </div>
+              </div>
+            </div>
+          </div>            
+        </template>
+        <template v-slot:footer>
+            
+                <button type="button" @click="isModalVisible='';log();fetchpostQ();fetchpostR()">
+                    Suivant
+                </button>
+           
+        </template>
+    </modal-admin>
+
+    <!--Modal page 3 vrai faux reponse image-->
+    <modal-admin v-if="isModalVisible == 'VFReponseImage'" @close="closeModal">
+       <template v-slot:header>
+            <h3>Ajouter</h3>
+        </template>
+        <template v-slot:body>
+          <header class="row border-bottom py-2">
+            <div class="col-auto">
+              <button
+                class="uk-modal-close-default"
+                type="button"
+                uk-close
+              ></button>
+            </div>
+            <div class="col text-center">
+              <h2 class="mb-1">Ajouter</h2>
+            </div>
+          </header>
+          <div class="container">
+            <div class="row pt-5">
+              <div class="col head-question">
+                <p>Type : Vrai/faux avec réponse en image</p>
+                <p>Étape : Vaud</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h3>Question</h3>
+              <textarea
+                class="input-modal full-width"
+                row="3"
+                placeholder="Quelle est la question ?"
+              ></textarea>
+              </div>
+            </div>
+            <div class="row pt-4">
+              <div class="col">
+                <h3>Réponse</h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p>Vrai :</p>
+                <div class="custom-file">
+                    
+                    <input
+                      type="file"
+                      class="custom-file-input"
+                      id="customFileLang"
+                      lang="fr"
+                    />
+                    <label class="custom-file-label" for="customFileLang"
+                      >Vrai image
+                    </label>
+                  </div>
+              </div>
+              <div class="col">
+                <p>Faux :</p>
+                <div class="custom-file">
+                    <input
+                      type="file"
+                      class="custom-file-input"
+                      id="customFileLang"
+                      lang="fr"
+                    />
+                    <label class="custom-file-label" for="customFileLang"
+                      >Fausse image
+                    </label>
+                </div>
+              </div>
+              <div class="w-100"></div>
+            </div>
+            <div class="row pt-4 pb-5">
+              <div class="col">
+                <h3>Anecdote liée</h3>
+                <textarea
+                  class="input-modal full-width"
+                  row="3"
+                  placeholder="Ajouter une anecdote s'il y en a une."
+                ></textarea>
+              </div>
+            </div>
+          </div>
+           <div class="row border-top pt-4 mt-auto">
+            <div class="col">
+              <div class="row my-3">
+                <div class="col">
+                  <button class="btn btn-secondary full-width">
+                  Retour
+                </button>
+                </div>
+                <div class="col">
+                  <button type="submit" class="btn btn-primary full-width">
+                  Valider
+                </button>
+                </div>
+              </div>
+            </div>
+          </div>
+       
+
+            
+        </template>
+        <template v-slot:footer>
+            
+                <button type="button" @click="isModalVisible='';log()">
+                    Suivant
+                </button>
+           
+        </template>
+    </modal-admin>
+    <!--Modal qcm avec image-->
+    <modal-admin v-if="isModalVisible == 'QCMImage'" @close="closeModal">
+       <template v-slot:header>
+            <h3>Ajouter</h3>
+        </template>
+        <template v-slot:body>
+          <header class="row border-bottom py-2">
+            <div class="col-auto">
+              <button
+                class="uk-modal-close-default"
+                type="button"
+                uk-close
+              ></button>
+            </div>
+            <div class="col text-center">
+              <h2 class="mb-1">Ajouter</h2>
+            </div>
+          </header>
+          <div class="container">
+            <div class="row pt-5">
+              <div class="col head-question">
+                <p>Type : QCM avec image</p>
+                <p>Étape : Vaud</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h3>Question</h3>
+                <div class="row">
+                  <div class="col">
+                    <textarea
+                      class="input-modal full-width"
+                      placeholder="Réponse juste"
+                    ></textarea>
+                  </div>
+                  <div class="col">
+                    <textarea
+                      class="input-modal full-width"
+                      placeholder="Réponse fausse"
+                    ></textarea>
+                    <div class="w-100"></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <textarea
+                      class="input-modal full-width"
+                      placeholder="Réponse fausse"
+                    ></textarea>
+                  </div>
+                  <div class="col">
+                    <textarea
+                      class="input-modal full-width"
+                      placeholder="Réponse fausse"
+                    ></textarea>
+                    <div class="w-100"></div>
+                  </div>
+                </div>
+                <br />
+                <div class="custom-file">
+                  <input
+                    type="file"
+                    class="custom-file-input"
+                    id="customFileLang"
+                    lang="fr"
+                  />
+                  <label class="custom-file-label" for="customFileLang"
+                    >Charger une image
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="row pt-4 pb-5">
+              <div class="col">
+                <h3>Anecdote liée</h3>
+                <textarea
+                  class="input-modal full-width"
+                  row="3"
+                  placeholder="Ajouter une anecdote s'il y en a une."
+                ></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row border-top pt-4 mt-auto">
+            <div class="col">
+              <div class="row my-3">
+                <div class="col">
+                  <button class="btn btn-secondary full-width">
+                  Retour
+                </button>
+                </div>
+                <div class="col">
+                  <button type="submit" class="btn btn-primary full-width">
+                  Valider
+                </button>
+                </div>
+              </div>
+            </div>
+          </div>
+       
+        </template>
+        <template v-slot:footer>
+            
+                <button type="button" @click="isModalVisible='';log()">
+                    Suivant
+                </button>
+           
+        </template>
+    </modal-admin>
+    
+    <!--Modal qcm sans image-->
+    <modal-admin v-if="isModalVisible == 'QCM'" @close="closeModal">
+       <template v-slot:header>
+            <h3>Ajouter</h3>
+        </template>
+        <template v-slot:body>
+          <header class="row border-bottom py-2">
+            <div class="col-auto">
+              <button
+                class="uk-modal-close-default"
+                type="button"
+                uk-close
+              ></button>
+            </div>
+            <div class="col text-center">
+              <h2 class="mb-1">Ajouter</h2>
+            </div>
+          </header>
+          <div class="container">
+            <div class="row pt-5">
+              <div class="col head-question">
+                <p>Type : QCM sans image</p>
+                <p>Étape : Vaud</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h3>Question</h3>
+                <div class="row">
+                  <div class="col">
+                    <textarea
+                      class="input-modal full-width"
+                      placeholder="Réponse juste"
+                    ></textarea>
+                  </div>
+                  <div class="col">
+                    <textarea
+                      class="input-modal full-width"
+                      placeholder="Réponse fausse"
+                    ></textarea>
+                    <div class="w-100"></div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <textarea
+                      class="input-modal full-width"
+                      placeholder="Réponse fausse"
+                    ></textarea>
+                  </div>
+                  <div class="col">
+                    <textarea
+                      class="input-modal full-width"
+                      placeholder="Réponse fausse"
+                    ></textarea>
+                    <div class="w-100"></div>
+                  </div>
+                </div>
+                <br />
+              </div>
+            </div>
+            <div class="row pt-4 pb-5">
+              <div class="col">
+                <h3>Anecdote liée</h3>
+                <textarea
+                  class="input-modal full-width"
+                  row="3"
+                  placeholder="Ajouter une anecdote s'il y en a une."
+                ></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row border-top pt-4 mt-auto">
+            <div class="col">
+              <div class="row my-3">
+                <div class="col">
+                  <button class="btn btn-secondary full-width">
+                  Retour
+                </button>
+                </div>
+                <div class="col">
+                  <button type="submit" class="btn btn-primary full-width">
+                  Valider
+                </button>
+                </div>
+              </div>
+            </div>
+          </div>            
+        </template>
+        <template v-slot:footer>
+            
+                <button type="button" @click="isModalVisible='';log()">
+                    Suivant
+                </button>
+           
+        </template>
+    </modal-admin>
+    
+    <!--Liste des questions-->
     <div class="row head-question">
       <div class="col-2">
         <select class="select-header" name="ids">
@@ -889,15 +872,14 @@ export default {
         <p>1</p>
       </div>
     </div>
-  </div>
   <div class="col">
     <div class="row">
-      <div class="col">
-        <a @click="scrollToTop()" id="scrollToTopBtn">
-          <img src="/img/fleche.png" />
-        </a>
+        <div class="col">
+          <a @click="scrollToTop()" id="scrollToTopBtn">
+            <img src="/img/fleche.png" />
+          </a>
+        </div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -960,7 +942,7 @@ option:hover {
   padding: 15px 62px 15px 62px;
 }
 @media (max-width: 576px) {
-  .canton-btn {
+  .canton-btn{
     font-size: 13px;
   }
 }

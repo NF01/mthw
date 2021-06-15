@@ -62,8 +62,10 @@ export default {
       } else {
         isModalVisible.value = "QuestionModalWrong";
       }
-      countQuestion.value = countQuestion.value + 1;
+      // countQuestion.value = countQuestion.value + 1;
     };
+    //nxt question
+    const addCount = (()=> countQuestion.value = countQuestion.value + 1);
 
     //add xp
     const addExperience = (idUser) => {
@@ -103,6 +105,7 @@ export default {
       nbOfQuestion,
       user,
       XpbyQuestion,
+      addCount
     };
   },
 };
@@ -247,15 +250,14 @@ export default {
       <template v-for="reponse in reponses" :key="reponse.idReponse">
         <p
           class="text-center"
-          v-if="reponse.idQuestion == questions[countQuestion].idQuestion - 1"
+          v-if="reponse.idQuestion == questions[countQuestion].idQuestion"
         >
-          <!-- +1 because displaying is not updated yet -->
           {{ reponse.anecdote }}
         </p>
       </template>
     </template>
     <template v-slot:footer>
-      <template v-if="countQuestion == nbOfQuestion">
+      <template v-if="countQuestion == nbOfQuestion -1">
         <template v-if="user.experience > 1000 * idChapitre">
           <button @click="endQuizz()">fin du quizz</button>
         </template>
@@ -274,7 +276,7 @@ export default {
         <button
           class="btn btn-primary full-width"
           type="button"
-          @click="closeModal()"
+          @click="closeModal();addCount()"
         >
           Suivant
         </button>
@@ -307,7 +309,7 @@ export default {
       </div>
     </template>
     <template v-slot:footer>
-      <template v-if="countQuestion == nbOfQuestion">
+      <template v-if="countQuestion == nbOfQuestion -1">
         <template v-if="user.experience > 1000 * idChapitre">
           <button @click="endQuizz()">fin du quizz</button>
         </template>
@@ -326,7 +328,7 @@ export default {
         <button
           class="btn btn-primary full-width"
           type="button"
-          @click="closeModal()"
+          @click="closeModal();addCount()"
         >
           Suivant
         </button>
