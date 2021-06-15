@@ -8,6 +8,8 @@ export default {
     const getUserId = ref(window.idUser);
     const URL_PREFIX = ref(window.URL_PREFIX);
     const vectorURL = ref(window.vectorURL);
+    const imageURL = ref(window.imageURL);
+    const edelweissURL = ref(window.edelweissURL);
 
     const user = ref([]);
     const currentUserLevel = ref([]);
@@ -54,10 +56,12 @@ export default {
       getUserId,
       chapitres,
       vectorURL,
-      URL_PREFIX,
       user,
       currentUserLevel,
       trainPosition,
+      URL_PREFIX,
+      imageURL,
+      edelweissURL,
     };
   },
 };
@@ -66,13 +70,25 @@ export default {
   <template>
   <div class="custom-nav">
     <div class="row">
-      <div class="col">
+      <div class="col-xs-3">
         <a class="mx-auto edit-icon" href="#infos" uk-toggle
-          ><img src="/svg/information-button.svg" alt="infos" class="info"
+          ><img
+            :src="URL_PREFIX + vectorURL + 'information-button.svg'"
+            alt="infos"
+            class="info"
         /></a>
       </div>
+      <div class="col-xs-9 text-right">
+        {{ user.experience }}
+        <img
+          :src="URL_PREFIX + imageURL + edelweissURL"
+          class="icon"
+          alt=""
+          width="28px"
+          height="28px"
+        />
+      </div>
     </div>
-    <div class="col text-right">{{ user.experience }}</div>
   </div>
 
   <div class="container home-container">

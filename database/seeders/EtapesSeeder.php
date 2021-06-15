@@ -15,7 +15,7 @@ class EtapesSeeder extends Seeder
     public function run()
     {
 
-        $noms = ['Genève', 'Vaud', 'Fribourg', 'Valais', 'Tessin', 'Grison', 'Lucerne', 'Schaffouse', 'Bâle', 'Berne', 'Neuchâtel', 'Lavaux'];
+        $noms = ['Genève', 'Vaud', 'Fribourg', 'Valais', 'Tessin', 'Grisons', 'Lucerne', 'Schaffouse', 'Bâle', 'Berne', 'Neuchâtel', 'Lavaux'];
 
         $badges = ['0-Ovomaltine.svg', '1-rivella.svg', '2-fondue.svg', '3-Toblerone.svg', '4-IceTea.svg', '5-Cenovis.svg', '6-Chocolat.svg', '7-Chips.svg', '8-Lackerli.svg', '9-Fromage.svg', '10-Sugus.svg', '11-Aromate.svg'];
 
