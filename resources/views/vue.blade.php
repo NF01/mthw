@@ -51,8 +51,6 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                {{-- <a class="uk-button uk-button-default" href="#popup" uk-toggle>Open</a> --}}
-
                 <div id="popup" class="uk-flex-top" uk-modal>
                     <div class="uk-modal-dialog uk-margin-auto-vertical modal-login px-3 py-2">
                         <form method="POST" action="{{ route('login') }}" class="col px-2">
@@ -90,7 +88,14 @@
     <script src="{{ asset('js/app.js')}}"></script>
 
     <script>
-        UIkit.modal($('#popup')).show();
+        if(window.idUser!=-1)
+        {
+            if(localStorage.getItem('popState') != 'shown'){
+                UIkit.modal($('#popup')).show();
+                localStorage.setItem('popState','shown')
+            }
+        }
+
     </script>
 
 </body>

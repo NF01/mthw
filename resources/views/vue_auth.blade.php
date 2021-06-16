@@ -4,16 +4,14 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            {{-- <a class="uk-button uk-button-default" href="#modal-center" uk-toggle>Open</a> --}}
-
-            <div id="modal-center" class="uk-flex-top" uk-modal>
+            <div id="modal-center" class="uk-flex-top" uk-modal="esc-close:false;bg-close:false;">
                 <div class="uk-modal-dialog uk-margin-auto-vertical modal-login px-3 py-2">
                     <form method="POST" action="{{ route('login') }}" class="col px-2">
                         @csrf
                         <header class="row border-bottom py-2">
-                            <div class="col-auto">
+                            {{-- <div class="col-auto">
                                 <button class="uk-modal-close-default" type="button" uk-close></button>
-                            </div>
+                            </div> --}}
                             <div class="col text-center">
                                 <h2>Connexion</h2>
                             </div>

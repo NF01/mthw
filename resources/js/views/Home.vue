@@ -40,11 +40,20 @@ export default {
       trainPosition.value =
         parseInt(trainDefaultPosition) +
         parseInt(trainIncrement) * parseInt(currentUserLevel.value);
-
-      $("html, body").animate({ scrollTop: trainPosition.value + 500 }, 3000);
     };
     getUserLevel();
+    document.onreadystatechange = () => {
+      scrollToTrain();
+    };
 
+    const scrollToTrain = () => {
+      if (document.readyState == "complete") {
+        $("html, body").animate(
+          { scrollTop: $("#etape-" + currentUserLevel.value).offset().top },
+          2500
+        );
+      }
+    };
     const fetchChapitre = async () => {
       const result = await fetch(URL_PREFIX.value + "api/chapitres/");
       const data = await result.json();
@@ -143,6 +152,7 @@ export default {
           <!-- MIDDLE -->
           <div
             class="town"
+            :id="'etape-' + chapitre.idEtape"
             v-if="chapitre.idEtape != 1 && chapitre.idEtape != chapitres.length"
           >
             <div class="row justify-content-center">
