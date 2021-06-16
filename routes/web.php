@@ -99,7 +99,7 @@ Route::get('{view}', function () {
     } else {
         return view('vue_auth');
     }
-})->where(['view' => 'vue|accueil|info|quizz|ranking|profil|experience']);
+})->where(['view' => 'vue|mthw|accueil|info|quizz|ranking|profil|experience']);
 
 Route::get('admin', function () {
     if (isAdmin() == 1) {
@@ -111,6 +111,16 @@ Route::get('admin', function () {
 
 
 Route::get('/quizz/{number}', function () {
+    // return view('vue');
+    return redirect('/accueil');
+})->where(['number' => '[0-9]+']);
+
+Route::get('/mthw/accueil', function () {
+    // return view('vue');
+    return redirect('/accueil');
+})->where(['number' => '[0-9]+']);
+
+Route::get('/accueil', function () {
     // return view('vue');
     return redirect('/accueil');
 })->where(['number' => '[0-9]+']);
