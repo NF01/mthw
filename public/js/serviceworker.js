@@ -10,7 +10,11 @@ self.addEventListener('install', async event => {
             '/css/app.css',
             '/css/style.css',
             '/js/app.js',
-        ]
+            '/css/font/SBBWeb-Roman.woff2',
+            '/css/font/SBBWeb-Bold.woff2',
+            '/img/edelweiss.png',
+            '/svg/train-top-entier.svg',
+        ]);
     // cache.add("app.css");
     // cache.add("style.css");
 });
