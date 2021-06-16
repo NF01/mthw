@@ -402,24 +402,29 @@ export default {
     </template>
 
     <template v-slot:body>
-
-      <template v-if="idChapitre < 12">
-              <div class="row text-center">
-                <div class="col pl-4">
-                  <p>Bravo, niveau réussi !</p>
+      <template
+          v-if="user.experience + score * XpbyQuestion >= 1000 * idChapitre"
+        >
+        <template v-if="idChapitre < 12">
+                <div class="row text-center">
+                  <div class="col pl-4">
+                    <p>Bravo, niveau réussi !</p>
+                  </div>
                 </div>
-              </div>
-            </template>
-            <template v-if="idChapitre >= 12">
-              <div class="row text-center">
-                <div class="col pl-4">
-                  <p>
-                    Bravo tu as finis le jeux, tu participe donc au tirage au
-                    sort !
-                  </p>
+        </template>
+        <template v-if="idChapitre >= 12">
+                <div class="row text-center">
+                  <div class="col pl-4">
+                    <p>
+                      Bravo tu as fini le jeu, tu participes donc au tirage au
+                      sort pour tenter de gagner 2 cartes journalières ! <br>
+                      Grâce à tous tes badges tu peux maintenant aller pique-niquer au Lavaux ;)
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </template>
+        </template>
+          
+      </template>
 
       <div class="container">
         <div class="row">
@@ -490,6 +495,7 @@ export default {
         <template
           v-if="user.experience + score * XpbyQuestion < 1000 * idChapitre"
         >
+        
           <div class="container">
             <div class="row">
               <div class="col text-center pr-0">
@@ -516,16 +522,15 @@ export default {
                 />
               </div>
             </div>
-
             <div class="row text-center">
-              <div class="col pl-4 pt-4">
-                <p>
-                  Tu n'as pas assez d'Edelweiss pour passer à la prochaine
-                  étape.<br />
-                  Retente ta chance !
-                </p>
-              </div>
+            <div class="col pl-4 pt-4">
+               <p>
+                Tu n'as pas assez d'Edelweiss pour passer à la prochaine
+                étape.<br />
+                 Retente ta chance !
+               </p>
             </div>
+          </div>
           </div>
         </template>
       </template>
@@ -538,6 +543,7 @@ export default {
       >
     </template>
   </modal-end>
+  <div></div>
 </template>
 
 
