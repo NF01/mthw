@@ -12,6 +12,14 @@ const routes = [
     component: Home,
   },
   {
+    path: "/mthw/accueil",
+    component: Home,
+  },
+  {
+    path: "/mthw",
+    component: Home,
+  },
+  {
     path: "/nouveau-compte",
     name: "nouveau-compte",
     component: Home,
