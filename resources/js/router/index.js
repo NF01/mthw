@@ -1,9 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "../views/Home.vue";
-// import Admin from "../views/Admin.vue";
-import Admin from "../views/Adminv2.vue";
+import Admin from "../views/Admin.vue";
 import Quizz from "../views/Quizz.vue";
-import Info from "../views/Info.vue";
 import Profil from "../views/Profil.vue";
 import Ranking from "../views/Ranking.vue";
 
@@ -28,11 +26,6 @@ const routes = [
     name: "quizz",
     component: Quizz,
     props: true
-  },
-  {
-    path: "/info",
-    name: "info",
-    component: Info,
   },
   {
     path: "/profil",
