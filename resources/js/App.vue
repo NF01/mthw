@@ -1,5 +1,6 @@
 <script>
 import { computed, ref, watch, watchEffect } from "vue";
+import { useRoute } from "vue-router";
 
 export default {
   components: {},
@@ -8,15 +9,20 @@ export default {
     const URL_PREFIX = ref(window.URL_PREFIX);
     const vectorURL = ref(window.vectorURL);
     const isAdmin = ref(window.isAdmin);
-    return { vectorURL, URL_PREFIX, isAdmin };
+
+    const route = useRoute();
+
+    // fetch the user information when params change
+    watch(() => route.params.id);
+
+    return { vectorURL, URL_PREFIX, isAdmin, route };
   },
 };
 </script>
 
-
 <template>
   <router-view />
-  <div class="row navigation">
+  <div class="navigation" :class="route.name">
     <div class="col-lg-8 mx-auto">
       <div class="row">
         <div class="col">
@@ -71,6 +77,10 @@ export default {
   padding-top: 1.3rem;
   padding-bottom: 1.3rem;
 }
+.navigation.quizz {
+  display: none;
+}
+
 .img-nav {
   width: 70px;
   height: 40px;
