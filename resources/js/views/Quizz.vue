@@ -108,6 +108,9 @@ export default {
       }
     }
 
+    function scrollPage() {
+      window.scrollTo(0, 0);
+    }
     const isModalVisible = ref("");
     const closeModal = () => (isModalVisible.value = false);
 
@@ -135,6 +138,7 @@ export default {
       vectorURL,
       chapitres,
       badges,
+      scrollPage
     };
   },
 };
@@ -166,7 +170,7 @@ export default {
         <progressbar :count="countQuestion"></progressbar>
       </div>
     </div>
-  </div>
+  
 
   <div class="row mx-0">
     <div class="col text-center">
@@ -186,6 +190,7 @@ export default {
         </template>
       </template>
     </div>
+  </div>
   </div>
 
   <ul class="container" v-if="countQuestion <= nbOfQuestion">
@@ -321,6 +326,7 @@ export default {
           @click="
             closeModal();
             addCount();
+            scrollPage();
           "
         >
           Suivant
@@ -381,6 +387,7 @@ export default {
           @click="
             closeModal();
             addCount();
+            scrollPage();
           "
         >
           Suivant
@@ -395,6 +402,25 @@ export default {
     </template>
 
     <template v-slot:body>
+
+      <template v-if="idChapitre < 12">
+              <div class="row text-center">
+                <div class="col pl-4">
+                  <p>Bravo, niveau réussi !</p>
+                </div>
+              </div>
+            </template>
+            <template v-if="idChapitre >= 12">
+              <div class="row text-center">
+                <div class="col pl-4">
+                  <p>
+                    Bravo tu as finis le jeux, tu participe donc au tirage au
+                    sort !
+                  </p>
+                </div>
+              </div>
+            </template>
+
       <div class="container">
         <div class="row">
           <div class="col">
@@ -443,27 +469,11 @@ export default {
               </div>
             </div>
 
-            <template v-if="idChapitre < 12">
-              <div class="row text-center">
-                <div class="col pl-4">
-                  <p>Bravo, niveau réussi !</p>
-                </div>
-              </div>
-            </template>
-            <template v-if="idChapitre >= 12">
-              <div class="row text-center">
-                <div class="col pl-4">
-                  <p>
-                    Bravo tu as finis le jeux, tu participe donc au tirage au
-                    sort !
-                  </p>
-                </div>
-              </div>
-            </template>
+            
 
             <div class="row text-center">
               <div class="col pl-4">
-                <h3>Badge débloqué :</h3>
+                <h3 class="pb-4">Badge débloqué :</h3>
                 <template v-for="badge in badges" :key="badge.idEtape">
                   <div v-if="badge.idEtape == idChapitre">
                     <img
