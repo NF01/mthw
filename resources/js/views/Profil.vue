@@ -191,7 +191,7 @@ export default {
   </div>
 
   <badges></badges>
-  <resultat></resultat>
+  <!-- <resultat></resultat> -->
 </template>
 <style scoped>
 </style>
