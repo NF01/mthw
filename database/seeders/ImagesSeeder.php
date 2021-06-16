@@ -14,8 +14,10 @@ class ImagesSeeder extends Seeder
      */
     public function run()
     {
-        $images = ['url1', 'url2', 'url3'];
-
+        $url = "https://pingouin.heig-vd.ch/mthw/storage/imgquizz/";
+        $url2 = "http://127.0.0.1:8000/storage/imgquizz/";
+        $images = ["{$url2}escalade.jpg", 'url2', 'url3'];
+        
         // DB::table('images')->delete();
         for ($i = 0; $i < 100; $i++) {
             DB::table('images')->insert([
