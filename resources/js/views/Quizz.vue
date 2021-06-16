@@ -20,6 +20,7 @@ export default {
     const vectorURL = ref(window.vectorURL);
     const imageURL = ref(window.imageURL);
     const edelweissURL = ref(window.edelweissURL);
+    const imageQuizzURL = ref(window.imageQuizzURL);
 
     const questions = ref([]);
     const reponses = ref([]);
@@ -129,6 +130,7 @@ export default {
       addCount,
       URL_PREFIX,
       imageURL,
+      imageQuizzURL,
       edelweissURL,
       vectorURL,
       chapitres,
@@ -169,7 +171,7 @@ export default {
       <div class="col text-center">
         <template v-for="image in images" :key="image.idImage">
           <template v-if="questions[countQuestion].idImage == image.idImage">
-            <img class="w-50 border" :src="image.url" />
+            <img class="w-50 border" :src="URL_PREFIX + imageQuizzURL + image.url" />
           </template>
         </template>
       </div>
@@ -187,7 +189,7 @@ export default {
     <div class="col text-center">
       <template v-for="image in images" :key="image.idImage">
         <template v-if="questions[countQuestion].idImage == image.idImage">
-          <img class="w-50 border" :src="image.url" />
+          <img class="w-50 border" :src="URL_PREFIX + imageQuizzURL + image.url" />
         </template>
       </template>
     </div>
@@ -223,7 +225,7 @@ export default {
                 <div class="col-md-6 mb-3 text-center text-md-left double">
                   <img
                     class="w-50 border"
-                    :src="image.url"
+                    :src="URL_PREFIX + imageQuizzURL + image.url"
                     @click="nextQuestion(reponse)"
                   />
                 </div>
@@ -439,7 +441,7 @@ export default {
               <div class="col pr-0">
                 <img
                   class="train-badge"
-                  src="/svg/train-entier.svg"
+                  :src="URL_PREFIX + vectorURL + 'train-entier.svg'"
                   alt="train"
                 />
               </div>
@@ -503,7 +505,7 @@ export default {
               <div class="col pl-0">
                 <img
                   class="train-badge"
-                  src="/svg/train-entier.svg"
+                  :src="URL_PREFIX + vectorURL + 'train-entier.svg'"
                   alt="train"
                 />
               </div>

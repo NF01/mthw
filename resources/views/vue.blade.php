@@ -31,6 +31,7 @@
         window.imageURL = 'img/';
         window.vectorURL = 'svg/';
         window.edelweissURL = 'edelweiss.png';
+        window.imageQuizzURL = 'storage/imgquizz/';
 
         
     </script>
