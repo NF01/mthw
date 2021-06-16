@@ -14,14 +14,26 @@ class ImagesSeeder extends Seeder
      */
     public function run()
     {
-        $url = "https://pingouin.heig-vd.ch/mthw/storage/imgquizz/";
-        $url2 = "http://127.0.0.1:8000/storage/imgquizz/";
-        $images = ["{$url2}escalade.jpg", 'url2', 'url3'];
+         
+        $images = [
+            "escalade.jpg", "jet-deau.jpg", "geneve.jpg","neuchatel.jpg", "statue-union-geneve-a-la-suisse.jpg", "guillaume-tel.jpg",
+            "panther.jpeg", "chateau-chillon.jpg","chateau-grandson.jpg","lucifer.jpg","cerveau-artificiel.jpg","pont-suspendu-diablerets-peak-walk.jpg","pont-suspendu-randa-charles-kuonen.jpg","lac-leman.jpg",
+            "fribourg.jpg","suiss-allemande.jpg","fromages.jpg","st-nicolas.jpg","fondue.jpg",
+            "valais.jpg","jura.jpg","cervin-de-dos.jpg","dent-blanche.jpg","drapeau-valais.png","feu-bidon-huile.jpg",
+            "tessin.jpg","vaud.jpg", "val-verzasca.jpg","lac-schiffenen.jpg", "boccalini-tessin.jpg","talerschwingen-instrument-musique.jpg",
+            "capun.jpg","jo.jpg","cinema.jpg",
+            "lucerne.jpg", "berne.jpg", "lucerne.png", "zurich.png", "pont-lucerne.jpg", "lion-lucerne-suisse.jpg", "lion-atlanta.jpg",
+            "suisse-allemande2.jpg", "valais2", "schaffhouse.png", "uri.png", "chute-du-rhin.jpg", "chute-du-day.jpg", "munot.jpg", "schaffhouse.jpg", "alsace.jpg",
+            "bale-campagne.png", "bale-ville.png", "zoo-bale.jpg", "cathedrale-bale.jpg", "cathedrale-lausanne.jpg", "lackerlis.jpg", "baselworld.jpg",  
+            "zytglogge-berne.jpg", "palais-federal.jpg", "musee-ceramique-verre.jpg", "fosse-aux-ours.jpg", "blausee.jpg", "lac-bleu-arolla.jpg", 
+            "logo-suchardexpress.png", "caotina-logo.png", "fete-vendanges.jpg",
+            "tally-weijl.jpg", "logo-swarovski.jpg", "toilettes.jpg", "drapeau-suisse.png", "bancomat.png", "nourriture.jpg"
+        ];
         
         // DB::table('images')->delete();
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < sizeof($images); $i++) {
             DB::table('images')->insert([
-                'url' => $i
+                'url' => $images[$i]
             ]);
         }
     }
