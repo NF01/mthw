@@ -67,7 +67,7 @@ export default {
       }
     };
     const fetchChapitre = async () => {
-      const result = await fetch(URL_PREFIX.value + "api/chapitres/");
+      const result = await fetch(URL_PREFIX.value + "api/chapitres");
       const data = await result.json();
       chapitres.value = data;
     };
@@ -173,7 +173,7 @@ export default {
                 <img
                   :class="[
                     chapitre.idEtape <= currentUserLevel
-                      ? activeClass
+                      ? ''
                       : 'chapter-locked',
                   ]"
                   v-if="chapitre.idEtape % 2 != 0"
@@ -188,7 +188,7 @@ export default {
                 <img
                   :class="[
                     chapitre.idEtape <= currentUserLevel
-                      ? activeClass
+                      ? ''
                       : 'chapter-locked',
                   ]"
                   v-if="chapitre.idEtape % 2 == 0"
@@ -236,7 +236,7 @@ export default {
             <img
               :class="[
                 chapitres[chapitres.length - 1].idEtape <= currentUserLevel
-                  ? activeClass
+                  ? ''
                   : 'chapter-locked',
               ]"
               class="illustration-background-end"

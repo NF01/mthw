@@ -27,7 +27,7 @@ export default {
       const level = await result.json();
       var lvl = level;
       currentUserLevel.value = ++lvl;
-      console.log(currentUserLevel.value);
+      // console.log(currentUserLevel.value);
     };
     getUserLevel();
 
@@ -58,7 +58,7 @@ export default {
                   :src="URL_PREFIX + vectorURL + badge.badgeUrl"
                   alt=""
                   v-bind:class="[
-                    badge.idEtape < currentUserLevel ? activeClass : 'locked',
+                    badge.idEtape < currentUserLevel ? '' : 'locked',
                   ]"
                 />
               </div>
@@ -104,7 +104,7 @@ export default {
                 :src="URL_PREFIX + vectorURL + badge.badgeUrl"
                 alt=""
                 v-bind:class="[
-                  badge.idEtape < currentUserLevel ? activeClass : 'locked',
+                  badge.idEtape < currentUserLevel ? '' : 'locked',
                 ]"
               />
             </div>

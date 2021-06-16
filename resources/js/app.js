@@ -33,10 +33,26 @@ require('./bootstrap');
 //     el: '#app',
 // });
 
-import {createApp} from 'vue';
+import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
+
+const install = async (path) => {
+    const registration = await navigator.serviceWorker.register(path);
+    return new Promise((resolve, reject) => {
+        registration.addEventListener("updatefound", evt => {
+            const installingWorker = registration.installing;
+            installingWorker.addEventListener("statechange", evt => {
+                if (evt.target.state === "activating") resolve();
+            });
+        });
+    })
+}
+// install('js/serviceworker.js');
+install('js/serviceworker.js').then(() => location.reload());
 
 const app = createApp(App);
 app.use(router);
 app.mount('#app');
+console.log('serviceworker loaded');
+
