@@ -166,16 +166,6 @@ export default {
         <progressbar :count="countQuestion"></progressbar>
       </div>
     </div>
-
-    <div class="row">
-      <div class="col text-center">
-        <template v-for="image in images" :key="image.idImage">
-          <template v-if="questions[countQuestion].idImage == image.idImage">
-            <img class="w-50 border" :src="URL_PREFIX + imageQuizzURL + image.url" />
-          </template>
-        </template>
-      </div>
-    </div>
   </div>
 
   <div class="row mx-0">

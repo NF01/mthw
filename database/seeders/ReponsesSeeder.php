@@ -102,7 +102,7 @@ class ReponsesSeeder extends Seeder
                 'statut' => $statut2[$i],
                 'anecdote' =>  $anecdote[$i],
                 'idQuestion' =>  $idQuestion2[$i],
-                // 'idImage' => $idImage[$i]
+                'idImage' => $idImage[$i]
             ]);
             if ($i % 2 == 0) {
                 $idQuestion++;
