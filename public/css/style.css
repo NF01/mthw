@@ -1,3 +1,40 @@
+@font-face {
+    font-family: "SBB";
+    src: url("./font/SBBWeb-Roman.woff2") format("woff2");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "SBB";
+    src: url("./font/SBBWeb-Light.woff2") format("woff2");
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: "SBB";
+    src: url("./font/SBBWeb-Bold.woff2") format("woff2");
+    font-weight: bold;
+}
+
+* {
+    font-family: "SBB";
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "SBB";
+    font-weight: bold;
+}
+
+html,
+body {
+    background-color: #f8fafc;
+}
+
 :root {
     --primary-color: #DA291C;
     --primary-color-hover: #cc1b0f;
@@ -49,7 +86,7 @@ body {
     right: 0;
     text-align: center;
     z-index: 1;
-    height: 4325px;
+    height: 4600px;
 }
 
 .train {
@@ -62,6 +99,8 @@ body {
     margin: auto;
     text-align: center;
     top: -605px;
+    transition-delay: .3s !important;
+
 }
 
 .rails {
@@ -91,6 +130,10 @@ body {
     width: 430px;
     margin-top: 180px;
     margin-bottom: -15px;
+}
+
+#etape-final .illustration-background-end {
+    z-index: 100;
 }
 
 @media (max-width: 576px) {

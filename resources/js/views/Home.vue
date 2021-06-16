@@ -19,6 +19,7 @@ export default {
     const trainDefaultPosition = -990;
     const trainIncrement = 385;
     const trainPosition = ref(0);
+    const trainAnimation = ref();
 
     window.scrollTo(0, 0);
 
@@ -40,6 +41,13 @@ export default {
       trainPosition.value =
         parseInt(trainDefaultPosition) +
         parseInt(trainIncrement) * parseInt(currentUserLevel.value);
+
+      trainAnimation.value =
+        currentUserLevel.value > 2
+          ? "top " +
+            parseInt(currentUserLevel.value * 0.35) +
+            "s cubic-bezier(0.33, -0.01, 0.76, 0.99)"
+          : "top 0s";
     };
     getUserLevel();
     document.onreadystatechange = () => {
@@ -48,9 +56,13 @@ export default {
 
     const scrollToTrain = () => {
       if (document.readyState == "complete") {
+        var currentLevel = currentUserLevel.value;
+        var anchor =
+          currentLevel == chapitres.value.length + 1 ? "final" : currentLevel;
+
         $("html, body").animate(
-          { scrollTop: $("#etape-" + currentUserLevel.value).offset().top },
-          2500
+          { scrollTop: $("#etape-" + anchor).offset().top },
+          2000
         );
       }
     };
@@ -71,6 +83,7 @@ export default {
       URL_PREFIX,
       imageURL,
       edelweissURL,
+      trainAnimation,
     };
   },
 };
@@ -104,7 +117,11 @@ export default {
     <div class="row mx-0">
       <div class="col-lg-8 mx-auto px-0 py-5">
         <!-- FIRST -->
-        <div class="town" v-if="chapitres[0]">
+        <div
+          class="town"
+          v-if="chapitres[0]"
+          :id="'etape-' + chapitres[0].idEtape"
+        >
           <div class="row text-center justify-content-center">
             <img
               class="illustration-background-first"
@@ -138,15 +155,11 @@ export default {
             height="auto"
             :style="{
               top: parseInt(trainPosition) + 'px',
-              transition:
-                'top ' +
-                parseInt(3) +
-                's cubic-bezier(0.33, -0.01, 0.76, 0.99) 0s',
+              transition: trainAnimation,
             }"
           />
           <div class="rails"></div>
         </div>
-        <!-- transition:'top ' + parseInt(5) + 's cubic-bezier(0.47, 0, 0.25, 1) 0s', -->
         <!-- LOGIC -->
         <template v-for="chapitre in chapitres" :key="chapitre.idEtape">
           <!-- MIDDLE -->
@@ -214,7 +227,11 @@ export default {
           </div>
         </template>
         <!-- END -->
-        <div class="town" v-if="chapitres[chapitres.length - 1]">
+        <div
+          class="town"
+          :id="'etape-' + chapitres[chapitres.length - 1].idEtape"
+          v-if="chapitres[chapitres.length - 1]"
+        >
           <div class="row text-center justify-content-center">
             <img
               :class="[
@@ -266,7 +283,28 @@ export default {
         </div>
       </div>
     </div>
-    <div class="row text-center mx-0">
+
+    <!-- SECRET TROPHY -->
+    <div
+      class="town"
+      id="etape-final"
+      v-if="currentUserLevel == chapitres.length + 1"
+    >
+      <div class="row text-center justify-content-center">
+        <img
+          class="illustration-background-end"
+          :src="URL_PREFIX + vectorURL + 'final.svg'"
+          alt=""
+          width="0"
+          height="0"
+        />
+      </div>
+    </div>
+
+    <div
+      class="row text-center mx-0"
+      v-if="currentUserLevel <= chapitres.length"
+    >
       <router-link
         :to="{
           name: 'quizz',
@@ -297,6 +335,7 @@ export default {
       <div class="container" uk-overflow-auto>
         <div class="row pt-5">
           <div class="col">
+            <h2>Qui sommes-nous ?</h2>
             <p class="text-justify">
               “Ça joue ?!” est une application créée par MTHW, rassemblant sept
               étudiants, dans le cadre d’un cours en ingénierie des médias. Dans
@@ -312,19 +351,17 @@ export default {
               sur le patois, les clichés, les expressions, mais aussi sur des
               faits typiquement suisses et bien d’autres choses. Afin de valider
               une étape et de passer au canton suivant, il te faudra réunir 1000
-              Edelweiss en répondant à ces fameuses questions. Ce qui nous fait
-              au moins 6 réponses justes pour pouvoir avancer. À la fin de
+              Edelweiss en répondant à ces fameuses questions. À la fin de
               chaque étape, tu recevras un badge représentant un aliment typique
-              de la région où tu te trouves. Tu pourras aussi recevoir, tout au
-              long du jeu, d’autres badges mystères pour féliciter tes hauts
-              faits.<br />
-              Une fois arrivé au Lavaux, le jeu est terminé et tu recevras ton
-              dernier badge. <br />
+              suisse. Une fois arrivé au Lavaux, le jeu est terminé et tu
+              recevras ton dernier badge.
+            </p>
+            <h2>Concours !!</h2>
+            <p>
               Exceptionnellement, jusqu’au 20 juillet, une fois que tu as
               terminé le jeu, ton adresse mail sera ajoutée au tirage au sort
               pour gagner deux billets de train journaliers en 1ère classe
-              valable dans toute la Suisse. Le tirage au sort est effectué par
-              les CFF sous contrôle d’un huissier de justice et n’est pas
+              valable dans toute la Suisse. Le tirage au sort n’est pas
               accessible aux employés des CFF ni aux personnes ayant participé à
               la création du jeu. Après le tirage au sort, les CFF contacteront
               par mail la personne ayant gagné. Ainsi, tu pourras peut-être

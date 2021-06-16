@@ -67,8 +67,8 @@
                             <div class="row align-items-center">
                                 <div class="col py-5 text-center">
                                     <h3>Concours jusqu’au 20 juillet 2021!</h3>
-                                    <p>Fini le jeu en arrivant au “Le Lavaux” pour participer au tirage au sort te permettant de gagner deux billets journaliers en 1ère classe valablent dans toute la Suisse.</p>
-                                    <p>Tirage au sort organisé par les CFF sous contrôle d’un huissier de justice, seul votre adresse mail sera transmis.</p>
+                                    <p>Fini le jeu en arrivant au "Lavaux” pour participer au tirage au sort te permettant de gagner <b>deux cartes journalières en 1ère classe valable dans toute la Suisse.<b></p>
+                                    <p>Le 25 juillet, nous tirerons au sort un gagnant, seul votre adresse mail sera transmise.</p>
                                 </div>
                             </div>
                             <div class="row border-top py-4 mt-auto">

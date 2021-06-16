@@ -22,7 +22,7 @@ export default {
 
 <template>
   <router-view />
-  <div class="navigation" :class="route.name">
+  <div class="navigation row" :class="route.name">
     <div class="col-lg-8 mx-auto">
       <div class="row">
         <div class="col">
