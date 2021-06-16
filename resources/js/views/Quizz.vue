@@ -179,7 +179,10 @@ export default {
     <div class="col text-center">
       <template v-for="image in images" :key="image.idImage">
         <template v-if="questions[countQuestion].idImage == image.idImage">
-          <img class="w-50 border" :src="URL_PREFIX + imageQuizzURL + image.url" />
+          <img
+            class="w-50 border"
+            :src="URL_PREFIX + imageQuizzURL + image.url"
+          />
         </template>
       </template>
     </div>
@@ -214,7 +217,7 @@ export default {
               >
                 <div class="col-md-6 mb-3 text-center text-md-left double">
                   <img
-                    class="w-50 border"
+                    class="w-50 border pointer"
                     :src="URL_PREFIX + imageQuizzURL + image.url"
                     @click="nextQuestion(reponse)"
                   />
@@ -295,13 +298,13 @@ export default {
     <template v-slot:footer>
       <template v-if="countQuestion == nbOfQuestion - 1">
         <template v-if="user.experience > 1000 * idChapitre">
-          <button class="btn btn-primary full-width" @click="endQuizz()">
+          <button class="btn btn-primary full-width size-button" @click="endQuizz()">
             Fin du quizz
           </button>
         </template>
         <template v-if="user.experience <= 1000 * idChapitre">
           <button
-            class="btn btn-primary full-width"
+            class="btn btn-primary full-width size-button"
             @click="
               endQuizz();
               addExperience(getUserId);
@@ -313,7 +316,7 @@ export default {
       </template>
       <template v-else>
         <button
-          class="btn btn-primary full-width"
+          class="btn btn-primary full-width size-button"
           type="button"
           @click="
             closeModal();
@@ -355,13 +358,13 @@ export default {
     <template v-slot:footer>
       <template v-if="countQuestion == nbOfQuestion - 1">
         <template v-if="user.experience > 1000 * idChapitre">
-          <button class="btn btn-primary full-width" @click="endQuizz()">
+          <button class="btn btn-primary full-width size-button" @click="endQuizz()">
             Fin du quizz
           </button>
         </template>
         <template v-if="user.experience <= 1000 * idChapitre">
           <button
-            class="btn btn-primary full-width"
+            class="btn btn-primary full-width size-button"
             @click="
               endQuizz();
               addExperience(getUserId);
@@ -373,7 +376,7 @@ export default {
       </template>
       <template v-else>
         <button
-          class="btn btn-primary full-width"
+          class="btn btn-primary full-width size-button"
           type="button"
           @click="
             closeModal();
@@ -392,17 +395,20 @@ export default {
     </template>
 
     <template v-slot:body>
-      <div class="container col-lg-6 mx-auto">
-        <p>Réponses justes : {{ score }} / {{ questions.length - 1 }}</p>
-        <p>
-          Total : {{ score * XpbyQuestion }}
-          <img
-            class="edelweiss-point"
-            :src="URL_PREFIX + imageURL + edelweissURL"
-            alt="points"
-          />
-        </p>
-      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <p>Réponses justes : {{ score }} / {{ questions.length - 1 }}</p>
+            <p>
+              Total : {{ score * XpbyQuestion }}
+              <img
+                class="edelweiss-point"
+                :src="URL_PREFIX + imageURL + edelweissURL"
+                alt="points"
+              />
+            </p>
+          </div>
+        </div>
 
       <template v-if="user">
         <template
@@ -440,7 +446,7 @@ export default {
             <template v-if="idChapitre < 12">
               <div class="row text-center">
                 <div class="col pl-4">
-                  <p>Bravo tu passes au niveau suivant !</p>
+                  <p>Bravo, niveau réussi !</p>
                 </div>
               </div>
             </template>
@@ -457,7 +463,7 @@ export default {
 
             <div class="row text-center">
               <div class="col pl-4">
-                <h3>Ton nouveau badge :</h3>
+                <h3>Badge débloqué :</h3>
                 <template v-for="badge in badges" :key="badge.idEtape">
                   <div v-if="badge.idEtape == idChapitre">
                     <img
@@ -513,20 +519,27 @@ export default {
           </div>
         </template>
       </template>
+      </div>
     </template>
 
     <template v-slot:footer>
-      <router-link to="/accueil" class="btn btn-primary full-width"
+      <router-link to="/accueil" class="btn btn-primary full-width size-button"
         >Suivant</router-link
       >
     </template>
   </modal-end>
-  <div></div>
 </template>
 
 
 
 <style scoped>
+.size-button {
+  max-width: 350px;
+}
+
+.pointer {
+  cursor: pointer;
+}
 .edelweiss-point {
   margin-left: 15px;
   width: 30px;
