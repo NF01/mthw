@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 
-// PROD URL 
 // $URL_PREFIX = "/mthw/";
 $URL_PREFIX = '/';
 

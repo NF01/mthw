@@ -134,7 +134,7 @@ export default {
       vectorURL,
       chapitres,
       badges,
-      scrollPage
+      scrollPage,
     };
   },
 };
@@ -166,27 +166,26 @@ export default {
         <progressbar :count="countQuestion"></progressbar>
       </div>
     </div>
-  
 
-  <div class="row mx-0">
-    <div class="col text-center">
-      <p v-if="questions[countQuestion]">
-        {{ questions[countQuestion].enonce }}
-      </p>
+    <div class="row mx-0">
+      <div class="col text-center">
+        <p v-if="questions[countQuestion]">
+          {{ questions[countQuestion].enonce }}
+        </p>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col text-center">
-      <template v-for="image in images" :key="image.idImage">
-        <template v-if="questions[countQuestion].idImage == image.idImage">
-          <img
-            class="w-50 border"
-            :src="URL_PREFIX + imageQuizzURL + image.url"
-          />
+    <div class="row">
+      <div class="col text-center">
+        <template v-for="image in images" :key="image.idImage">
+          <template v-if="questions[countQuestion].idImage == image.idImage">
+            <img
+              class="w-50 border"
+              :src="URL_PREFIX + imageQuizzURL + image.url"
+            />
+          </template>
         </template>
-      </template>
+      </div>
     </div>
-  </div>
   </div>
 
   <ul class="container" v-if="countQuestion <= nbOfQuestion">
@@ -241,7 +240,7 @@ export default {
         <div class="col">
           <div class="row my-3">
             <div class="col">
-              <router-link to="/accueil">
+              <router-link :to="URL_PREFIX + 'accueil'">
                 <button class="btn btn-primary full-width uk-modal-close">
                   Oui
                 </button>
@@ -299,7 +298,10 @@ export default {
     <template v-slot:footer>
       <template v-if="countQuestion == nbOfQuestion - 1">
         <template v-if="user.experience > 1000 * idChapitre">
-          <button class="btn btn-primary full-width size-button" @click="endQuizz()">
+          <button
+            class="btn btn-primary full-width size-button"
+            @click="endQuizz()"
+          >
             Fin du quizz
           </button>
         </template>
@@ -360,7 +362,10 @@ export default {
     <template v-slot:footer>
       <template v-if="countQuestion == nbOfQuestion - 1">
         <template v-if="user.experience > 1000 * idChapitre">
-          <button class="btn btn-primary full-width size-button" @click="endQuizz()">
+          <button
+            class="btn btn-primary full-width size-button"
+            @click="endQuizz()"
+          >
             Fin du quizz
           </button>
         </template>
@@ -399,27 +404,27 @@ export default {
 
     <template v-slot:body>
       <template
-          v-if="user.experience + score * XpbyQuestion >= 1000 * idChapitre"
-        >
+        v-if="user.experience + score * XpbyQuestion >= 1000 * idChapitre"
+      >
         <template v-if="idChapitre < 12">
-                <div class="row text-center">
-                  <div class="col pl-4">
-                    <p>Bravo, niveau réussi !</p>
-                  </div>
-                </div>
+          <div class="row text-center">
+            <div class="col pl-4">
+              <p>Bravo, niveau réussi !</p>
+            </div>
+          </div>
         </template>
         <template v-if="idChapitre >= 12">
-                <div class="row text-center">
-                  <div class="col pl-4">
-                    <p>
-                      Bravo tu as fini le jeu, tu participes donc au tirage au
-                      sort pour tenter de gagner 2 cartes journalières ! <br>
-                      Grâce à tous tes badges tu peux maintenant aller pique-niquer au Lavaux ;)
-                    </p>
-                  </div>
-                </div>
+          <div class="row text-center">
+            <div class="col pl-4">
+              <p>
+                Bravo tu as fini le jeu, tu participes donc au tirage au sort
+                pour tenter de gagner 2 cartes journalières ! <br />
+                Grâce à tous tes badges tu peux maintenant aller pique-niquer au
+                Lavaux ;)
+              </p>
+            </div>
+          </div>
         </template>
-          
       </template>
 
       <div class="container">
@@ -437,104 +442,103 @@ export default {
           </div>
         </div>
 
-      <template v-if="user">
-        <template
-          v-if="user.experience + score * XpbyQuestion >= 1000 * idChapitre"
-        >
-          <div class="container">
-            <div class="row">
-              <div class="col text-center pr-0">
-                <template
-                  v-for="chapitre in chapitres"
-                  :key="chapitre.idChapitre"
-                >
-                  <router-link to="/accueil">
+        <template v-if="user">
+          <template
+            v-if="user.experience + score * XpbyQuestion >= 1000 * idChapitre"
+          >
+            <div class="container">
+              <div class="row">
+                <div class="col text-center pr-0">
+                  <template
+                    v-for="chapitre in chapitres"
+                    :key="chapitre.idChapitre"
+                  >
+                    <router-link :to="URL_PREFIX + 'accueil'">
+                      <p
+                        class="btn btn-play small mx-auto etape"
+                        v-if="parseInt(idChapitre) + 1 == chapitre.idEtape"
+                      >
+                        {{ chapitre.nom }}
+                      </p>
+                    </router-link>
+                  </template>
+                </div>
+              </div>
+
+              <div class="row text-right border-bottom my-4">
+                <div class="col pr-0">
+                  <img
+                    class="train-badge"
+                    :src="URL_PREFIX + vectorURL + 'train-entier.svg'"
+                    alt="train"
+                  />
+                </div>
+              </div>
+
+              <div class="row text-center">
+                <div class="col pl-4">
+                  <h3 class="pb-4">Badge débloqué :</h3>
+                  <template v-for="badge in badges" :key="badge.idEtape">
+                    <div v-if="badge.idEtape == idChapitre">
+                      <img
+                        :src="URL_PREFIX + vectorURL + badge.badgeUrl"
+                        alt="Nouveau badge"
+                        class="badge-recu pt-2"
+                      />
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </div>
+          </template>
+          <template
+            v-if="user.experience + score * XpbyQuestion < 1000 * idChapitre"
+          >
+            <div class="container">
+              <div class="row">
+                <div class="col text-center pr-0">
+                  <template
+                    v-for="chapitre in chapitres"
+                    :key="chapitre.idChapitre"
+                  >
                     <p
                       class="btn btn-play small mx-auto etape"
-                      v-if="parseInt(idChapitre) + 1 == chapitre.idEtape"
+                      v-if="idChapitre == chapitre.idEtape"
                     >
                       {{ chapitre.nom }}
                     </p>
-                  </router-link>
-                </template>
+                  </template>
+                </div>
               </div>
-            </div>
 
-            <div class="row text-right border-bottom my-4">
-              <div class="col pr-0">
-                <img
-                  class="train-badge"
-                  :src="URL_PREFIX + vectorURL + 'train-entier.svg'"
-                  alt="train"
-                />
+              <div class="row text-left border-bottom my-4">
+                <div class="col pl-0">
+                  <img
+                    class="train-badge"
+                    :src="URL_PREFIX + vectorURL + 'train-entier.svg'"
+                    alt="train"
+                  />
+                </div>
               </div>
-            </div>
-
-            
-
-            <div class="row text-center">
-              <div class="col pl-4">
-                <h3 class="pb-4">Badge débloqué :</h3>
-                <template v-for="badge in badges" :key="badge.idEtape">
-                  <div v-if="badge.idEtape == idChapitre">
-                    <img
-                      :src="URL_PREFIX + vectorURL + badge.badgeUrl"
-                      alt="Nouveau badge"
-                      class="badge-recu pt-2"
-                    />
-                  </div>
-                </template>
-              </div>
-            </div>
-          </div>
-        </template>
-        <template
-          v-if="user.experience + score * XpbyQuestion < 1000 * idChapitre"
-        >
-        
-          <div class="container">
-            <div class="row">
-              <div class="col text-center pr-0">
-                <template
-                  v-for="chapitre in chapitres"
-                  :key="chapitre.idChapitre"
-                >
-                  <p
-                    class="btn btn-play small mx-auto etape"
-                    v-if="idChapitre == chapitre.idEtape"
-                  >
-                    {{ chapitre.nom }}
+              <div class="row text-center">
+                <div class="col pl-4 pt-4">
+                  <p>
+                    Tu n'as pas assez d'Edelweiss pour passer à la prochaine
+                    étape.<br />
+                    Retente ta chance !
                   </p>
-                </template>
+                </div>
               </div>
             </div>
-
-            <div class="row text-left border-bottom my-4">
-              <div class="col pl-0">
-                <img
-                  class="train-badge"
-                  :src="URL_PREFIX + vectorURL + 'train-entier.svg'"
-                  alt="train"
-                />
-              </div>
-            </div>
-            <div class="row text-center">
-            <div class="col pl-4 pt-4">
-               <p>
-                Tu n'as pas assez d'Edelweiss pour passer à la prochaine
-                étape.<br />
-                 Retente ta chance !
-               </p>
-            </div>
-          </div>
-          </div>
+          </template>
         </template>
-      </template>
       </div>
     </template>
 
     <template v-slot:footer>
-      <router-link to="/accueil" class="btn btn-primary full-width size-button"
+      <router-link
+        :to="URL_PREFIX + 'accueil'"
+        class="btn btn-primary full-width size-button"
         >Suivant</router-link
       >
     </template>
