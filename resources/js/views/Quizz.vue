@@ -1,5 +1,5 @@
 <script>
-import { computed, reactive, ref } from "vue";
+import { ref } from "vue";
 import Progressbar from "../components/Progressbar.vue";
 import ModalQuizz from "../components/Modal/ModalQuizz.vue";
 import ModalEnd from "../components/Modal/ModalEnd.vue";
@@ -33,17 +33,14 @@ export default {
     const nbOfQuestion = ref(8);
     const XpbyQuestion = ref(125);
     const getUserId = ref(window.idUser);
-    // const url = ref(window.urlProd);
 
-    // const url = ref(process.env.URL);
-    // console.log(url.value);
-
-    //fetch question & reponse
+    //fetch data
     const fetchData = async () => {
       const getQuestion = await fetch(
         URL_PREFIX.value + "api/questions/idC/" + props.idChapitre
       );
       questions.value = await getQuestion.json();
+      shuffleArray(questions.value);
 
       const getReponse = await fetch(URL_PREFIX.value + "api/reponses");
       reponses.value = await getReponse.json();
@@ -77,7 +74,6 @@ export default {
       } else {
         isModalVisible.value = "QuestionModalWrong";
       }
-      // countQuestion.value = countQuestion.value + 1;
     };
     //nxt question
     const addCount = () => (countQuestion.value = countQuestion.value + 1);
@@ -100,7 +96,7 @@ export default {
     const endQuizz = () => {
       isModalVisible.value = "QuestionModalEnd";
     };
-
+    // Durstenfeld shuffle
     function shuffleArray(array) {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));

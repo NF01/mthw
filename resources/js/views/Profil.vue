@@ -144,7 +144,7 @@ export default {
                 id="pseudo"
                 class="form-control"
                 name="pseudo"
-                :placeholder="user.name"
+                placeholder="Nouveau nom"
                 autofocus
               />
             </div>
@@ -156,7 +156,7 @@ export default {
                 id="email"
                 class="form-control"
                 name="email"
-                :placeholder="user.email"
+                placeholder="Nouveau e-mail"
               />
             </div>
             <div class="form-group">
@@ -168,7 +168,7 @@ export default {
                 class="form-control"
                 name="password"
                 autocomplete="current-password"
-                :placeholder="user.password"
+                placeholder="Nouveau mot de passe"
               />
             </div>
           </div>
