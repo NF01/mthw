@@ -85,6 +85,7 @@
         </div>
     </div>
     <section id="app">
+
     </section>
     <script src="{{ asset('js/app.js')}}"></script>
 

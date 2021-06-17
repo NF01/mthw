@@ -536,10 +536,10 @@ export default {
     </template>
 
     <template v-slot:footer>
-      <router-link
-        :to="URL_PREFIX + 'accueil'"
+      <a
+        :href="URL_PREFIX + 'accueil'"
         class="btn btn-primary full-width size-button"
-        >Suivant</router-link
+        >Suivant</a
       >
     </template>
   </modal-end>

@@ -1,6 +1,7 @@
   <script>
 import { computed, ref, watch, watchEffect } from "vue";
 import { useRoute } from "vue-router";
+import ConfettiGenerator from "confetti-js";
 
 export default {
   components: {},
@@ -50,20 +51,32 @@ export default {
             "s cubic-bezier(0.33, -0.01, 0.76, 0.99)"
           : "top 0s";
       $("html, body").animate({ scrollTop: trainPosition.value + 600 }, 2500);
+
+      document.onreadystatechange = () => {
+        if (currentUserLevel.value - 1 == 12) {
+          // if (currentUserLevel.value - 1 == chapitres.value.length)
+          // console.log(currentUserLevel.value - 1);
+          // console.log(chapitres.value.length);
+          var confettiElement = document.getElementById("confetti");
+          var confettiSettings = { target: confettiElement };
+          var confetti = new ConfettiGenerator(confettiSettings);
+          confetti.render();
+        }
+      };
     };
 
-    const scrollToTrain = () => {
-      if (document.readyState == "complete") {
-        var currentLevel = currentUserLevel.value;
-        var anchor =
-          currentLevel == chapitres.value.length + 1 ? "final" : currentLevel;
+    // const scrollToTrain = () => {
+    //   if (document.readyState == "complete") {
+    //     var currentLevel = currentUserLevel.value;
+    //     var anchor =
+    //       currentLevel == chapitres.value.length + 1 ? "final" : currentLevel;
 
-        $("html, body").animate(
-          { scrollTop: $("#etape-" + anchor).offset().top },
-          2000
-        );
-      }
-    };
+    //     $("html, body").animate(
+    //       { scrollTop: $("#etape-" + anchor).offset().top },
+    //       2000
+    //     );
+    //   }
+    // };
 
     const fetchChapitre = async () => {
       const result = await fetch(URL_PREFIX.value + "api/chapitres");
@@ -81,10 +94,6 @@ export default {
       //   scrollToTrain();
       //   console.log("scroll");
       // });
-
-      // document.onreadystatechange = () => {
-      //   scrollToTrain();
-      // };
     };
 
     fetchUser();
@@ -317,6 +326,7 @@ export default {
           height="0"
         />
       </div>
+      <canvas id="confetti" height="100px"> </canvas>
     </div>
 
     <div

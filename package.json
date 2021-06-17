@@ -25,6 +25,7 @@
         "vue-loader": "^16.2.0"
     },
     "dependencies": {
+        "confetti-js": "^0.0.18",
         "vue-router": "^4.0.8"
     }
 }
