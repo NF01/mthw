@@ -40,91 +40,93 @@ export default {
 </script>
 
 <template>
-  <div class="container">
-    <div class="row mx-0">
-      <div class="col-lg-8 mx-auto px-0">
-        <div class="row header">
-          <h1>Classement</h1>
+  <div class="container-ranking">
+    <div class="container">
+      <div class="row mx-0">
+        <div class="col-lg-8 mx-auto px-0">
+          <div class="row header">
+            <h1>Classement</h1>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <section class="container caption">
-    <img
-      class="img-fluid"
-      id="podium"
-      :src="URL_PREFIX + vectorURL + 'classement_couleur.svg'"
-      alt="podium"
-    />
-    <p class="place1" v-if="allUser[0]">
-      <span>{{ allUser[0].name }}</span> <br />
-      {{ allUser[0].experience }} points
-    </p>
-    <p class="place2" v-if="allUser[1]">
-      <span>{{ allUser[1].name }}</span> <br />
-      {{ allUser[1].experience }} points
-    </p>
-    <p class="place3" v-if="allUser[2]">
-      <span>{{ allUser[2].name }}</span> <br />
-      {{ allUser[2].experience }} points
-    </p>
-  </section>
+    <section class="container caption">
+      <img
+        class="img-fluid"
+        id="podium"
+        :src="URL_PREFIX + vectorURL + 'classement_couleur.svg'"
+        alt="podium"
+      />
+      <p class="place1" v-if="allUser[0]">
+        <span>{{ allUser[0].name }}</span> <br />
+        {{ allUser[0].experience }} points
+      </p>
+      <p class="place2" v-if="allUser[1]">
+        <span>{{ allUser[1].name }}</span> <br />
+        {{ allUser[1].experience }} points
+      </p>
+      <p class="place3" v-if="allUser[2]">
+        <span>{{ allUser[2].name }}</span> <br />
+        {{ allUser[2].experience }} points
+      </p>
+    </section>
 
-  <section class="container">
-    <div class="row" v-if="allUser[3]">
-      <p class="col-2 place">4</p>
-      <p class="col-6 pseudo">{{ allUser[3].name }}</p>
-      <p class="col-2 points">{{ allUser[3].experience }}</p>
-      <div class="col-2">
-        <img
-          class="edelweiss"
-          :src="URL_PREFIX + imageURL + edelweissURL"
-          alt="points"
-        />
-      </div>
-    </div>
-    <div class="row" v-if="allUser[4]">
-      <p class="col-2 place">5</p>
-      <p class="col-6 pseudo">{{ allUser[4].name }}</p>
-      <p class="col-2 points">{{ allUser[4].experience }}</p>
-      <div class="col-2">
-        <img
-          class="edelweiss"
-          :src="URL_PREFIX + imageURL + edelweissURL"
-          alt="points"
-        />
-      </div>
-    </div>
-
-    <template v-if="allUser[5]">
-      <template v-if="user.experience < allUser[5].experience">
-        <div class="espace">
+    <section class="container">
+      <div class="row" v-if="allUser[3]">
+        <p class="col-2 place">4</p>
+        <p class="col-6 pseudo">{{ allUser[3].name }}</p>
+        <p class="col-2 points">{{ allUser[3].experience }}</p>
+        <div class="col-2">
           <img
-            id="espace"
-            :src="URL_PREFIX + imageURL + 'petits_points.png'"
-            alt="espace"
+            class="edelweiss"
+            :src="URL_PREFIX + imageURL + edelweissURL"
+            alt="points"
           />
         </div>
-        <span class="row">
-          <template v-for="(user, index) in allUser" :key="index">
-            <template v-if="user.id == getUserId">
-              <p class="col-2 place">{{ index }}</p>
-            </template>
-          </template>
+      </div>
+      <div class="row" v-if="allUser[4]">
+        <p class="col-2 place">5</p>
+        <p class="col-6 pseudo">{{ allUser[4].name }}</p>
+        <p class="col-2 points">{{ allUser[4].experience }}</p>
+        <div class="col-2">
+          <img
+            class="edelweiss"
+            :src="URL_PREFIX + imageURL + edelweissURL"
+            alt="points"
+          />
+        </div>
+      </div>
 
-          <p class="col-6 pseudo">{{ user.name }}</p>
-          <p class="col-2 points">{{ user.experience }}</p>
-          <div class="col-2">
+      <template v-if="allUser[5]">
+        <template v-if="user.experience < allUser[5].experience">
+          <div class="espace">
             <img
-              class="edelweiss"
-              :src="URL_PREFIX + imageURL + edelweissURL"
-              alt="points"
+              id="espace"
+              :src="URL_PREFIX + imageURL + 'petits_points.png'"
+              alt="espace"
             />
           </div>
-        </span>
+          <span class="row">
+            <template v-for="(user, index) in allUser" :key="index">
+              <template v-if="user.id == getUserId">
+                <p class="col-2 place">{{ index }}</p>
+              </template>
+            </template>
+
+            <p class="col-6 pseudo">{{ user.name }}</p>
+            <p class="col-2 points">{{ user.experience }}</p>
+            <div class="col-2">
+              <img
+                class="edelweiss"
+                :src="URL_PREFIX + imageURL + edelweissURL"
+                alt="points"
+              />
+            </div>
+          </span>
+        </template>
       </template>
-    </template>
-  </section>
+    </section>
+  </div>
 </template>
 
 <style scoped>

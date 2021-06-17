@@ -79,6 +79,10 @@ body {
     padding-bottom: 200px;
 }
 
+.container-ranking {
+    padding-bottom: 150px;
+}
+
 .container-train {
     overflow: hidden;
     position: absolute;
