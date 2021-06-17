@@ -49,6 +49,7 @@ export default {
             parseInt(currentUserLevel.value * 0.35) +
             "s cubic-bezier(0.33, -0.01, 0.76, 0.99)"
           : "top 0s";
+      $("html, body").animate({ scrollTop: trainPosition.value + 600 }, 2500);
     };
 
     const scrollToTrain = () => {
@@ -84,8 +85,6 @@ export default {
       // document.onreadystatechange = () => {
       //   scrollToTrain();
       // };
-
-      $("html, body").animate({ scrollTop: trainPosition.value + 600 }, 2500);
     };
 
     fetchUser();
