@@ -12,7 +12,10 @@ use Illuminate\Support\Facades\Hash;
 class ApiControllerPUT extends Controller
 {
 
-
+    /**
+     * Fait la mise à jour d'une question
+     * @param Request $request
+     */
     public function updatequestion(Request $request)
     {
 
@@ -26,6 +29,10 @@ class ApiControllerPUT extends Controller
         ));
     }
 
+    /**
+     * Fait la mise à jour d'une réponse
+     * @param Request $request
+     */
     public function updateresponse(Request $request)
     {
         $id = $request->input("id");
@@ -39,6 +46,10 @@ class ApiControllerPUT extends Controller
         ));
     }
 
+    /**
+     * Fait la mise à jour d'un user
+     * @param Request $request
+     */
     public function updateUser(Request $request)
     {
 

@@ -10,7 +10,11 @@ use Illuminate\Support\Facades\Storage;
 
 class ApiControllerDELETE extends Controller
 {
-
+    /**
+     * Supprime une instance
+     * instance = image + question + réponse (dans cet ordre)
+     * @param Request $request
+     */
     public function deleteinstance(Request $request)
     {
 

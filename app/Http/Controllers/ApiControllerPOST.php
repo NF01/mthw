@@ -14,7 +14,11 @@ use Illuminate\Support\Facades\Storage;
 class ApiControllerPOST extends Controller
 {
 
-
+    /**
+     * Reçoit les informations nécessaires à la création d'une nouvelle images dans la BD ainsi que dans le storage
+     * @param Request $request
+     * @return mixed
+     */
     public function postimage(Request $request)
     {
 
@@ -46,7 +50,11 @@ class ApiControllerPOST extends Controller
         }
     }
 
-
+    /**
+     * Reçoit les informations nécessaires à la création d'une nouvelle question dans la BD
+     * @param Request $request
+     * @return mixed
+     */
     public function postquestion(Request $request)
     {
         $unequestion = new question();
@@ -69,6 +77,11 @@ class ApiControllerPOST extends Controller
         }
     }
 
+    /**
+     * Reçoit les informations nécessaires à la création d'une nouvelle réponse dans la BD
+     * @param Request $request
+     * @return mixed
+     */
     public function postresponse(Request $request)
     {
         $aresponse = new reponse();
@@ -91,6 +104,11 @@ class ApiControllerPOST extends Controller
         }
     }
 
+    /**
+     * Ajoute les points d'éxpérience au bon utilisateur dans la DB
+     * @param Request $request
+     * @return mixed
+     */
     public function addXpToUser(Request $request)
     {
 
