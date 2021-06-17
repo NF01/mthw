@@ -370,6 +370,10 @@ export default {
               la mesure où ceci est réalisé dans un but pédagogique, nous
               déclinons toute responsabilité en cas de bug.
             </p>
+            <p class="text-center">
+              <img :src="URL_PREFIX + vectorURL + 'logo-icon.svg'" alt="Logo ça joue?!" class="w-50">
+            </p>
+            
             <h2>“Ça joue ?!” Quésaco ?</h2>
             <p class="text-justify">
               Le but du jeu est de t’offrir un petit tour de Suisse à travers
@@ -396,6 +400,36 @@ export default {
               faire le tour de Suisse que nous t’avons proposé dans
               l’application, mais en vrai, et riche de tout ce que tu auras
               appris dans l’application « Ça joue ?! ».
+            </p>
+            <h2>Quelques sources</h2>
+            <p>
+              <a href="https://fr.wikipedia.org">Wikipedia</a><br>
+              <a href="https://blog.travailler-en-suisse.ch/10/2015/chiffres-etonnants-suisse.html">Blog travailler en Suisse</a><br>
+              <a href="https://www.24heures.ch/vivre/societe/achetez-vache-leasing/story/15019649">Article 24 heures</a><br>
+              <a href="https://www.cooperation.ch/jeux/2019/quiz-suissitude-223589/">Quizz de la Coop</a><br>
+              <a href="http://www.habitants.ch/">Nom des habitants</a><br>
+              <a href="https://www.houseofswitzerland.org/fr/swissstories/histoire/lhistoire-du-jet-deau-de-geneve#:~:text=Elle%20permet%20de%20contr%C3%B4ler%20la,du%20b%C3%A2timent%20des%20Forces%20motrices">Histoire du jet d'eau</a><br>
+              <a href="https://www.heidi.news/economie/afflux-de-prostituees-a-geneve-pour-le-sommet-biden-poutine?utm_source=copylink&utm_medium=partage-social">Sommet Biden et Poutine</a><br>
+              <a href="https://dossiers-publics.ch/8-infos-sur-le-canton-de-vaud/">Dossier public du canton de Vaud</a><br>
+              <a href="https://www.fribourgtourisme.ch/fr/P9414/la-saint-nicolas">Fribourg tourisme</a><br>
+              <a href="https://www.rts.ch/info/regions/valais/9453411-le-valais-amende-christian-constantin-pour-la-flamme-allumee-sur-le-cervin.html ">Rts infos</a><br>
+              <a href="https://www.bern.com/fr/faits-insolites">Faits insolites sur Berne</a><br>
+              <a href="https://www.myswitzerland.com/">My Switzerland</a>
+            </p>
+            <h3>Images</h3>
+            <p>
+              <a href="https://fr.thelabelfinder.ch/tally-weijl/1647805">Logo Tally Weijl</a><br>
+              <a href="https://logos-marques.com/swarovski-logo/">Logo Swarovski</a><br>
+              <a href="https://www.futura-sciences.com/sante/actualites/medecine-toilettes-intelligentes-surveiller-notre-sante-78370/">Salle de bains</a><br>
+              <a href="https://www.thyon.ch/fr/bancomat-les-collons-fp31964">Bancomat</a><br>
+              <a href="https://notrehistoire.ch/entries/o0wBe76wWmZ">Fosse aux ours</a><br>
+              <a href="https://fr.wikipedia.org/wiki/Drapeau_et_armoiries_du_canton_de_Vaud">Écusson des cantons</a><br>
+              <a href="https://www.loisirs.ch/loisirs/22/zoo-de-bale">Loisirs.ch</a><br>
+              <a href="https://luxus-plus.com/horlogerie-la-direction-de-lex-baselworld-organise-un-nouvel-evenement-en-lausanne/">Basel World</a><br>
+              <a href="https://www.pinterest.ch/pin/164170348886305286/">Pinterest</a><br>
+              <a href="https://www.lenouvelliste.ch/articles/sports/jo-d-hiver-2026-les-jeux-olympiques-se-derouleront-en-italie-849607">Le Nouvelliste</a><br>
+              <a href="https://www.alibabuy.com/bon-plan/suisse/geneve/101068-week-bord-leman-euro-vols-nuits-hotel-seulement-geneve.html">Lac Léman</a><br>
+              <a href=" https://www.geneve.ch/sites/default/files/2020-02/lieux-jet-d-eau-ville-geneve-cover.jpg">Jet d'eau de genève</a>
             </p>
           </div>
         </div>
