@@ -27,7 +27,8 @@ class ImagesSeeder extends Seeder
             "bale-campagne.png", "bale-ville.png", "zoo-bale.jpg", "cathedrale-bale.jpg", "cathedrale-lausanne.jpg", "lackerlis.jpg", "baselworld.jpg",  
             "zytglogge-berne.jpg", "palais-federal.jpg", "musee-ceramique-verre.jpg", "fosse-aux-ours.jpg", "blausee.jpg", "lac-bleu-arolla.jpg", 
             "logo-suchardexpress.png", "caotina-logo.png", "fete-vendanges.jpg",
-            "tally-weijl.jpg", "logo-swarovski.jpg", "toilettes.jpg", "drapeau-suisse.png", "bancomat.jpg", "nourriture.jpg"
+            "tally-weijl.jpg", "logo-swarovski.jpg", "toilettes.jpg", "drapeau-suisse.png", "bancomat.png", "nourriture.jpg",
+            "grenouille-sur-ecureuil.jpg", "viande-sechee.jpg", "top-secret.jpg", "hotel-palafitte.jpg", "hotel-maldives.jpg"
         ];
         
         // DB::table('images')->delete();
