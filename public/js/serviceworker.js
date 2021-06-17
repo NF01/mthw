@@ -1,4 +1,4 @@
-const CACHE_VERSION = '1';
+const CACHE_VERSION = '2';
 
 self.addEventListener('install', async event => {
     self.skipWaiting(); //life cycle management
@@ -23,7 +23,7 @@ self.addEventListener('fetch', async event => {
     const fetchCacheFirst = async () => {
         const cache = await caches.open(CACHE_VERSION);
         const cached = await cache.match(event.request);
-        console.log('attention it\'s caching');
+        // console.log('attention it\'s caching');
         if (cached) return cached;
         let response = await fetch(event.request);
         if (response) cache.put(event.request, response.clone());

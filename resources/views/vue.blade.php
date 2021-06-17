@@ -67,7 +67,7 @@
                             <div class="row align-items-center">
                                 <div class="col py-5 text-center">
                                     <h3>Concours jusqu’au 20 juillet 2021!</h3>
-                                    <p>Fini le jeu en arrivant au "Lavaux” pour participer au tirage au sort te permettant de gagner <b>deux cartes journalières en 1ère classe valable dans toute la Suisse.<b></p>
+                                    <p>Fini le jeu en arrivant au "Lavaux” pour participer au tirage au sort te permettant de gagner <b>deux cartes journalières en 1ère classe valable dans toute la Suisse.</b></p>
                                     <p>Le 25 juillet, nous tirerons au sort un gagnant, seul votre adresse mail sera transmise.</p>
                                 </div>
                             </div>

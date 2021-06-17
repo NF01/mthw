@@ -1,5 +1,6 @@
   <script>
 import { computed, ref, watch, watchEffect } from "vue";
+import { useRoute } from "vue-router";
 
 export default {
   components: {},
@@ -21,15 +22,15 @@ export default {
     const trainPosition = ref(0);
     const trainAnimation = ref();
 
-    window.scrollTo(0, 0);
+    const route = useRoute();
 
+    window.scrollTo(0, 0);
     const fetchUser = async () => {
       const result = await fetch(
         URL_PREFIX.value + "api/user/" + getUserId.value
       );
       user.value = await result.json();
     };
-    fetchUser();
 
     const getUserLevel = async () => {
       const result = await fetch(
@@ -49,10 +50,6 @@ export default {
             "s cubic-bezier(0.33, -0.01, 0.76, 0.99)"
           : "top 0s";
     };
-    getUserLevel();
-    document.onreadystatechange = () => {
-      scrollToTrain();
-    };
 
     const scrollToTrain = () => {
       if (document.readyState == "complete") {
@@ -66,11 +63,33 @@ export default {
         );
       }
     };
+
     const fetchChapitre = async () => {
       const result = await fetch(URL_PREFIX.value + "api/chapitres");
       const data = await result.json();
       chapitres.value = data;
+      watch(
+        () => route.params.id,
+        () => {
+          console.log("hey");
+        }
+      );
+
+      // watch(() => {
+      //   console.log(route.params.id);
+      //   scrollToTrain();
+      //   console.log("scroll");
+      // });
+
+      // document.onreadystatechange = () => {
+      //   scrollToTrain();
+      // };
+
+      $("html, body").animate({ scrollTop: trainPosition.value + 600 }, 2500);
     };
+
+    fetchUser();
+    getUserLevel();
     fetchChapitre();
 
     return {
@@ -116,6 +135,22 @@ export default {
   <div class="container home-container">
     <div class="row mx-0">
       <div class="col-lg-8 mx-auto px-0 py-5">
+        <!-- CONTAINER TRAIN -->
+        <div class="container-train">
+          <img
+            class="train"
+            id="train"
+            :src="URL_PREFIX + vectorURL + 'train-top-entier.svg'"
+            alt=""
+            width="50px"
+            height="auto"
+            :style="{
+              top: parseInt(trainPosition) + 'px',
+              transition: trainAnimation,
+            }"
+          />
+          <div class="rails"></div>
+        </div>
         <!-- FIRST -->
         <div
           class="town"
@@ -143,22 +178,6 @@ export default {
               {{ chapitres[0].nom }}
             </router-link>
           </div>
-        </div>
-        <!-- CONTAINER TRAIN -->
-        <div class="container-train">
-          <img
-            class="train"
-            id="train"
-            :src="URL_PREFIX + vectorURL + 'train-top-entier.svg'"
-            alt=""
-            width="50px"
-            height="auto"
-            :style="{
-              top: parseInt(trainPosition) + 'px',
-              transition: trainAnimation,
-            }"
-          />
-          <div class="rails"></div>
         </div>
         <!-- LOGIC -->
         <template v-for="chapitre in chapitres" :key="chapitre.idEtape">

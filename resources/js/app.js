@@ -54,5 +54,5 @@ install('js/serviceworker.js').then(() => location.reload());
 const app = createApp(App);
 app.use(router);
 app.mount('#app');
-console.log('serviceworker loaded');
+// console.log('serviceworker loaded');
 
