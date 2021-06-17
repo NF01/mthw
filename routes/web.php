@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 
 
+// PROD URL 
+// $URL_PREFIX = "/mthw/";
+$URL_PREFIX = '/';
 
 //REST API Routing//begin
 Route::prefix('api')->group(function () {
@@ -78,57 +81,58 @@ Route::prefix('api')->group(function () {
         Route::Put('/reponse', [ApiControllerPUT::class, 'updateresponse']);
     });
 });
-Route::redirect('/', '/accueil');
-Auth::routes();
-Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
-Route::get('/nouveau-compte', function () {
-    return view('vue_register');
-});
 
 
+Route::prefix($URL_PREFIX)->group(function () {
 
-Route::get('{view}', function () {
+    Route::redirect('', 'accueil');
 
-    $idUser = Auth::user() ? Auth::user()->id : -1;
-    $_SESSION['idUser'] = $idUser;
+    Auth::routes();
+    Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+    Route::get('nouveau-compte', function () {
+        return view('vue_register');
+    });
 
-    isAdmin();
+    Route::get('{view}', function () {
 
-    if ($idUser != -1) {
-        return view('vue');
-    } else {
-        return view('vue_auth');
-    }
-})->where(['view' => 'vue|mthw|accueil|info|quizz|ranking|profil|experience']);
+        $idUser = Auth::user() ? Auth::user()->id : -1;
+        $_SESSION['idUser'] = $idUser;
 
-Route::get('admin', function () {
-    if (isAdmin() == 1) {
-        return view('vue');
-    } else {
+        isAdmin();
+
+        if ($idUser != -1) {
+            return view('vue');
+        } else {
+            return view('vue_auth');
+        }
+    })->where(['view' => 'vue|mthw|accueil|info|quizz|ranking|profil|experience']);
+
+    Route::get('admin', function () {
+        if (isAdmin() == 1) {
+            return view('vue');
+        } else {
+            return redirect('accueil');
+        }
+    });
+
+    Route::get('quizz/{number}', function () {
+        // return view('vue');
         return redirect('/accueil');
-    }
+    })->where(['number' => '[0-9]+']);
+
+
+    Route::get('accueil', function () {
+        // return view('vue');
+        return redirect('accueil');
+    })->where(['number' => '[0-9]+']);
+
+    Route::get('{any}', function () {
+        // return abort(404);
+        return redirect('/');
+    });
 });
 
 
-Route::get('/quizz/{number}', function () {
-    // return view('vue');
-    return redirect('/accueil');
-})->where(['number' => '[0-9]+']);
-
-Route::get('/mthw/accueil', function () {
-    // return view('vue');
-    return redirect('/accueil');
-})->where(['number' => '[0-9]+']);
-
-Route::get('/accueil', function () {
-    // return view('vue');
-    return redirect('/accueil');
-})->where(['number' => '[0-9]+']);
-
-Route::get('/{any}', function () {
-    // return abort(404);
-    return redirect('/');
-});
 
 function isAdmin()
 {

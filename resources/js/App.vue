@@ -26,7 +26,7 @@ export default {
     <div class="col-lg-8 mx-auto">
       <div class="row">
         <div class="col">
-          <router-link to="/accueil"
+          <router-link :to="URL_PREFIX + 'accueil'"
             ><img
               :src="URL_PREFIX + vectorURL + 'train_couleur.svg'"
               alt="accueil"
@@ -34,7 +34,7 @@ export default {
           /></router-link>
         </div>
         <div class="col">
-          <router-link to="/profil"
+          <router-link :to="URL_PREFIX + 'profil'"
             ><img
               :src="URL_PREFIX + vectorURL + 'profil_couleur.svg'"
               alt="profil"
@@ -42,7 +42,7 @@ export default {
           /></router-link>
         </div>
         <div class="col">
-          <router-link to="/ranking"
+          <router-link :to="URL_PREFIX + 'ranking'"
             ><img
               :src="URL_PREFIX + vectorURL + 'classement_couleur.svg'"
               alt="classement"
@@ -50,7 +50,7 @@ export default {
           /></router-link>
         </div>
         <div class="col" v-if="isAdmin == 1">
-          <router-link to="/admin"
+          <router-link :to="URL_PREFIX + 'admin'"
             ><img
               :src="URL_PREFIX + vectorURL + 'question_couleur.svg'"
               alt="admin"

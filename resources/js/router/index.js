@@ -5,43 +5,41 @@ import Quizz from "../views/Quizz.vue";
 import Profil from "../views/Profil.vue";
 import Ranking from "../views/Ranking.vue";
 
+URL_PREFIX = window.URL_PREFIX;
+
 const routes = [
   {
-    path: "/accueil",
+    path: URL_PREFIX + "accueil",
     name: "accueil",
     component: Home,
   },
   {
-    path: "/mthw/accueil",
+    path: URL_PREFIX,
     component: Home,
   },
   {
-    path: "/mthw",
-    component: Home,
-  },
-  {
-    path: "/nouveau-compte",
+    path: URL_PREFIX + "nouveau-compte",
     name: "nouveau-compte",
     component: Home,
   },
   {
-    path: "/admin",
+    path: URL_PREFIX + "admin",
     name: "admin",
     component: Admin,
   },
   {
-    path: "/quizz/:idChapitre",
+    path: URL_PREFIX + "quizz/:idChapitre",
     name: "quizz",
     component: Quizz,
     props: true
   },
   {
-    path: "/profil",
+    path: URL_PREFIX + "profil",
     name: "profil",
     component: Profil,
   },
   {
-    path: "/ranking",
+    path: URL_PREFIX + "ranking",
     name: "ranking",
     component: Ranking,
   }
