@@ -53,7 +53,7 @@ export default {
       $("html, body").animate({ scrollTop: trainPosition.value + 600 }, 2500);
 
       document.onreadystatechange = () => {
-        if (currentUserLevel.value - 1 == 12) {
+        if (currentUserLevel.value - 1 >= 12) {
           // if (currentUserLevel.value - 1 == chapitres.value.length)
           // console.log(currentUserLevel.value - 1);
           // console.log(chapitres.value.length);
@@ -315,7 +315,7 @@ export default {
     <div
       class="town"
       id="etape-final"
-      v-if="currentUserLevel == chapitres.length + 1"
+      v-if="currentUserLevel >= chapitres.length + 1"
     >
       <div class="row text-center justify-content-center">
         <img
