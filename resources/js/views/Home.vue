@@ -401,6 +401,8 @@ export default {
               l’application, mais en vrai, et riche de tout ce que tu auras
               appris dans l’application « Ça joue ?! ».
             </p>
+            <h2>Contact</h2>
+            <p>En cas de questions/remarques n'hésitez pas à nous écrire à l'adresse : <a href="mailto:info@quizz-cajoue.ch">info@quizz-cajoue.ch</a></p>
             <h2>Quelques sources</h2>
             <p>
               <a href="https://fr.wikipedia.org">Wikipedia</a><br>
