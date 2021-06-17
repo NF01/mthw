@@ -142,8 +142,8 @@ export default {
 
 <template>
   <div class="container pt-4">
-    <div class="row">
-      <div class="col-auto">
+    <header class="row border-bottom pb-4 mb-4">
+      <div class="col-auto" style="z-index: 500">
         <button
           class="uk-close-large"
           href="#return"
@@ -151,11 +151,9 @@ export default {
           uk-close
         ></button>
       </div>
-    </div>
-    <header class="row border-bottom pb-4 mb-4">
       <div class="col text-center">
         <template v-for="chapitre in chapitres" :key="chapitre.idChapitre">
-          <h1 class="mb-1" v-if="idChapitre == chapitre.idEtape">
+          <h1 class="mb-1 title-question" v-if="idChapitre == chapitre.idEtape">
             {{ chapitre.nom }}
           </h1>
         </template>
@@ -549,6 +547,9 @@ export default {
 
 
 <style scoped>
+.title-question {
+  margin-left: -50px;
+}
 .size-button {
   max-width: 350px;
 }

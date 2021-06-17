@@ -48,7 +48,7 @@ body {
 }
 
 #app {
-    padding-bottom: 170px;
+    /* padding-bottom: 170px; */
 }
 
 .custom-nav {
@@ -76,7 +76,7 @@ body {
 
 .home-container {
     padding-top: 30px;
-    padding-bottom: 50px;
+    padding-bottom: 200px;
 }
 
 .container-train {
@@ -341,6 +341,14 @@ body {
     border: 1px solid var(--primary-color);
     box-shadow: rgba(0, 0, 0, .15) 0 6px 15px;
     background-color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 18px;
+}
+
+.uk-modal-dialog .btn-secondary {
+    padding: 15px;
+    font-size: 20px;
 }
 
 .btn.btn-primary.small {
