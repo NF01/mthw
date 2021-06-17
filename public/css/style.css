@@ -309,12 +309,10 @@ body {
     right: 0;
     bottom: 95px;
     width: 80px;
-    border-radius: 100px;
+    border-radius: 30px;
     line-height: 37px;
     z-index: 99;
     box-shadow: rgb(0 0 0 / 35%) 0 6px 15px;
-
-    border: 5px solid #ff6464;
 }
 
 .pulse {
