@@ -873,73 +873,79 @@ export default {
     </template>
   </modal-admin>
 
-  <!--Liste des questions-->
-  <div class="row head-question">
-    <div class="col-2">
-      <select class="select-header" name="ids">
-        <option value="">ID</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
+  <div class="container">
+    <!--Liste des questions-->
+    <div class="row head-question">
+      <div class="col-2">
+        <select class="select-header" name="ids">
+          <option value="">ID</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+      <div class="col-5">
+        <p>Question</p>
+      </div>
+      <div class="col-3">
+        <p>Type</p>
+      </div>
+      <div class="col-2 d-sm-block d-none">
+        <p class="">Niveau</p>
+      </div>
+      <div class="col-2 d-block d-sm-none">
+        <p class="">Niv</p>
+      </div>
     </div>
-    <div class="col-5">
-      <p>Question</p>
+    <div class="row mt-4">
+      <div class="col-2">
+        <p>1</p>
+      </div>
+      <div class="col-5">
+        <p>De quel canton provient cette plaque de voiture ?</p>
+      </div>
+      <div class="col-3">
+        <p>QCM avec image</p>
+      </div>
+      <div class="col-2">
+        <p>1</p>
+      </div>
     </div>
-    <div class="col-3">
-      <p>Type</p>
-    </div>
-    <div class="col-2 d-sm-block d-none">
-      <p class="">Niveau</p>
-    </div>
-    <div class="col-2 d-block d-sm-none">
-      <p class="">Niv</p>
-    </div>
-  </div>
-  <div class="row mt-4">
-    <div class="col-2">
-      <p>1</p>
-    </div>
-    <div class="col-5">
-      <p>De quel canton provient cette plaque de voiture ?</p>
-    </div>
-    <div class="col-3">
-      <p>QCM avec image</p>
-    </div>
-    <div class="col-2">
-      <p>1</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-6 btn btn-primary full-width">
-      <p>Effacer</p>
-    </div>
-    <div class="col-6 btn btn-secondary full-width">
-      <p>Modifier</p>
-    </div>
-  </div>
-  <div class="row mt-4">
-    <div class="col-2">
-      <p>1</p>
-    </div>
-    <div class="col-5">
-      <p>De quel canton provient cette plaque de voiture ?</p>
-    </div>
-    <div class="col-3">
-      <p>QCM avec image</p>
-    </div>
-    <div class="col-2">
-      <p>1</p>
-    </div>
-  </div>
-  <div class="col">
     <div class="row">
-      <div class="col">
-        <a @click="scrollToTop()" id="scrollToTopBtn">
-          <img src="/img/fleche.png" />
-        </a>
+      <div class="col-6">
+        <a class="btn btn-primary full-width">Effacer</a>
+      </div>
+      <div class="col-6">
+        <a
+          class="btn btn-secondary full-width"
+          style="padding-top: 15px; padding-bottom: 15px"
+          >Modifier</a
+        >
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-2">
+        <p>1</p>
+      </div>
+      <div class="col-5">
+        <p>De quel canton provient cette plaque de voiture ?</p>
+      </div>
+      <div class="col-3">
+        <p>QCM avec image</p>
+      </div>
+      <div class="col-2">
+        <p>1</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          <a @click="scrollToTop()" id="scrollToTopBtn">
+            <img src="/img/fleche.png" />
+          </a>
+        </div>
       </div>
     </div>
   </div>

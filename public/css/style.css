@@ -158,6 +158,10 @@ body {
     .badge-container {
         line-height: 23vw !important;
     }
+
+    .container-train {
+        top: 260px;
+    }
 }
 
 
